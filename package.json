@@ -1,0 +1,25 @@
+{
+  "name": "kino_webbsajt",
+  "version": "1.0.0",
+  "description": "Uppgiften går ut på att i grupp planera, strukturera och påbörja utvecklingen av en biograf-webbsajt enligt Scrum-metodik.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LatifaBik/Kino_Webbsajt.git"
+  },
+  "keywords": [],
+  "author": "SJPI25 - A4 Grupp D",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LatifaBik/Kino_Webbsajt/issues"
+  },
+  "homepage": "https://github.com/LatifaBik/Kino_Webbsajt#readme",
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "sass": "^1.96.0"
+  }
+}
