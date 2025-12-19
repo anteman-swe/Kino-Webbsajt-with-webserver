@@ -23,7 +23,7 @@
     }
 
     &__nav {
-        display: none; // gömd från start
+opacity: 0; visibility: hidden; transform: scale(0.95); transition: opacity 0.4s ease, transform 0.4s ease;
         background-color: #0C0000;
         position: fixed;
         top: 0;
@@ -33,12 +33,16 @@
         z-index: 3;
         flex-direction: column;
         justify-content: center;
+        animation: navfadeandscale .66s cubic-bezier(.53, .52, .04, 1.06) 0s 1 both;
 
         &--active {
             display: flex; // visas när klassen läggs till
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            opacity: 1; // synlig
+            visibility: visible;
+            transform: scale(1); // växer till normal storlek
         }
 
         &-logo {
@@ -90,6 +94,6 @@
     }
 }
 
-.close-menu{
+.close-menu {
     font-size: 1rem;
 }
