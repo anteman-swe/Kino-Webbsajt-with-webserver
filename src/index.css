@@ -1,0 +1,23 @@
+
+/* Notice banner */
+.notice {
+  background-color: #e6edb8;
+  padding: 17px 14px;
+  position: relative;
+  text-align: center;
+}
+.notice__text {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: bold;
+}
+.notice__close {
+  position: absolute;
+  right: 10px;
+  top: 6px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+}
