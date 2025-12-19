@@ -1,0 +1,49 @@
+@use "./sections/footer";
+.footer_container {
+    background-color: #0d0d0e;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.footer_content{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
+}
+
+.footer_links{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer_content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer_links a{
+  color: inherit;
+  text-decoration: underline;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+.social-links a {
+  font-size: 30px;
+  color: #fff;
+  text-decoration: none;
+}
+
+
+.nyhetsbrev {
+  margin-top: 20px;
+    text-align: center;
+    
+}
