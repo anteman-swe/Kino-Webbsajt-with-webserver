@@ -1,16 +1,7 @@
 import './scss/main.scss';
 import './scripts/menu.js';
+import './scss/main.scss';
+import { toggleMenu } from './scripts/menu.js'; 
 
-const menuButton = document.querySelector('.header__menu-button');
-const navContainer = document.querySelector('.header__nav');
-const closeButton = document.querySelector('.header__nav-close');
+toggleMenu(); 
 
-if (menuButton && navContainer && closeButton) {
-  menuButton.addEventListener('click', () => {
-    navContainer.classList.add('mobileactive');
-  });
-  
-  closeButton.addEventListener('click', () => {
-    navContainer.classList.remove('mobileactive');
-  });
-}
