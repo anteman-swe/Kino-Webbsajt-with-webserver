@@ -1,29 +1,48 @@
+@use '../lib/variables_mixins' as *;
+
+
 .header {
-    background-color: #1A0000;
+    background-color: $dark-bg;
     position: relative;
+    flex-direction: column; // staplar innehållet vertikalt
+    justify-content: flex-end; // trycker allt längst ner
+    height: 120px; // ge headern en höjd
 
     &__theme {
         display: flex;
         flex-direction: column; // staplar auth under ikonerna 
         align-items: flex-end; // allt till höger
         gap: 0.5rem;
-        margin-right:20px;
         cursor: pointer;
 
+           
+
         &-btn {
-            color: rgb(255, 255, 255);
+            color: $dark-text;
             font-size: 1rem;
             align-items: right;
             border: none;
             background-color: transparent;
-             cursor: pointer;
+            cursor: pointer;
+        
 
             &-lightmode {
-                color: yellow;
+                color: $toggle-on;
+                transform: scaleX(-1);
+                margin-right: 20px;
+                font-size: 1.3rem;
             }
 
             &-darkmode {
-                color: rgb(108, 108, 106);
+                color: $toggle-off;
+                font-size: 1.3rem;
+            }
+
+            &-join {
+                border: none;
+                background-color: transparent;
+                color: $dark-text;
+                
             }
         }
 
@@ -38,31 +57,38 @@
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        max-width: 270px;
-        margin-top: 10px;
+        width: 270px;
+        object-fit: contain;
+        top: 1rem; // justera vertikalt om du vill
     }
 
     &__top {
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        right: 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding: 0 1rem;
     }
 
     &__menu-button {
-        background-color: #1A0000;
-        color: white;
-        font-size: 1.3rem;
+        background-color: $dark-bg;
+        color: $dark-text;
+        font-size: 1.4rem;
         border: none;
         cursor: pointer;
-        margin: 90px 0 20px 0;
+        margin-right: auto; // trycker menyn längst till vänster
+
     }
 
     &__auth-buttons {
         display: flex;
-        gap: 1.5rem;
-        color: white;
-        margin-bottom: 2rem;
-        
+        gap: 2.5rem;
+        color: $dark-text;
+        margin-left: auto; // trycker sök + login längst till höger
+
     }
 
     &__nav {
@@ -70,7 +96,7 @@
         visibility: hidden;
         transform: scale(0.95);
         transition: opacity 0.4s ease, transform 0.4s ease;
-        background-color: #0C0000;
+        background-color: $dark-bg;
         position: fixed;
         top: 0;
         right: 0;
@@ -82,13 +108,13 @@
         animation: navfadeandscale .66s cubic-bezier(.53, .52, .04, 1.06) 0s 1 both;
 
         &--active {
-            display: flex; // visas när klassen läggs till
+            display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            opacity: 1; // synlig
+            opacity: 1;
             visibility: visible;
-            transform: scale(1); // växer till normal storlek
+            transform: scale(1);
         }
 
         &-logo {
@@ -106,9 +132,9 @@
             left: 1.1rem;
             font-size: 2.3rem;
             border: 0;
-            color: white;
+            color: $dark-text;
             cursor: pointer;
-            background-color: #0C0000;
+            background-color: $dark-bg;
         }
 
         &-list {
@@ -116,21 +142,20 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: static;
-            margin-left: 3.6rem;
-            margin-top: -8rem;
-            padding: 0;
+            justify-content: center; // centrerar vertikalt
+            height: 100vh; // tar hela höjden på sidan
+            margin-top: 170px;
         }
 
         &-item {
             margin: 0.3rem 0;
-            font-size: 2rem;
+            font-size: 1.5rem;
             width: 260px;
             text-align: left;
 
             a {
                 text-decoration: none;
-                color: white;
+                color: $dark-text;
             }
         }
     }
@@ -141,6 +166,16 @@
 }
 
 .divider-btn {
-
     color: rgb(118, 113, 113);
+}
+
+.fa-search {
+    color: white; // ändrar färg
+    font-size: 1.5rem; // ändrar storlek
+    margin-right: 0.5rem; // lite spacing
+    cursor: pointer; // gör den klickbar
+
+   // @media (max-width: 500px) {
+     //   font-size: 0.9rem; // mindre storlek på små skärmar
+    //}
 }
