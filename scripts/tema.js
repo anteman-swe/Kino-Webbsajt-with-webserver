@@ -1,20 +1,21 @@
 
 export function toggleTheme() {
-  const lightBtn = document.querySelector('.header__theme--light');
-  const darkBtn  = document.querySelector('.header__theme--dark');
+  const lightBtn = document.querySelector('.header__theme-btn--light');
+  const darkBtn  = document.querySelector('.header__theme-btn--dark');
 
-  const saved = localStorage.getItem('theme');
+ 
+ // init från localStorage
+ const saved = localStorage.getItem('theme');
+  if (saved === 'light') document.body.classList.add('light');
+  else document.body.classList.remove('light');
 
-  // default = dark
-  if (saved === 'light') {
-    document.body.classList.add('light');
-  }
-
+// klick: gå till LIGHT
   lightBtn?.addEventListener('click', () => {
     document.body.classList.add('light');
     localStorage.setItem('theme', 'light');
   });
 
+// klick: gå till DARK
   darkBtn?.addEventListener('click', () => {
     document.body.classList.remove('light');
     localStorage.setItem('theme', 'dark');

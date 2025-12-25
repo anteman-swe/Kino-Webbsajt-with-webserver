@@ -13,46 +13,67 @@ body.light {
 }
 
 
+
 .header {
-  &__theme {
+  &__theme-btn {
     position: fixed;
-    background: $toggle-bg;
-    border-radius: 8rem;
-    padding: 0.2rem 0.7rem 0.2rem 0.2rem;
-    top: 1.5rem;
-    right: 2rem;
+    background: transparent;
+    box-shadow: none;
+     border: none;
+    border-radius: 6rem;
+    top: 1.1rem;
+    right: 4rem;
     z-index: 5;
     display: flex;
     gap: 0.5rem;
   }
+  &__theme {
+  background: transparent;   // tar bort vita rutan
+  box-shadow: none;          // om du har skugga
+  border: none;
+  background: rgba(0,0,0,0.4);
+}
 
-  &__theme--light,
-  &__theme--dark {
-    width: 1rem;
-    height: 1rem;
+  &__theme-btn--light,
+  &__theme-btn--dark {
+    width: 2rem;
+    height: 2rem; 
     border: none;
-    background: $toggle-bg;
-    font-size: 0.8rem;
+     
     cursor: pointer;
+   
+    display: grid;
+    place-items: center;
+    padding: 0;
   }
-
-  &__theme--light { color: $toggle-on; }
-  &__theme--dark  { color: $toggle-off; }
-
-  &__theme--light:active,
-  &__theme--dark:active {
-    transform: scale(0.95);
+  &__theme-icon {
+    width: 3.5rem;
+    height: 1.5rem;
+    display: block;
   }
 }
+
+/* default = DARK: visa light-knappen (månen) och göm dark-knappen (solen) */
+.header__theme-btn--dark { display: none; }
+.header__theme-btn--light { display: inline-grid; }
+
+/* LIGHT mode: visa “till dark” (måne), göm “till light” (sol) */
+body.light .header__theme-btn--dark { display: inline-grid; }
+body.light .header__theme-btn--light { display: none; }
+
+/* så img inte “stjäl” klick */
+/*.header__theme-icon { pointer-events: none; }
+
+
 /* tonDARK DEFAULT: (ingen klass) */
-.header_theme--dark  { background: $toggle-on; }
+/*.header_theme--dark  { background: $toggle-on; }
 .header_theme--light { background:$toggle-off; }
 
 .header_theme--dark i  { color: $toggle-bg; }
 .header_theme--light i { color: $toggle-off; }
 
 /* LIGHT MODE: när body.light finns */
-body.light .header_theme--light { background: $toggle-on; }
+/*body.light .header_theme--light { background: $toggle-on; }
 body.light .header_theme--dark  { background: $toggle-off; }
 
 body.light .header_theme--light i { color: $toggle-bg; }
@@ -72,18 +93,41 @@ body.light .footer__container a {
   color: $light-text;
 }
 
-.header__top {
-    background: $dark-bg;
-  color: $dark-text;
-}
-/* LIGHT mode */
-body.light .header__top {
-    background: $light-bg;
-  color: $light-text;
-}
-body.light .header__top a {
-  color: $light-text;
+body.light .header__nav {
+  background: $light-menu;
 }
 
- 
+/* DARK */
+body.dark {
+  .header__nav a { color: $dark-text; }
+}
+
+/* LIGHT */
+body.light .header__nav a {
+  color: $dark-bg;      
+}
+
+/* default (dark)=> visar dark och gömmer light */
+.header__logo-light { display: none;}
+/* light: byt */
+body.light .header__logo { display: none; }
+body.light .header__logo-light { display: inline-block; }   
+
+
+
+
+.header__nav-logo-light { display: none; }
+
+body.light .header__nav-logo  { display: none; }
+body.light .header__nav-logolight { display: inline-block; }
+
+
+
+
+
+
+
+
+
+
 
