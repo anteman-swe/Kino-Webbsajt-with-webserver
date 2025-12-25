@@ -12,52 +12,6 @@
         height: 170px;
     }
 
-    &__theme {
-        display: flex;
-        flex-direction: column; 
-        align-items: flex-end; 
-        gap: 0.5rem;
-        cursor: pointer;
-
-        &-btn {
-            color: $dark-text;
-            font-size: 1rem;
-            align-items: right;
-            border: none;
-            background-color: transparent;
-            cursor: pointer;
-
-
-            &-lightmode {
-                color: $toggle-on;
-                transform: scaleX(-1) rotate(40deg);
-                margin-right: 50px;
-                font-size: 1.3rem;
-            }
-
-            &-darkmode {
-                color: $toggle-off;
-                font-size: 1.3rem;
-            }
-
-            &-join {
-                border: none;
-                background-color: transparent;
-                color: $dark-text;
-            }
-        }
-
-        &-icons {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-
-            @include small-screen {
-                margin-top: 4rem;
-            }
-        }
-    }
-
     &__logo {
         position: absolute;
         left: 50%;
@@ -65,8 +19,6 @@
         width: 270px;
         object-fit: contain;
         top: 1rem; 
-
-
     }
 
     &__top {
@@ -91,14 +43,6 @@
         border: none;
         cursor: pointer;
         margin-right: auto; 
-
-    }
-
-    &__auth-buttons {
-        display: flex;
-        gap: 0.5rem;
-        color: $dark-text;
-        margin-left: auto; // trycker sök + login längst till höger
 
     }
 
@@ -153,8 +97,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; // centrerar vertikalt
-            height: 100vh; // tar hela höjden på sidan
+            justify-content: center;
+            height: 100vh;
             margin-top: 170px;
         }
 
@@ -176,25 +120,5 @@
     font-size: 1rem;
 }
 
-.divider-btn {
-    color: rgb(118, 113, 113);
-    font-size: 1.3rem;
-}
 
-.fa-search {
-    color: white; // ändrar färg
-    font-size: 1.5rem; // ändrar storlek
-    margin-right: 0.5rem; // lite spacing
-    cursor: pointer; // gör den klickbar
 
-    // @media (max-width: 500px) {
-    //   font-size: 0.9rem; // mindre storlek på små skärmar
-    //}
-}
-
-.fa-sign-in {
-    color: white; // ändrar färg
-    font-size: 1.5rem; // ändrar storlek
-
-    cursor: pointer; // gör den klickbar
-}
