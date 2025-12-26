@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "sass-watch": "sass --watch src/main.scss:css/main.css",
-    "prepare": "husky"
+    "prepare": "husky",
+    "dev": "vite"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,7 @@
   "homepage": "https://github.com/LatifaBik/Kino_Webbsajt#readme",
   "devDependencies": {
     "husky": "^9.1.7",
-    "sass": "^1.96.0",
+    "sass": "^1.97.1",
     "vite": "^7.3.0"
   },
   "dependencies": {
