@@ -1,0 +1,19 @@
+#!/bin/bash
+# .husky/pre-commit
+#
+# This script is run automatically before any commit
+# If the script returns an error (exit code != 0) the commit is aborted
+
+echo "Kör pre-commit kontroll..."
+
+# Check if any debug code is left in file (i.e. console.log, debugger, TODO: REMOVE)
+echo "Söker efter debug-kommentarer..."
+if git diff --cached | grep -E "console\.log|debugger|TODO: REMOVE" > /dev/null; then
+    echo "⚠️ VARNING: Debug-kod hittades i staged filer!"
+    echo "   Ta bort debug kod (ex. console.log, debugger, TODO: REMOVE) innan commit"
+    exit 1
+fi
+
+echo "✅ Pre-commit kontroller passerade!"
+echo "📝 Fortsätter med commit..."
+exit 0
