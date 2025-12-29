@@ -1,3 +1,5 @@
+import "../src/main.scss";
+
 import './member-page.js';
 
 import { initMemberPage } from './member-page.js';
