@@ -12,6 +12,7 @@ body {
   transform: translateY(-100%);
   opacity: 0;
   animation: noticeIn 400ms ease-out forwards;
+  z-index: 1000;
 
   &__text {
     margin: 0;
