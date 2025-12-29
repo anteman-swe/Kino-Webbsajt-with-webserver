@@ -1,6 +1,7 @@
 import "./styles/main.scss";
 import { fetchMovies } from "../scripts/api.js";
 import { renderMovieList } from "../scripts/createcard.js";
+import { openTrailer } from "../scripts/trailermodal.js"; 
 
 function parseDate(dateStr) {
   if (!dateStr) return null;
@@ -31,16 +32,35 @@ document.addEventListener("DOMContentLoaded", async () => {
     const upcoming = movies.filter(isUpcoming);
     const current = movies.filter((m) => !isUpcoming(m));
 
-     // only shows 10 cards on landingpage, otherwise it will load almost infinite titles with our API
+    // only shows 10 cards on landingpage, otherwise it will load almost infinite titles with our API
+
     renderMovieList(currentTrack, current.slice(0, 10));
     renderMovieList(comingSoonTrack, upcoming.slice(0, 10));
     renderMovieList(eventsTrack, current.slice(0, 10)); // placeholder until we get API to show upcoming events, can change current to events
+
+    //  Click handling for the Trailer button
+    document.body.addEventListener("click", (e) => {
+      const btn = e.target.closest(".movies-carousel__button");
+      if (!btn) return;
+
+      if (btn.textContent === "Trailer") {
+        const movieId = Number(btn.dataset.id);
+
+        const movie = movies.find(m => m.id === movieId);
+
+        if (!movie?.Trailer_Id) {
+          alert("Trailer saknas");
+          return;
+        }
+
+        openTrailer(movie.Trailer_Id);
+      }
+    });
 
   } catch (err) {
     console.error(err);
     const msg = `<p class="empty_state">Kunde inte hämta filmer: ${err.message}</p>`;
     if (currentTrack) currentTrack.innerHTML = msg;
     if (comingSoonTrack) comingSoonTrack.innerHTML = msg;
-    if (eventsTrack) comingSoonTrack.innerHTML = msg;
   }
 });
