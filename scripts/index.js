@@ -1,12 +1,25 @@
 import "../src/main.scss";
 
-import './member-page.js';
+import { initAuthButtons } from "./member-page.js";
+import { initMemberPage } from "./member-page.js";
 
-import { initMemberPage } from './member-page.js';
+initAuthButtons();
 
-if (document.querySelector('.user__member--page')) {
+if (document.querySelector(".member__page")) {
   initMemberPage();
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

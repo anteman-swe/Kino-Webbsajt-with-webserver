@@ -1,15 +1,35 @@
 // anvandare-egen-sida.js
 
+
+
+// auth.js (eller i member-page.js)
+export function initAuthButtons() {
+    const loginBtn = document.querySelector(".header__login--btn");
+    const logoutBtn = document.querySelector(".header__logout--btn");
+
+        loginBtn?.addEventListener("click", () => {
+      localStorage.setItem("isLoggedIn", "true");
+      window.location.href = "/member-page.html";
+    });
+
+    logoutBtn?.addEventListener("click", () => {
+      localStorage.removeItem("isLoggedIn");
+      window.location.href = "/index.html";
+    });
+  };
+
+
+
 export function initMemberPage() {
   const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
   // blockera om INTE inloggad
-  if (!isLoggedIn) {
+ if (!isLoggedIn) {
     window.location.href = 'index.html';
     return;
   }
 
-  const form = document.querySelector('#reviewForm');
+  const form = document.querySelector('.review__form');
   if (!form) return;
 
   form.addEventListener('submit', (e) => {
@@ -25,18 +45,4 @@ export function initMemberPage() {
   });
 }
 
-
-// login/logout ska funka på alla sidor
-const loginBtn = document.querySelector('.btn_join');
-const logoutBtn = document.querySelector('.btn_logout');
-
-loginBtn?.addEventListener('click', () => {
-  localStorage.setItem('isLoggedIn', 'true');
-  window.location.href = '/member-page.html';
-});
-
-logoutBtn?.addEventListener('click', () => {
-  localStorage.removeItem('isLoggedIn');
-  window.location.href = '/index.html';
-});
 
