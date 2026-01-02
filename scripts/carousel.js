@@ -7,6 +7,9 @@ export async function movieCarousel() {
     const heroInner = document.querySelector('.carousel_inner');
     const daySelector = document.getElementById('dayFilter'); 
 
+    // Cache to store movies for each day
+    const dailyMovieCache = {};
+
     try {
         const movieData = await fetchMovies();
 
@@ -14,7 +17,6 @@ export async function movieCarousel() {
             console.error("No movie data found");
             return;
         }
-
 
         const getAgeCategory = (certificate) => {
             if (!certificate) return { category: null, class: null };
@@ -27,7 +29,6 @@ export async function movieCarousel() {
             }
         };
 
-  
         const heroMovies = [...movieData].sort(() => Math.random() - 0.5).slice(0, 6);
         heroInner.innerHTML = heroMovies.map((movie, index) => {
             const { category, class: categoryClass } = getAgeCategory(movie.Certificate);
@@ -43,12 +44,9 @@ export async function movieCarousel() {
             </div>`;
         }).join('');
 
-       
         const generateMovieHTML = (data, showDays, prefix) => {
-            //const days = ["Idag", "Imorgon", "Fredag 19/12", "Lördag 20/12", "Söndag 21/12"];
             return data.map((movie, index) => {
                 const { category, class: categoryClass } = getAgeCategory(movie.Certificate);
-                //${showDays ? `<h3 class="movie-day-label">${days[index] || ''}</h3>` : ''}
                 return `
                     <div class="movie-wrapper">
                         <div class="movie-card">
@@ -70,35 +68,36 @@ export async function movieCarousel() {
                     </div>`}).join('');
         };
 
-        // FILTER
+       
         const updateCurrentMovies = (filterDay) => {
-            // If movieData has a day property, filter by it. 
-            // Otherwise, shuffle to provide dynamic visual feedback.
-            const filtered = [...movieData].sort(() => Math.random() - 0.5).slice(0, 5);
+            // Check if we already have movies saved for this specific day
+            if (!dailyMovieCache[filterDay]) {
+                // If not, create a random selection and save it in the cache
+                dailyMovieCache[filterDay] = [...movieData].sort(() => Math.random() - 0.5).slice(0, 5);
+            }
+
+            // Use the movies stored in the cache for this day
+            const filtered = dailyMovieCache[filterDay];
             
             if (currentTrack) {
                 currentTrack.innerHTML = generateMovieHTML(filtered, true, 'current');
-                setupDetailsListeners(); // Re-initialize detail buttons
+                setupDetailsListeners(); 
             }
         };
 
-        //  DAY SELECTOR LISTENER
         if (daySelector) {
             daySelector.addEventListener('click', (e) => {
                 const btn = e.target.closest('.day-btn');
                 if (!btn) return;
 
-                // Update Button UI
                 document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
-                // Update List
                 updateCurrentMovies(btn.dataset.day);
             });
         }
 
-       
-        updateCurrentMovies("Idag"); // Load initial list
+        updateCurrentMovies("Idag"); 
 
         const shuffledUpcoming = [...movieData].sort(() => Math.random() - 0.5).slice(5, 10);
         if (upcomingTrack) upcomingTrack.innerHTML = generateMovieHTML(shuffledUpcoming, false, 'upcoming');
@@ -117,7 +116,6 @@ export async function movieCarousel() {
         console.error("Movie Carousel Error:", error);
     }
 }
-
 
 function setupDetailsListeners() {
     document.removeEventListener('click', handleDetailClick);
