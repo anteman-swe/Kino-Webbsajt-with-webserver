@@ -49,5 +49,12 @@
             font-size: 1rem;
         }
     }
-    
+}
+
+.breakfast-movie {
+    text-align: center;
+    &__img {
+        max-width: 60%;
+        border-radius: $bistro-radius;
+    }
 }
