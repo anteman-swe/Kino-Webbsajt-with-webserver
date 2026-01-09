@@ -550,6 +550,8 @@ body.light .header__nav-logolight {
 .footer__container {
   display: flex;
   flex-direction: column;
+  display: flex;
+  flex-direction: column;
   background-color: #161313;
   color: #FFFFFF;
   font-size: 1.1rem;
