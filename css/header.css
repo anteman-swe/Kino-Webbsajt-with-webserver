@@ -147,6 +147,7 @@
   background-color: #1A0000;
   justify-content: center;
   align-items: center;
+  z-index: 100;
 }
 .register__modal--active {
   display: flex;
@@ -201,6 +202,7 @@
   background-color: #1A0000;
   justify-content: center;
   align-items: center;
+  z-index: 100;
 }
 .login__modal--active {
   display: flex;
