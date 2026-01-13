@@ -4,7 +4,7 @@ const app = express();
 
 const port = 5080;
 
-app.use('/', express.static('./'));
+app.use('/', express.static('./dist'));
 
 // app.get(' ', (req,  res) => {
 //     console.log(req.path);
