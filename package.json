@@ -6,11 +6,13 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite",
+    "dev-vite": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "sass-watch": "sass --watch src/main.scss:css/main.css",
-    "prepare": "husky"
+    "prepare": "husky",
+    "start": "node server.js",
+    "dev-serv": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,7 @@
   "homepage": "https://github.com/LatifaBik/Kino_Webbsajt#readme",
   "devDependencies": {
     "husky": "^9.1.7",
+    "nodemon": "^3.1.11",
     "sass": "^1.97.2",
     "vite": "^7.3.1"
   },
