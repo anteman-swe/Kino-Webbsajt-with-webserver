@@ -53,8 +53,59 @@
 
 .breakfast-movie {
     text-align: center;
+    &__text-info {
+        text-align: left;
+        margin: auto;
+        width: 80%;
+        // font-size: 1.2rem;
+    }
     &__img {
-        max-width: 60%;
+        width: 80%;
         border-radius: $bistro-radius;
+    }
+    &-choices {
+        margin: auto;
+        max-width: 80%;
+        display: grid;
+        // justify-content: center;
+        justify-items: center;
+        grid-template-columns: 25% 25% 25% 25%;        
+        column-gap: 0.4rem;
+        row-gap: 2rem;
+        // padding: 2rem;
+        &-header {
+            text-decoration: underline;
+            grid-column-start: 1;
+            grid-column-end: 5;
+            padding-top: 3rem;
+        }
+        &-image {
+            width: 80%;
+            // min-width: 80%;
+        }
+        &-pic {
+            max-width: 90%;
+        }
+        &-selector {
+            font-size: 1.2rem;
+            input[type=radio] {
+                width: 1rem;
+                height: 1rem;
+                &:checked {
+                    color: black;
+                }
+            }
+        }
+        &-submit {
+            margin: 3rem 0 6rem 0;
+            grid-column-start: 2;
+            grid-column-end: 4;
+            border: 1px solid black;
+            border-radius: 0.5rem;
+            width: 50%;
+            height: 3rem;
+            font-size: 1.2rem;
+            background-color: white;
+        }
     }
 }
