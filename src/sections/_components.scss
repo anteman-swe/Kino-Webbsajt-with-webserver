@@ -9,6 +9,7 @@
     margin: 20px auto;
     overflow: hidden;
     border: 5px solid $text-white;
+    border: 5px solid $text-white;
     border-radius: 10px;
     
     &_slide {
@@ -33,6 +34,7 @@
     &_control {
         background: $dark-bg;
         color: $text-white;
+        color: $text-white;
         border: none;
         padding: 10px;
         cursor: pointer;
@@ -56,103 +58,4 @@
             height: 18px;
         }
     }
-}
-.carousel_controls_bottom {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    display: flex;
-    gap: 10px;
-    z-index: 1; 
-}
-
-.day-btn {
-    cursor: pointer; 
-}
-
-
-.carousel_nav_btn {
-    background: $dark-bg;
-    color: $text-white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 35px;   
-    height: 35px;  
-    z-index: 10;
-
-    &:hover {
-        background: $dark-bg;
-    }
-
-    i {
-        font-size: 14px;
-    }
-}
-
-
-.movies_carousel {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-
-    &__track {
-        display: flex;
-        gap: 20px;
-        overflow-x: auto;
-        scroll-behavior: smooth;
-        
-        &::-webkit-scrollbar {
-            display: none;
-        }
-        -ms-overflow-style: none;  
-        scrollbar-width: none;  
-    }
-}
-
-
-.day-selector {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    justify-content: space-around;
-    align-items: center;
-
-    .day-btn {
-        background: transparent;
-        color: $text-white;
-        border: 1px solid $text-white;
-        padding: 8px 16px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: all 0.3s;
-
-        &.active, &:hover {
-            background: $text-white;
-            color: $dark-bg;
-        }
-    }
-}
-.movie-details-info {
-    padding: 10px;
-    background: rgba(0,0,0,0.8);
-    color: $text-white;
-    font-size: 0.8rem;
-    position: absolute; 
-    bottom: 50px;
-    left: 0;
-    width: 100%;
-    z-index: 5;
-}
-.movies-carousel__card {
-    position: relative; 
-}
-
-.details-btnn {
-    font-size: larger; 
 }
