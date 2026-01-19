@@ -1,12 +1,12 @@
 import express from 'express';
 
-const app = express();
+const server = express();
 
 const port = 5080;
 
 // app.use('/', express.static('./dist'));
 
-app.get('/', (req, res) =>{
+server.get('/', (req, res) =>{
 
 });
 app.get('/index.html', (req, res) =>{
