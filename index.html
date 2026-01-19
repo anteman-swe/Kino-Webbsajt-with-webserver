@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset='utf-8'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -9,10 +8,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
-
-
-
-
 <body>
   <!-- Info / notice bar -->
   <div class="notice" role="status" aria-live="polite">
@@ -21,7 +16,6 @@
     <button class="notice__close" type="button" aria-label="Stäng notis">&times;</button>
   </div>
   <header class="header">
-
     <div class="header__theme">
       <button class="header__theme-btn header__theme-btn--light" aria-label="toggle light">
         <img class="header__theme-icon" src="/assets/toggle2-light.png" alt="Light mode icon">
@@ -31,7 +25,6 @@
         <img class="header__theme-icon" src="/assets/toggle1-dark.png" alt="Dark mode icon">
       </button>
     </div>
-
     <div class="header__top">
       <button class="header__menu-button" aria-label="Menu">☰ MENY</button>
       <img class="header__logo-dark" src="/assets/logo1-dark.png" alt="Logga - Kino bio">
@@ -43,47 +36,41 @@
         <button class="open-register">Registrera dig</button>
       </div>
     </div>
+    <div class="login">
+      <div class="login__modal">
+        <div class="login__content">
+          <button class="login__close" aria-label="Stäng">✕</button>
+          <h2 class="login__title">Logga in</h2>
+          <form class="login__form">
+            <input class="login__input" type="email" placeholder="E-post" name="email" required>
+            <input class="login__input" type="password" placeholder="Lösenord" name="password" required>
 
-  <div class="login">
-    <div class="login__modal">
-      <div class="login__content">
-        <button class="login__close" aria-label="Stäng">✕</button>
-        <h2 class="login__title">Logga in</h2>
-        <form class="login__form">
-          <input class="login__input" type="email" placeholder="E-post" name="email" required>
-          <input class="login__input" type="password" placeholder="Lösenord" name="password" required>
-
-          <a href="#" class="login__forgot">Glömt lösenord?</a>
-          <button class="login__submit" type="submit">Logga in</button>
-        </form>
+            <a href="#" class="login__forgot">Glömt lösenord?</a>
+            <button class="login__submit" type="submit">Logga in</button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div class="register">
-    <div class="register__modal">
-      <div class="register__content">
-        <button class="register__close" aria-label="Stäng">✕</button>
-        <h2 class="register__title">Registrera dig</h2>
-        <form class="register__form">
-          <input class="register__input" type="text" placeholder="Namn" name="username" required>
-          <input class="register__input" type="email" placeholder="E-post" name="email" required>
-          <input class="register__input" type="password" placeholder="Lösenord" name="password" required>
-          <button class="register__submit" type="submit">Skapa konto</button>
-        </form>
+    <div class="register">
+      <div class="register__modal">
+        <div class="register__content">
+          <button class="register__close" aria-label="Stäng">✕</button>
+          <h2 class="register__title">Registrera dig</h2>
+          <form class="register__form">
+            <input class="register__input" type="text" placeholder="Namn" name="username" required>
+            <input class="register__input" type="email" placeholder="E-post" name="email" required>
+            <input class="register__input" type="password" placeholder="Lösenord" name="password" required>
+            <button class="register__submit" type="submit">Skapa konto</button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-
-  </header>
-  
     <nav class="header__nav">
-      <button class="header__nav-close" aria-label="Stäng menyn">
-        ✕ <span class="close-menu">MENY</span></button>
-
+      <button class="header__nav-close" aria-label="Stäng menyn">✕
+        <span class="close-menu">MENY</span>
+      </button>
       <img class="header__nav-logodark" src="/assets/logo1-dark.png" alt="Logga - Kino bio">
       <img class="header__nav-logolight" src="/assets/logo2-light.png" alt="Logga - Kino bio">
-
       <ul class="header__nav-list">
         <li class="header__nav-item"><a href="index.html">På bio just nu</a></li>
         <li class="header__nav-item"><a href="all-movies.html">Kommande filmer</a></li>
@@ -95,31 +82,28 @@
         <li class="header__nav-item"><a href="#">Mina sidor</a></li>
         <li class="header__nav-item"><a href="#">Företag</a></li>
       </ul>
-    </nav>     
-
+    </nav>
+  </header>
   <main class="container">
-      <section class="carousel">
-            <div class="carousel_inner" id="heroInner">
-               
-            </div>
-            <div class="carousel_controls_bottom" >
-                <button class="carousel_control prev"><i class="fas fa-chevron-left"></i></button>
-                <button class="carousel_control next"><i class="fas fa-chevron-right"></i></button>
-            </div>
-      </section>
-
-    
+    <section class="carousel">
+          <div class="carousel_inner" id="heroInner">
+              <!--  Code injected by javascript -->
+          </div>
+          <div class="carousel_controls_bottom" >
+              <button class="carousel_control prev"><i class="fas fa-chevron-left"></i></button>
+              <button class="carousel_control next"><i class="fas fa-chevron-right"></i></button>
+          </div>
+    </section>
     <section class="movies_section">
       <h2 class="section_title">Aktuella visningar</h2>
-        <div class="day-selector" id="dayFilter">
-          <button class="day-btn active" data-day="Idag">Idag</button>
-          <button class="day-btn" data-day="Imorgon">Imorgon</button>
-          <button class="day-btn" data-day="Tor">Tor</button>
-          <button class="day-btn" data-day="Fre">Fre</button>
-          <button class="day-btn" data-day="Lör">Lör</button>
-          <button class="day-btn" data-day="Sön">Sön</button>
-        </div>
-
+      <div class="day-selector" id="dayFilter">
+        <button class="day-btn active" data-day="Idag">Idag</button>
+        <button class="day-btn" data-day="Imorgon">Imorgon</button>
+        <button class="day-btn" data-day="Tor">Tor</button>
+        <button class="day-btn" data-day="Fre">Fre</button>
+        <button class="day-btn" data-day="Lör">Lör</button>
+        <button class="day-btn" data-day="Sön">Sön</button>
+      </div>
       <div class="movies_carousel movies-carousel">
         <button class="carousel_nav_btn prev_btn" type="button" aria-label="Previous movies">
           <i class="fas fa-chevron-left"></i>
@@ -132,85 +116,47 @@
         </button>
       </div>
     </section>
+    <section class="movies_section">
+      <h2 class="section_title">Kommande visningar</h2>
+      <div class="movies_carousel movies-carousel">
+        <button class="carousel_nav_btn prev_btn" type="button" aria-label="Previous events">
+          <i class="fas fa-chevron-left"></i>
+        </button>
 
-        <section class="movies_section">
-          <h2 class="section_title">Kommande visningar</h2>
-
-          <div class="movies_carousel movies-carousel">
-            <button class="carousel_nav_btn prev_btn" type="button" aria-label="Previous events">
-              <i class="fas fa-chevron-left"></i>
-            </button>
-
-            <div class="movies_carousel_container">
-              <div id="comingSoonTrack" class="movies-carousel__track">
-                <!-- Movie cards will be generated by JavaScript -->
-              </div>
-            </div>
-
-            <button class="carousel_nav_btn next_btn" type="button" aria-label="Next events">
-              <i class="fas fa-chevron-right"></i>
-            </button>
-
-              <div class="carousel_indicators movie_indicators" id="eventsIndicators">
-                <!-- Indicators will be generated by JavaScript -->
-              </div>
-            </div>
-        </section>
-
-        <section class="movies_section">
-          <h2 class="section_title">Aktuella och kommande event</h2>
-
-          <div class="movies_carousel movies-carousel">
-            <button class="carousel_nav_btn prev_btn" type="button" aria-label="Previous coming soon">
-              <i class="fas fa-chevron-left"></i>
-            </button>
-
-            <div class="movies_carousel_container">
-              <div id="eventsTrack" class="movies-carousel__track">
-                <!-- Coming soon cards will be generated by JavaScript -->
-              </div>
-            </div>
-
-            <button class="carousel_nav_btn next_btn" type="button" aria-label="Next coming soon">
-              <i class="fas fa-chevron-right"></i>
-            </button>
-            
-              <!-- Popularmovies, nothing we have discussed? I'll comment this out until we adress this.
-      <section class="movies_section">
-        <h2 class="section_title">Populära filmer</h2>
-
-        <div class="movies_carousel movies-carousel">
-          <button class="carousel_nav_btn prev_btn" type="button" aria-label="Previous popular movies">
-            <i class="fas fa-chevron-left"></i>
-          </button>
-
-          <div class="movies_carousel_container">
-            <div id="popularMoviesTrack" class="movies-carousel__track"></div>
+        <div class="movies_carousel_container">
+          <div id="comingSoonTrack" class="movies-carousel__track">
+            <!-- Movie cards will be generated by JavaScript -->
           </div>
+        </div>
+        <button class="carousel_nav_btn next_btn" type="button" aria-label="Next events">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="carousel_indicators movie_indicators" id="eventsIndicators">
+          <!-- Indicators will be generated by JavaScript -->
+        </div>
+      </div>
+    </section>
+    <section class="movies_section">
+      <h2 class="section_title">Aktuella och kommande event</h2>
+      <div class="movies_carousel movies-carousel">
+        <button class="carousel_nav_btn prev_btn" type="button" aria-label="Previous coming soon">
+          <i class="fas fa-chevron-left"></i>
+        </button>
 
-          <button class="carousel_nav_btn next_btn" type="button" aria-label="Next popular movies">
-            <i class="fas fa-chevron-right"></i>
-          </button>
-
-            <div class="movies_carousel">
-                <button class="carousel_nav_btn prev_btn" aria_label="Populära filmer">
-                    <i class="fas fa_chevron_left"></i>
-                </button>
-
-                <div class="movies_carousel_container">
-                    <div class="movies_carousel_track" id="popularMoviesTrack">
-                         Popular movie cards will be generated by JavaScript -->
-              <!-- Popular movie cards will be generated by JavaScript -->
-            </div>
+        <div class="movies_carousel_container">
+          <div id="eventsTrack" class="movies-carousel__track">
+            <!-- Coming soon cards will be generated by JavaScript -->
           </div>
-
-          <button class="carousel_nav_btn next_btn" aria_label="Next popular">
-            <i class="fas fa_chevron_right"></i>
-          </button>
-
-          <div class="carousel_indicators movie_indicators" id="popularMoviesIndicators">
-            <!-- Indicators will be generated by JavaScript -->
-          </div>
+        </div>
+        <button class="carousel_nav_btn next_btn" type="button" aria-label="Next coming soon">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <button class="carousel_nav_btn next_btn" aria_label="Next popular">
+          <i class="fas fa_chevron_right"></i>
+        </button>
+        <div class="carousel_indicators movie_indicators" id="popularMoviesIndicators">
+          <!-- Indicators will be generated by JavaScript -->
+        </div>
       </div>
     </section>
     <section class="movies_section">
