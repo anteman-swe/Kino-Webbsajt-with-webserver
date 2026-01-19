@@ -7,7 +7,6 @@
     margin-bottom: 2rem;
   }
 }
-
 .bistro-products {
   border: 1px solid $dark-text;
   border-radius: $bistro-radius;
@@ -18,7 +17,6 @@
   flex-wrap: wrap;
   gap: $gap-md;
   margin: auto;
-
   &__product {
     a {
       display: grid;
@@ -37,7 +35,6 @@
       }
     }
   }
-
   &__description {
     text-align: center;
     white-space: wrap;
@@ -47,7 +44,6 @@
     }
   }
 }
-
 .breakfast-movie {
   text-align: center;
   &__text-info {
@@ -64,7 +60,7 @@
     max-width: 80%;
     display: grid;
     justify-items: center;
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns:  1fr 1fr 1fr 1fr;
     column-gap: 0.4rem;
     row-gap: 2rem;
     &-header {

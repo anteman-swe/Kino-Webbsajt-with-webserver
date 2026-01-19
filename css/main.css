@@ -5,6 +5,7 @@
 /* Toggle colors */
 /* Carousel Variables*/
 /*Bistro*/
+/*Movie Carousel*/
 body {
   font-family: "Segoe UI", sans-serif;
   margin: 0;
@@ -105,7 +106,7 @@ body .header__theme-btn--light {
   max-width: 80%;
   display: grid;
   justify-items: center;
-  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   column-gap: 0.4rem;
   row-gap: 2rem;
 }
@@ -151,7 +152,6 @@ body .header__theme-btn--light {
   margin: 20px auto;
   overflow: hidden;
   border: 5px solid #e0e0e0;
-  border: 5px solid #e0e0e0;
   border-radius: 10px;
 }
 .carousel_slide {
@@ -173,7 +173,6 @@ body .header__theme-btn--light {
 }
 .carousel_control {
   background: #1A0000;
-  color: #e0e0e0;
   color: #e0e0e0;
   border: none;
   padding: 10px;
@@ -216,7 +215,6 @@ body .header__theme-btn--light {
   padding: 0.1rem 3rem 0rem;
   margin: 0rem;
 }
-
 .footer__section--about {
   width: 100%;
 }
@@ -235,7 +233,6 @@ body .header__theme-btn--light {
   color: inherit;
   text-decoration: underline;
 }
-
 .footer__section--other {
   width: 100%;
 }
@@ -254,7 +251,6 @@ body .header__theme-btn--light {
   color: inherit;
   text-decoration: underline;
 }
-
 .footer__section--contact {
   width: 100%;
 }
@@ -273,7 +269,6 @@ body .header__theme-btn--light {
   color: inherit;
   text-decoration: underline;
 }
-
 .footer__section--social {
   width: 100%;
   margin-top: -2rem;
@@ -291,7 +286,6 @@ body .header__theme-btn--light {
   color: inherit;
   text-decoration: none;
 }
-
 .footer__section--extra {
   flex: 0 0 100%;
   width: 100%;
@@ -393,6 +387,7 @@ body .header__theme-btn--light {
 }
 
 .header {
+  background-color: #1A0000;
   position: relative;
   flex-direction: column;
   justify-content: flex-end;
@@ -438,7 +433,27 @@ body .header__theme-btn--light {
   display: flex;
   align-items: center;
 }
+.header__member-btn {
+  background: transparent;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  margin-right: 2rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-transform: uppercase;
+}
 .header__login-btn {
+  background: transparent;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.header__logout-btn {
   background: transparent;
   color: #fff;
   border: none;
@@ -837,7 +852,7 @@ body.light .header__nav a {
   display: inline-flex;
 }
 .header {
-  /* light mode: visa dark, göm lighr */
+  /* light mode: visa dark, göm light */
 }
 body.light .header__logo-dark, body.light .header__nav-logodark {
   display: inline-flex;
@@ -868,32 +883,20 @@ body.light .footer__content a {
 
 /* ===== LOGO TOGGLE (works with multiple class variants) ===== */
 /* dark default */
-.header__logo-dark,
-.header__nav-logodark,
-.header__logo-dark,
-.header__nav-logodark {
+.header__logo-dark, .header__nav-logodark, .header__logo-dark, .header__nav-logodark {
   display: none;
 }
 
-.header__logo-light,
-.header__nav-logolight,
-.header__logo-light,
-.header__nav-logolight {
+.header__logo-light, .header__nav-logolight, .header__logo-light, .header__nav-logolight {
   display: inline-block;
 }
 
 /* light mode */
-body.light .header__logo-dark,
-body.light .header__nav-logodark,
-body.light .header__logo-dark,
-body.light .header__nav-logodark {
+body.light .header__logo-dark, body.light .header__nav-logodark, body.light .header__logo-dark, body.light .header__nav-logodark {
   display: inline-block;
 }
 
-body.light .header__logo-light,
-body.light .header__nav-logolight,
-body.light .header__logo-light,
-body.light .header__nav-logolight {
+body.light .header__logo-light, body.light .header__nav-logolight, body.light .header__logo-light, body.light .header__nav-logolight {
   display: none;
 }
 
