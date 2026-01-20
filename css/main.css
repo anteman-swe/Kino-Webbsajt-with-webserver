@@ -53,7 +53,7 @@ body .header__theme-btn--light {
   border: 1px solid #FFFFFF;
   border-radius: 20px;
   padding: 3vh 1vw;
-  width: 83vw;
+  max-width: 83vw;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
