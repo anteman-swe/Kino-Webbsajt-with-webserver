@@ -13,7 +13,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 100px;
+    max-width: 20rem;
     object-fit: contain;
     top: 1rem;
   }

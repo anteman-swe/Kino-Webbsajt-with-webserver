@@ -1,4 +1,4 @@
-import express from "express";
+import express, { json } from "express";
 import ejs from "ejs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -10,15 +10,14 @@ export default function initServer(api) {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
 
-  // server.engine("ejs", ejs.renderFile);
+  server.engine("ejs", ejs.renderFile);
   server.set("view engine", "ejs");
   server.set("views", path.join(__dirname, "views"));
 
   server.get("/movies", async (req, res) => {
     const movies = await api.getAllMovies();
-    res.send("Movies requested...");
-    res.status(200);
-    res.end();
+    console.log(movies);
+    res.render('movielist', {list: 'filmlista här'});
   });
 
   server.get("/movies/:movieID", async (req, res) => {

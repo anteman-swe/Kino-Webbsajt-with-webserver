@@ -1,6 +1,7 @@
 import convertMD2HTML from "./mdconversion.js";
 
 const movieCollection = 'https://plankton-app-xhkom.ondigitalocean.app/api/movies';
+
 // Function to get a list of movies from API
 async function getAllMovies() {
     try {
@@ -14,6 +15,7 @@ async function getAllMovies() {
         console.log(`Error message: ${err.message}`);
     }
 }
+
 // Function to get one specific movie from API
 async function getOneMovie(id) {
     try {
@@ -22,21 +24,23 @@ async function getOneMovie(id) {
             console.log(`Response status:  ${response.status}`);
         }
         const oneMovie = await response.json();
-        return simplifyMovieData(oneMovie);
+        return simplifyMovieData(oneMovie.data);
     } catch (err) {
         console.log(`Error message: ${err.message}`);
     }
 }
+
 // Function to clean and simplify a json-object with data about a movie
 function simplifyMovieData(oneMovieData) {
-    const convertedIntro = convertMD2HTML(oneMovieData.data.attributes.intro);
-    oneMovieData.data.attributes.intro = convertedIntro;
+    const convertedIntro = convertMD2HTML(oneMovieData.attributes.intro);
+    oneMovieData.attributes.intro = convertedIntro;
     return {
-        id: oneMovieData.data.id,
-        ...oneMovieData.data.attributes
+        id: oneMovieData.id,
+        ...oneMovieData.attributes
     }
 }
 
+// Export of functions as a object
 const api = {
     getAllMovies,
     getOneMovie
