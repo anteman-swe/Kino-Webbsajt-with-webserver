@@ -16,8 +16,7 @@ export default function initServer(api) {
 
   server.get("/movies", async (req, res) => {
     const movies = await api.getAllMovies();
-    console.log(movies);
-    res.render('movielist', {list: 'filmlista här'});
+    res.render('movielist', {list: movies});
   });
 
   server.get("/movies/:movieID", async (req, res) => {
@@ -35,6 +34,8 @@ export default function initServer(api) {
     console.log('EJS Rendering requested');
     res.render('index', { message: 'Hello world!' });
   });
+
+  // Serving all other pages static for now
   server.use("/", express.static("./"));
 
   return server;

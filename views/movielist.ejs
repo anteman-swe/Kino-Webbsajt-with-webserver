@@ -1,7 +1,8 @@
 <%- include('header') %>
     <h1>En filmlista</h1>
     <ul>
-     <li></li>
+      <% list.forEach(element => { %>
+        <li><a href="/movies/<%= element.id %>"><%= element.title %></a></li>
+      <% }); %>
     </ul>
-    <%= list %>
 <%- include('footer') %>
