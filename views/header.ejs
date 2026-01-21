@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <title>KINO _ Movie Theater</title>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font_awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet"type="text/css" href="../css/main.css">
+
+    </head>
+<!-- Info / notice bar -->
+
+<body>
+    <div class="container">
+        <header class="header">
+
+            <img class="header__logo" src="/assets/logo1.png" alt="Logga - Kino bio">
+
+            <div class="header__top">
+                <button class="header__menu-button" aria-label="Menu">☰ MENY</button>
+
+
+                <div class="header__auth">
+                    <button class="header__login-btn" aria-label="Logga in">JOIN / LOGIN</button>
+                    <button class="open-register">Registrera dig</button>
+                </div>
+
+                
+                <!-- Login användare -->
+                <div class="login">
+                    <div class="login__modal">
+                        <div class="login__content">
+                            <button class="login__close" aria-label="Stäng">✕</button>
+                            <h2 class="login__title">Logga in</h2>
+                            <form class="login__form">
+                                <input class="login__input" type="email" placeholder="E-post" name="email" required>
+                                <input class="login__input" type="password" placeholder="Lösenord" name="password" required>
+                                <!-- Glömt lösenord under lösenordet -->
+                                <a href="#" class="login__forgot">Glömt lösenord?</a>
+                                <button class="login__submit" type="submit">Logga in</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!--Registrera användare-->
+                <div class="register">
+                    <div class="register__modal">
+                        <div class="register__content">
+                            <button class="register__close" aria-label="Stäng">✕</button>
+                            <h2 class="register__title">Registrera dig</h2>
+                            <form class="register__form">
+                                <input class="register__input" type="text" placeholder="Namn" name="username" required>
+                                <input class="register__input" type="email" placeholder="E-post" name="email" required>
+                                <input class="register__input" type="password" placeholder="Lösenord" name="password"
+                                    required>
+                                <button class="register__submit" type="submit">Skapa konto</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <nav class="header__nav">
+                    <button class="header__nav-close" aria-label="Stäng menyn">
+                        ✕ <span class="close-menu">MENY</span></button>
+                    <img class="header__nav-logo" src="/assets/logo1.png">
+
+                    <ul class="header__nav-list">
+                        <li class="header__nav-item"><a href="index.html">På bio just nu</a></li>
+                        <li class="header__nav-item"><a href="all-movies.html">Kommande filmer</a></li>
+                        <li class="header__nav-item"><a href="#">Barnbio</a></li>
+                        <li class="header__nav-item"><a href="#">Presentkort</a></li>
+                        <li class="header__nav-item"><a href="#">Café & Bistro</a></li>
+                        <li class="header__nav-item"><a href="#">Event</a></li>
+                        <li class="header__nav-item"><a href="#">Kundservice</a></li>
+                        <li class="header__nav-item"><a href="#">Mina sidor</a></li>
+                        <li class="header__nav-item"><a href="#">Företag</a></li>
+                    </ul>
+                </nav>
+        </header>
+    </div>
+    <main>
