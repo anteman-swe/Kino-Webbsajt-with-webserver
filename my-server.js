@@ -2,7 +2,6 @@ import express, { json } from "express";
 import ejs from "ejs";
 import path from "path";
 import { fileURLToPath } from "url";
-import convertMD2HTML from "./mdconversion.js";
 
 export default function initServer(api) {
   const server = express();
@@ -13,6 +12,10 @@ export default function initServer(api) {
   server.engine("ejs", ejs.renderFile);
   server.set("view engine", "ejs");
   server.set("views", path.join(__dirname, "views"));
+
+  server.get(['/','/index','/index.html'], (req, res) => {
+    res.render('index');
+  });
 
   server.get("/movies", async (req, res) => {
     const movies = await api.getAllMovies();
@@ -28,15 +31,16 @@ export default function initServer(api) {
       movieimage: oneMovie.image.url
     });
   });
-
-  server.get("/ejstest", async (req, res) => {
-    
-    console.log('EJS Rendering requested');
-    res.render('index', { message: 'Hello world!' });
-  });
-
-  // Serving all other pages static for now
-  server.use("/", express.static("./"));
+  // Serving script static
+  server.use("/src", express.static("./src"));
+  // Serving sub-scripts static
+  server.use("/scripts", express.static("./scripts"));
+  // Serving mock-data static
+  server.use("/mockup_Data", express.static("./mockup_Data"));
+  // Serving css static
+  server.use("/css", express.static("./css"));
+  // Serving asset static
+  server.use("/assets", express.static("./assets"));
 
   return server;
 }

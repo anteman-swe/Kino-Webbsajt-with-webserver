@@ -184,18 +184,28 @@
         </article>
       </div>   
     </section>
-  </main>
+    <!--TRAILER MODAL-->
+    <div id="trailerModal" class="trailer-modal hidden">
+      <div class="trailer-modal__backdrop"></div>
+      <div class="trailer-modal__content">
+        <button class="trailer-modal__close" type="button">✕</button>
 
-  <!-- Player for trailers -->
-  <iframe
-    id="trailerIframe"
-    width="100%"
-    height="450"
-    src=""
-    frameborder="0"
-    allow="autoplay; encrypted-media"
-    allowfullscreen>
-  </iframe>
+        <iframe id="trailerIframe" width="100%" height="450" src="" frameborder="0" allow="autoplay; encrypted-media"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+    <!-- Player for trailers -->
+    <iframe
+      id="trailerIframe"
+      width="100%"
+      height="450"
+      src=""
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+  </main>
 
   <footer>
     <section class="footer__container">
@@ -260,20 +270,7 @@
         </div>
       </section>
     </section>
-  </footer>
-  
-  <!--TRAILER MODAL-->
-  <div id="trailerModal" class="trailer-modal hidden">
-    <div class="trailer-modal__backdrop"></div>
-    <div class="trailer-modal__content">
-      <button class="trailer-modal__close" type="button">✕</button>
-
-      <iframe id="trailerIframe" width="100%" height="450" src="" frameborder="0" allow="autoplay; encrypted-media"
-        allowfullscreen>
-      </iframe>
-    </div>
-  </div>
-  
-  <script type="module" src="/src/index.js"></script>
+  </footer>  
+  <script type="module" src="../src/index.js"></script>
 </body>
 </html>

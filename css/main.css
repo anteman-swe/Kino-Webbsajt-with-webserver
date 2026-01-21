@@ -7,6 +7,7 @@
 /*Bistro*/
 /*Movie Carousel*/
 body {
+  min-height: 100dvh;
   font-family: "Segoe UI", sans-serif;
   margin: 0;
   padding-top: 50px;
@@ -74,7 +75,6 @@ body .header__theme-btn--light {
 @media screen and (max-width: 510px) {
   .bistro-products__product img {
     max-width: none;
-    min-width: none;
     width: 100%;
   }
 }
@@ -664,6 +664,7 @@ body .header__theme-btn--light {
 /* Notice banner */
 .notice {
   background-color: #e6edb8;
+  color: black;
   padding: 17px 14px;
   position: sticky;
   top: 0;

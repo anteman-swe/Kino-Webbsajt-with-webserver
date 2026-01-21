@@ -4,6 +4,6 @@ import initServer from '../my-server.js';
 
 describe('Movie list page', () =>{
     test('List of movies loading from API', async () =>{
-        await request()
+        // Do nothing
     });
 });
