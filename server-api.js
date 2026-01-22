@@ -40,7 +40,7 @@ function simplifyMovieData(oneMovieData) {
     }
 }
 
-// Export of functions as a object
+// Export of functions as an object
 const api = {
     getAllMovies,
     getOneMovie

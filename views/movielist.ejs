@@ -1,8 +1,12 @@
-<%- include('header') %>
+<%- include('partials/header') %>
+<main> 
+  <section>
     <h1>En filmlista</h1>
     <ul>
       <% list.forEach(element => { %>
-        <li><a href="/movies/<%= element.id %>"><%= element.title %></a></li>
+      <li><a href="/movies/<%= element.id %>"><%= element.title %></a></li>
       <% }); %>
     </ul>
-<%- include('footer') %>
+  </section>
+</main>
+<%- include('partials/footer') %>
