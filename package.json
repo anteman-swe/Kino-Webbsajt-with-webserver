@@ -1,7 +1,7 @@
 {
   "name": "kino-webbsite-with-webbserver",
   "version": "1.0.0",
-  "description": "Uppgiften går ut på att i grupp planera, strukturera och påbörja utvecklingen av en biograf-webbsajt enligt Scrum-metodik.",
+  "description": "Uppgiften går ut på att skapa en webbserver med templating och dynamisk rendering",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -29,6 +29,7 @@
     "husky": "^9.1.7",
     "jest": "^30.2.0",
     "nodemon": "^3.1.11",
+    "prettier-plugin-ejs": "^1.0.3",
     "sass": "^1.97.2",
     "supertest": "^7.2.2",
     "vite": "^7.3.1"
@@ -47,7 +48,7 @@
     "is-number": "^7.0.0",
     "marked": "^17.0.1",
     "micromatch": "^4.0.8",
-    "node": "^24.12.0",
+    "node": "^25.4.0",
     "node-addon-api": "^7.1.1",
     "picomatch": "^2.3.1",
     "readdirp": "^4.1.2",
