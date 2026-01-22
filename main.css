@@ -1,10 +1,5 @@
 @charset "UTF-8";
 
-.header__top {
-  background: #1A0000;
-  color: #000000;
-}
-
 .header__top img, .header__nav img {
   height: 45px;
   width: 100%;

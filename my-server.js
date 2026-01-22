@@ -17,6 +17,14 @@ export default function initServer(api) {
     res.render('index');
   });
 
+  server.get(['/member-page','/memberpage','/member-page.html'], (req, res) => {
+    res.render('member-page');
+  });
+
+  server.get(['/breakfast-movie','/breakfastmovie','/breakfastmovie.html'], (req, res) => {
+    res.render('breakfastmovie');
+  });
+
   server.get("/movies", async (req, res) => {
     const movies = await api.getAllMovies();
     res.render('movielist', {list: movies});
@@ -32,15 +40,15 @@ export default function initServer(api) {
     });
   });
   // Serving script static
-  server.use("/src", express.static("./src"));
+  server.use("/src", express.static("../src"));
   // Serving sub-scripts static
-  server.use("/scripts", express.static("./scripts"));
+  server.use("/scripts", express.static("../scripts"));
   // Serving mock-data static
-  server.use("/mockup_Data", express.static("./mockup_Data"));
+  server.use("/mockup_Data", express.static("../mockup_Data"));
   // Serving css static
   server.use("/css", express.static("./css"));
   // Serving asset static
-  server.use("/assets", express.static("./assets"));
+  server.use("/assets", express.static("../assets"));
 
   return server;
 }
