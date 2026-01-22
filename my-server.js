@@ -14,32 +14,33 @@ export default function initServer(api) {
   server.set("views", path.join(__dirname, "views"));
 
   server.get(["/", "/index", "/index.html"], (req, res) => {
-    res.render("index");
+    res.render("index", {pageTitle: "Kino Biograf"});
   });
 
   server.get(
     ["/member-page", "/memberpage", "/member-page.html"],
     (req, res) => {
-      res.render("member-page");
+      res.render("member-page", {pageTitle: "Medlemssida"});
     },
   );
 
   server.get(
     ["/breakfast-movie", "/breakfastmovie", "/breakfastmovie.html"],
     (req, res) => {
-      res.render("breakfastmovie");
+      res.render("breakfastmovie", {pageTitle: "Frukostbio på Kino"});
     },
   );
 
   server.get("/movies", async (req, res) => {
     const movies = await api.getAllMovies();
-    res.render("movielist", { list: movies });
+    res.render("movielist", { pageTitle: "Filmlistan", list: movies });
   });
 
   server.get("/movies/:movieID", async (req, res) => {
     const movieID = req.params.movieID;
     const oneMovie = await api.getOneMovie(movieID);
     res.render("onemovie", {
+      pageTitle: oneMovie.title,
       movietitle: oneMovie.title,
       movieintro: oneMovie.intro,
       movieimage: oneMovie.image.url,
