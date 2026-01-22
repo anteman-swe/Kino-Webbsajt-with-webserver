@@ -15,12 +15,13 @@ describe('Movie API', () =>{
             expect(response.text).toContain('The Godfather');
     });
 
-    test('One movie is loading from API', async () => {
+    test('One movie is loading from API and showing correct title', async () => {
         const response = await request(app)
-            .get('/movies/99')
+            .get('/movies/42')
             .expect('Content-Type', /html/)
             .expect(200)
 
-            expect(response.text).toContain('Encanto');
+            expect(response.text).toContain('<h1>Encanto</h1>');
+            expect(response.text).toContain('<title>Encanto</title>');
     });
 });

@@ -46,7 +46,13 @@ export default function initServer(api) {
       movieimage: oneMovie.image.url,
     });
   });
-  // Serving script static
+
+  server.get("/templatetest", async (req, res) => {
+    const movies = await api.getAllMovies();
+    res.render("movielist", { list: movies });
+  });
+
+  // Serving main script static
   server.use("/src", express.static("./src"));
   // Serving sub-scripts static
   server.use("/scripts", express.static("./scripts"));
