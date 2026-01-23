@@ -986,6 +986,30 @@ body.light .header__logo-light, body.light .header__nav-logolight, body.light .h
   margin-bottom: 16px;
 }
 
+.movielistlink {
+  padding: 2rem 0 3rem 0;
+}
+.movielistlink h2 a {
+  color: white;
+}
+
+.movielist {
+  width: 20rem;
+  margin: 12dvh auto;
+}
+.movielist li a {
+  color: white;
+}
+
+.onemovie {
+  width: 30rem;
+  margin: 3rem auto;
+}
+.onemovie img {
+  width: 20rem;
+  padding: 1rem 5rem;
+}
+
 .header__top img, .header__nav img {
   height: 45px;
   width: 100%;
