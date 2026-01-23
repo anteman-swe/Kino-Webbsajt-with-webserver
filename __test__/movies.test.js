@@ -3,7 +3,7 @@ import request from "supertest";
 import initServer from '../my-server.js';
 import { mockupApi } from './mockupApi.js';
 
-describe('Movie API to HTML', () =>{
+describe('Integration-test:  Movie API to HTML', () =>{
     const app = initServer(mockupApi);
     test('List of movies loading from API', async () =>{
         const response = await request(app)
@@ -25,7 +25,7 @@ describe('Movie API to HTML', () =>{
             expect(response.text).toContain('<title>Encanto</title>');
     });
 });
-describe('Test server response when problems in API', () => {
+describe('Integration-test: Test server response when problems in API', () => {
     const app = initServer(mockupApi);
     test('Movie page doesnt exist, 404', async () => {
         const response = await request(app)
