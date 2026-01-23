@@ -28,6 +28,13 @@ describe('Movie API to HTML', () =>{
 describe('Test server response when problems in API', () => {
     const app = initServer(mockupApi);
     test('Movie page doesnt exist, 404', async () => {
-        
+        const response = await request(app)
+            .get('/movies/99')
+            .expect('content-type', /html/)
+            .expect(404);
+
+            expect(response.text)
+            .toContain('Filmen du försöker nå finns inte i filmlistan');
+            expect(response.text).toContain('<title>Serverfel!</title>');
     });
 });
