@@ -33,23 +33,41 @@ export default function initServer(api) {
 
   server.get("/movies", async (req, res) => {
     const movies = await api.getAllMovies();
-    res.render("movielist", { pageTitle: "Filmlistan", list: movies });
+    if (!movies.status){
+      res.render("movielist", { pageTitle: "Filmlistan", list: movies });
+    } else {
+      res.sendStatus(movies.status);
+      res.render("errorpage", {
+        status: movies.status,
+        name: movies.name,
+        message: movies.message
+      });
+    }
   });
 
   server.get("/movies/:movieID", async (req, res) => {
     const movieID = req.params.movieID;
     const oneMovie = await api.getOneMovie(movieID);
-    res.render("onemovie", {
-      pageTitle: oneMovie.title,
-      movietitle: oneMovie.title,
-      movieintro: oneMovie.intro,
-      movieimage: oneMovie.image.url,
-    });
+    if (!oneMovie.status) {
+      res.render("onemovie", {
+        pageTitle: oneMovie.title,
+        movietitle: oneMovie.title,
+        movieintro: oneMovie.intro,
+        movieimage: oneMovie.image.url,
+      });
+    } else {
+      // res.status(movies.status);
+      res.status(oneMovie.status).render("errorpage", {
+        status: oneMovie.status,
+        name: oneMovie.name,
+        message: oneMovie.message
+      });
+    }
   });
 
   server.get("/templatetest", async (req, res) => {
     const movies = await api.getAllMovies();
-    res.render("movielist", { list: movies });
+    res.status(418).render("movielist", { list: movies });
   });
 
   // Serving main script static
