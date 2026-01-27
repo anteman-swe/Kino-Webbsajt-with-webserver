@@ -1,23 +1,37 @@
 import express from "express";
 import ejs from "ejs";
-import swaggerUi from 'swagger-ui-express';
-import YAML from 'yamljs';
-import kinoRoutes from './routes/routes.js';
-
-
-
+import swaggerUi from "swagger-ui-express";
+import YAML from "yamljs";
+import apiRoutes from "./api-routes.js";
 
 export default function initServer(api) {
   const server = express();
-  const swaggerDocument = YAML.load('./swagger/openapi.yaml');
+  const swaggerDocument = YAML.load("./swagger/openapi.yaml");
   server.engine("ejs", ejs.renderFile);
   server.set("view engine", "ejs");
-  server.set("views", './views');
+  server.set("views", "./views");
 
-  server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-  server.use(kinoRoutes(api));
+  // Serving swagger docs
+  server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+  // Serving API
+  server.use(apiRoutes(api));
 
-  
+  // Serving site dynamically
+  server.get(["/", "/index", "/index.html"], (req, res) => {
+    res.render("index", { pageTitle: "Kino Biograf" });
+  });
+  server.get(
+    ["/member-page", "/memberpage", "/member-page.html"],
+    (req, res) => {
+      res.render("member-page", { pageTitle: "Medlemssida" });
+    },
+  );
+  server.get(
+    ["/breakfast-movie", "/breakfastmovie", "/breakfastmovie.html"],
+    (req, res) => {
+      res.render("breakfastmovie", { pageTitle: "Frukostbio på Kino" });
+    },
+  );
 
   // Serving main script static
   server.use("/src", express.static("./src"));

@@ -1,26 +1,9 @@
-import express from "express";
+import express from  'express';
 
-export default function kinoRoutes(api) {
-  const router = express.Router();
-  router.get(["/", "/index", "/index.html"], (req, res) => {
-    res.render("index", { pageTitle: "Kino Biograf" });
-  });
+export default function apiRoutes(api) {
+    const router = express.Router();
 
-  router.get(
-    ["/member-page", "/memberpage", "/member-page.html"],
-    (req, res) => {
-      res.render("member-page", { pageTitle: "Medlemssida" });
-    },
-  );
-
-  router.get(
-    ["/breakfast-movie", "/breakfastmovie", "/breakfastmovie.html"],
-    (req, res) => {
-      res.render("breakfastmovie", { pageTitle: "Frukostbio på Kino" });
-    },
-  );
-
-  router.get("/movies", async (req, res) => {
+    router.get("/movies", async (req, res) => {
     const movies = await api.getAllMovies();
     if (!movies.status) {
       res.render("movielist", { pageTitle: "Filmlistan", list: movies });
