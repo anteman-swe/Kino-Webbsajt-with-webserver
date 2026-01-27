@@ -15,7 +15,7 @@ export default function initServer(api) {
   server.set("views", './views');
 
   server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-  server.use(kinoRoutes);
+  server.use(kinoRoutes(api));
 
   
 
