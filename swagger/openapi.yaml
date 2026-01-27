@@ -1,0 +1,161 @@
+openapi: 3.0.0
+info:
+  title: Kino webbserver API Documentation
+  version: 0.0.1
+  description: Complete Documentation for the Kino webbserver API
+  contact:
+    name: Anders Eriksson
+    email: anteman.swe@gmail.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:5080
+    description: Development server
+  - url: https://produktionsserver.se
+    description: Production server, correct adress to be filled later
+
+tags:
+  # Tags describing the endpoints
+  - name:
+    description:
+
+paths:
+  # Paths to endpoints
+  /movies:
+    get:
+      summary: Retrieve all movies
+      description: Returns all movies
+      tags:
+        - Movies
+      parameters:
+
+  /movies/{id}:
+
+  /movies/{id}/reviews:
+   
+  /movies/{id}/screenings:
+
+  /movies/{id}/rating:
+
+components:
+  schemas:
+    Movies:
+      type: object
+      properties:
+        id:
+          type: number
+          description: movie ID number from database API
+          example: 1
+        title:
+          type: string
+          description: Movie title
+          example: "The Matrix"
+        genre:
+          type: string
+          description: The genre of movie
+          example: "Action"
+        IMDB_rating:
+          type: number
+          description: The movies rating on IMDB
+          example: 9.2
+        intro:
+          type: string
+          description: An short introduction to the movie plot
+          example: "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring."
+        show_date:
+          type: string
+          description: Date of screening
+          example: "2025-03-31"
+        show_time:
+          type: string
+          description: At what time will the movie be shown
+          example: "21:00"
+    
+    Reviews:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Review ID number from database API
+          example: 1621
+        comment:
+          type: string
+          description: Review written by user
+          example: "Best movie ever!"
+        rating:
+          type: number
+          description: Rating given by user, 0-5
+          example: 4
+        author:
+          type: string
+          description: Name choosen by user
+          example: "King Louie"
+        verified:
+          type: boolean
+          description: Is the review verified by system checks
+          example: true
+        lastChange:
+          type: string
+          description: When was the review last updated
+          example: "2026-01-27T16:16:45.565Z"
+
+    Error:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Type of Error
+          example: "NotFoundError"
+        message:
+          type: string
+          description: Error message
+          example: "Movie was not found"
+        status:
+          type: number
+          description: HTTP Response status code
+          example: 404
+  responses:
+    responses:
+    NotFound:
+      description: The resource wasn't found
+      content:
+        application/json:
+          schema:
+            $ref: './schemas.yaml#/components/schemas/Error'
+          example:
+            name: "NotFoundError"
+            message: "The resource could not be found"
+            status: 404
+
+    BadRequest:
+      description: Not a valid request
+      content:
+        application/json:
+          schema:
+            $ref: './schemas.yaml#/components/schemas/Error'
+          example:
+            name: "BadRequest"
+            message: "Request contains invalid data"
+            status: 400
+
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: './schemas.yaml#/components/schemas/Error'
+          example:
+            name: "InternalServerError"
+            message: "An unexpected error occured"
+            status: 500
+  
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []
