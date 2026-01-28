@@ -14,17 +14,20 @@
     "start": "node start-server.js",
     "dev-serv": "nodemon start-server.js"
   },
+  "nodemonConfig": {
+    "ext": "js, mjs, cjs, json, yaml, yml"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LatifaBik/Kino_Webbsajt.git"
+    "url": "git+https://github.com/anteman-swe/Kino-Webbsajt-with-webserver.git"
   },
   "keywords": [],
   "author": "SJPI25 - A4 Grupp D",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/LatifaBik/Kino_Webbsajt/issues"
+    "url": "https://github.com/anteman-swe/Kino-Webbsajt-with-webserver/issues"
   },
-  "homepage": "https://github.com/LatifaBik/Kino_Webbsajt#readme",
+  "homepage": "https://github.com/anteman-swe/Kino-Webbsajt-with-webserver#readme",
   "devDependencies": {
     "husky": "^9.1.7",
     "jest": "^30.2.0",
@@ -39,6 +42,7 @@
     "chokidar": "^4.0.3",
     "cross-env": "^10.1.0",
     "detect-libc": "^1.0.3",
+    "dotenv": "^17.2.3",
     "ejs": "^4.0.1",
     "express": "^5.2.1",
     "fill-range": "^7.1.1",
@@ -53,6 +57,8 @@
     "picomatch": "^2.3.1",
     "readdirp": "^4.1.2",
     "source-map-js": "^1.2.1",
-    "to-regex-range": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "to-regex-range": "^5.0.1",
+    "yamljs": "^0.3.0"
   }
 }
