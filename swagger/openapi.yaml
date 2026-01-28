@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Kino webbserver API Documentation
-  version: 0.0.1
+  version: 1.0.0
   description: Complete Documentation for the Kino webbserver API
   contact:
     name: Anders Eriksson
@@ -13,13 +13,11 @@ info:
 servers:
   - url: http://localhost:5080
     description: Development server
-  - url: https://produktionsserver.se
-    description: Production server, correct adress to be filled later
 
 tags:
   # Tags describing the endpoints
-  - name:
-    description:
+  - name: Kino Endpoints
+    description: API Endpoints to use with Kino server
 
 paths:
   # Paths to endpoints
@@ -29,19 +27,189 @@ paths:
       description: Returns all movies
       tags:
         - Movies
-      parameters:
+      responses:
+        '200':
+          description: List of movies
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Movie'
+                  total:
+                    type: number
+                    description: Count of total number of items in data
+                    example: 1
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
   /movies/{id}:
+    get:
+      summary: Retrieve a specific movie
+      description: Returns one movie
+      tags:
+        - Movies
+      responses:
+        '200':
+          description: One movie
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movie'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
   /movies/{id}/reviews:
-   
-  /movies/{id}/screenings:
+    get:
+      summary: Retrieve all reviews for one movie
+      tags:
+        - Reviews
+      responses:
+        '200':
+          description: List of reviews
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Review'
+                  total:
+                    type: number
+                    description: Count of total number of items in data
+                    example: 1
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Post a new review of current movie
+      tags:
+        - Reviews
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewPost'
+      responses:
+        '200':
+          description: Review added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
-  /movies/{id}/rating:
+  /movies/{id}/screenings:
+    get:
+      summary: Retrieve all screening times for one movie
+      description: Returns all screening times for one movie
+      tags:
+        - Screenings
+      responses:
+        '200':
+          description: List of screening times
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Screening'
+                  total:
+                    type: number
+                    description: Count of total number of items in data
+                    example: 1
+
+  /movies/popular:
+    get:
+      summary: Retrieve a list of the most popular movies
+      description: Returns a list of the most popular movies with highest ratings within 30 days
+      tags:
+        - Movies
+      responses:
+        '200':
+          description: List of popular movies
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Movie'
+                  total:
+                    type: number
+                    description: Count of total number of items in data
+                    example: 1
 
 components:
   schemas:
-    Movies:
+    Movie:
       type: object
       properties:
         id:
@@ -52,28 +220,20 @@ components:
           type: string
           description: Movie title
           example: "The Matrix"
-        genre:
-          type: string
-          description: The genre of movie
-          example: "Action"
-        IMDB_rating:
-          type: number
-          description: The movies rating on IMDB
-          example: 9.2
+        poster:
+          type: object
+          description: An object containing the url to a movie poster image
+          properties:
+            url:
+              type: string
+              description: A string containing an url to a movie poster image
+              example: "https://m.media-amazon.com/images/M/MV5BOTY1YmU1ZTItMzNjZC00ZGU0LTk0MTEtZDgzN2QwOWVlNjZhXkEyXkFqcGc@._V1_.jpg"
         intro:
           type: string
           description: An short introduction to the movie plot
           example: "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring."
-        show_date:
-          type: string
-          description: Date of screening
-          example: "2025-03-31"
-        show_time:
-          type: string
-          description: At what time will the movie be shown
-          example: "21:00"
     
-    Reviews:
+    Review:
       type: object
       properties:
         id:
@@ -96,11 +256,60 @@ components:
           type: boolean
           description: Is the review verified by system checks
           example: true
-        lastChange:
+        createdAt:
+          type: string
+          description: When was the review created
+          example: "2026-01-27T16:16:45.565Z"
+        updatedAt:
           type: string
           description: When was the review last updated
           example: "2026-01-27T16:16:45.565Z"
 
+    ReviewPost:
+      type: object
+      properties:
+        comment:
+          type: string
+          description: Users comment about a movie
+          example: "Interesting plot-twists!"
+        rating:
+          type: integer
+          description: Users rating of movie, 0-5
+          example: 3
+          minimum: 0
+          maximum: 5
+        author:
+          type: string
+          description: Users alias name
+          example: "Kaiser Bose"
+        movie:
+          type: string
+          description: Movie identifier, ID number
+          example: 12
+
+    Screening:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID number of one particular screening announcement
+          example: 1231
+        room:
+          type: string
+          description: Which room is the screening in
+          example: "Large cinema"
+        start_time:
+          type: string
+          description: Date and time of screening
+          example: "2026-01-31T17:30:00Z"
+        createdAt:
+          type: string
+          description: Date and time of this posts creation
+          example: "2026-01-28T16:55:30Z"
+        updatedAt:
+          type: string
+          description: Date and time of this posts last update
+          example: "2026-01-28T16:55:30Z"
     Error:
       type: object
       properties:
@@ -116,8 +325,8 @@ components:
           type: number
           description: HTTP Response status code
           example: 404
+
   responses:
-    responses:
     NotFound:
       description: The resource wasn't found
       content:

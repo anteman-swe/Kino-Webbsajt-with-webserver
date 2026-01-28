@@ -7,12 +7,20 @@ import apiRoutes from "./api-routes.js";
 export default function initServer(api) {
   const server = express();
   const swaggerDocument = YAML.load("./swagger/openapi.yaml");
+  const swaggerOptions = {
+    customCss: '.swagger-ui .topbar { display: none }',
+    customSiteTitle: "Kino API dokumentation",
+    swaggerOptions: {
+      persistAuthorization: true, // Behåll auth-token mellan sidladdningar
+    }
+  };
+
   server.engine("ejs", ejs.renderFile);
   server.set("view engine", "ejs");
   server.set("views", "./views");
 
   // Serving swagger docs
-  server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+  server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument, swaggerOptions));
   // Serving API
   server.use(apiRoutes(api));
 
