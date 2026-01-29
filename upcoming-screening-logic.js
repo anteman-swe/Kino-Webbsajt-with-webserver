@@ -8,5 +8,8 @@ export function getUpcomingScreenings(screenings, now = new Date()) {
     return screeningDate >= now && screeningDate <= fiveDaysFromNow;
   });
 
-  return upcomingScreenings.slice(0, 10);
+ return upcomingScreenings
+  .sort((a, b) => new Date(a.date) - new Date(b.date))
+  .slice(0, 10);
+
 }
