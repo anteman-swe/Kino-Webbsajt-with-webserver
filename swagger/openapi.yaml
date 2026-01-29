@@ -356,7 +356,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: './schemas.yaml#/components/schemas/Error'
+            $ref: '#/components/schemas/Error'
           example:
             name: "NotFoundError"
             message: "The resource could not be found"
@@ -367,7 +367,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: './schemas.yaml#/components/schemas/Error'
+            $ref: '#/components/schemas/Error'
           example:
             name: "BadRequest"
             message: "Request contains invalid data"
@@ -378,7 +378,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: './schemas.yaml#/components/schemas/Error'
+            $ref: '#/components/schemas/Error'
           example:
             name: "InternalServerError"
             message: "An unexpected error occured"

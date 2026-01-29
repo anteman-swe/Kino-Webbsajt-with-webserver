@@ -1,14 +1,3 @@
-# Kino Webbserver
-
-Uppgift för att skapa en enkel http webbserver som serverar Kino-sidorna med rendering på serverns sida med hjälp av templates.
-Som template-motor valdes EJS.  
-Intro-texter som ingår i film-objekten som hämtas genom http requests från ett API konverteras från Markdown till HTML.   
-Till uppgiften har jag skapat Unit-tester och integrationstester för att kontrollera funktionaliteten.
-
-Uppgift steg 2: Utöka servern med möjlighet att svara på HTTP Requests som i sin tur kommuniceras från backend vidare till ett CMS
-
----
-
 # Kino webbserver API Documentation
 Complete Documentation for the Kino webbserver API
 
@@ -20,7 +9,7 @@ anteman.swe@gmail.com
 
 **License:** [MIT](https://opensource.org/licenses/MIT)
 
-### Available authorizations 
+### Available authorizations
 #### bearerAuth (HTTP, bearer)
 Bearer format: JWT
 
@@ -163,6 +152,3 @@ Returns all screening times for one movie
 | name | string | Type of Error<br>*Example:* `"NotFoundError"` | No |
 | message | string | Error message<br>*Example:* `"Movie was not found"` | No |
 | status | number | HTTP Response status code<br>*Example:* `404` | No |
-
-
-
