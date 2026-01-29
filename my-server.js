@@ -1,7 +1,8 @@
 import express from "express";
 import ejs from "ejs";
-import path from "path";
-import { fileURLToPath } from "url";
+import swaggerUi from "swagger-ui-express";
+import YAML from "yamljs";
+import apiRoutes from "./api-routes.js";
 
 import screeningsRouter from "./upcoming-screening.js"; 
 
@@ -15,26 +16,39 @@ export default function initServer(api) {
 
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
+  
+  const swaggerDocument = YAML.load("./swagger/openapi.yaml");
+  const swaggerOptions = {
+    customCss: '.swagger-ui .topbar { display: none }',
+    customSiteTitle: "Kino API dokumentation",
+    swaggerOptions: {
+      persistAuthorization: true, // Behåll auth-token mellan sidladdningar
+    }
+  };
 
   server.engine("ejs", ejs.renderFile);
   server.set("view engine", "ejs");
-  server.set("views", path.join(__dirname, "views"));
+  server.set("views", "./views");  
 
+  // Serving swagger docs
+  server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument, swaggerOptions));
+  // Serving API
+  server.use(apiRoutes(api));
+
+  // Serving site dynamically
   server.get(["/", "/index", "/index.html"], (req, res) => {
-    res.render("index", {pageTitle: "Kino Biograf"});
+    res.render("index", { pageTitle: "Kino Biograf" });
   });
-
   server.get(
     ["/member-page", "/memberpage", "/member-page.html"],
     (req, res) => {
-      res.render("member-page", {pageTitle: "Medlemssida"});
+      res.render("member-page", { pageTitle: "Medlemssida" });
     },
   );
-
   server.get(
     ["/breakfast-movie", "/breakfastmovie", "/breakfastmovie.html"],
     (req, res) => {
-      res.render("breakfastmovie", {pageTitle: "Frukostbio på Kino"});
+      res.render("breakfastmovie", { pageTitle: "Frukostbio på Kino" });
     },
   );
 
