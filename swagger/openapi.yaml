@@ -37,10 +37,22 @@ paths:
                 properties:
                   data:
                     $ref: '#/components/schemas/Movie'
-                  total:
-                    type: number
-                    description: Count of total number of items in data
-                    example: 1
+                  meta:
+                    type: object
+                    properties:
+                      page:
+                        type: integer
+                        description: What page is actual
+                        example: 2
+                      pagination:
+                        type: integer
+                        description: Number of items per page
+                        default: 5
+                        example: 5
+                      total:
+                        type: number
+                        description: Count of total number of items in data
+                        example: 1
         '400':
           description: Bad request
           content:
@@ -107,10 +119,22 @@ paths:
                 properties:
                   data:
                     $ref: '#/components/schemas/Review'
-                  total:
-                    type: number
-                    description: Count of total number of items in data
-                    example: 1
+                  meta:
+                    type: object
+                    properties:
+                      page:
+                        type: integer
+                        description: What page is actual
+                        example: 2
+                      pagination:
+                        type: integer
+                        description: Number of items per page
+                        default: 5
+                        example: 5
+                      total:
+                        type: number
+                        description: Count of total number of items in data
+                        example: 1
         '400':
           description: Bad request
           content:
@@ -332,7 +356,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: './schemas.yaml#/components/schemas/Error'
+            $ref: '#/components/schemas/Error'
           example:
             name: "NotFoundError"
             message: "The resource could not be found"
@@ -343,7 +367,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: './schemas.yaml#/components/schemas/Error'
+            $ref: '#/components/schemas/Error'
           example:
             name: "BadRequest"
             message: "Request contains invalid data"
@@ -354,7 +378,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: './schemas.yaml#/components/schemas/Error'
+            $ref: '#/components/schemas/Error'
           example:
             name: "InternalServerError"
             message: "An unexpected error occured"
