@@ -3,8 +3,15 @@ import ejs from "ejs";
 import path from "path";
 import { fileURLToPath } from "url";
 
+import screeningsRouter from "./upcoming-screening.js"; 
+
+
+
 export default function initServer(api) {
   const server = express();
+
+  // API routes
+  server.use("/api/screenings", screeningsRouter(api));
 
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
@@ -65,10 +72,15 @@ export default function initServer(api) {
     }
   });
 
+
+
   server.get("/templatetest", async (req, res) => {
     const movies = await api.getAllMovies();
     res.status(418).render("movielist", { list: movies });
   });
+
+ 
+
 
   // Serving main script static
   server.use("/src", express.static("./src"));
