@@ -1,11 +1,9 @@
 // upcoming-screening.js
-import express from "express";
-import { getUpcomingScreenings } from "./upcoming-screenings-logic.js";
 
-export default function screeningsRouter(api) {
+
+export default function apiRouter(api) {
   const router = express.Router();
-
-  router.get("/", async (req, res) => {
+  router.get("/screenings", async (req, res) => {
     try {
       const cmsData = await api.getCMSData();
       const allScreenings = await api.getAllScreenings(cmsData);
@@ -22,3 +20,4 @@ export default function screeningsRouter(api) {
 
   return router;
 }
+

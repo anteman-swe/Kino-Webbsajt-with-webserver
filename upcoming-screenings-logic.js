@@ -4,12 +4,12 @@ export function getUpcomingScreenings(screenings, now = new Date()) {
   fiveDaysFromNow.setDate(fiveDaysFromNow.getDate() + 5);
 
   const upcomingScreenings = screenings.filter(screening => {
-    const screeningDate = new Date(screening.date);
-    return screeningDate >= now && screeningDate <= fiveDaysFromNow;
+       const startTime = new Date(screening.startTime);
+    return startTime >= now && startTime <= fiveDaysFromNow;
   });
 
  return upcomingScreenings
-  .sort((a, b) => new Date(a.date) - new Date(b.date))
-  .slice(0, 10);
+  .sort((a, b) => new Date(a.startTime) - new Date(b.startTime))  
+  .slice(0, 10); 
 
 }
