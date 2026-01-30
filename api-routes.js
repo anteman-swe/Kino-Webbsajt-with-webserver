@@ -1,7 +1,13 @@
 import express from  'express';
+import popularMoviesRoute from './popularMovies-route.js';
+
+
 
 export default function apiRoutes(api) {
     const router = express.Router();
+
+//returns a router with /popular-movies endpoint
+router.use(popularMoviesRoute(api));
 
     router.get("/movies", async (req, res) => {
     const movies = await api.getAllMovies();
