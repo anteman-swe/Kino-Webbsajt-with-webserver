@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
-import { getPopularMovies } from "../getPopularMovies.js";
+import { getPopularMovies } from "../popularMovies.js";
 import { mockMovieApi } from './mockPopularMovies.js';
 
 
