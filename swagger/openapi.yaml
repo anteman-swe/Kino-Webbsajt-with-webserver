@@ -36,7 +36,9 @@ paths:
                 type: object
                 properties:
                   data:
-                    $ref: '#/components/schemas/Movie'
+                    type: array
+                    items: 
+                      $ref: '#/components/schemas/Movie'
                   meta:
                     type: object
                     properties:
@@ -118,7 +120,9 @@ paths:
                 type: object
                 properties:
                   data:
-                    $ref: '#/components/schemas/Review'
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Review'
                   meta:
                     type: object
                     properties:
@@ -204,7 +208,9 @@ paths:
                 type: object
                 properties:
                   data:
-                    $ref: '#/components/schemas/Screening'
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Screening'
                   total:
                     type: number
                     description: Count of total number of items in data
@@ -225,7 +231,9 @@ paths:
                 type: object
                 properties:
                   data:
-                    $ref: '#/components/schemas/Movie'
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Movie'
                   total:
                     type: number
                     description: Count of total number of items in data
