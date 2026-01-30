@@ -44,7 +44,7 @@ paths:
                         type: integer
                         description: What page is actual
                         example: 2
-                      pagination:
+                      pageSize:
                         type: integer
                         description: Number of items per page
                         default: 5
@@ -126,7 +126,7 @@ paths:
                         type: integer
                         description: What page is actual
                         example: 2
-                      pagination:
+                      pageSize:
                         type: integer
                         description: Number of items per page
                         default: 5

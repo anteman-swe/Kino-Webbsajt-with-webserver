@@ -12,7 +12,14 @@ async function getAllMovies() {
       return errorResponse.error;
     } else {
       const allMovies = await response.json();
-      return allMovies.data.map(simplifyMovieData);
+      return {
+        data: allMovies.data.map(simplifyMovieData),
+        meta: {
+          page: allMovies.meta.pagination.page,
+          pageSize: allMovies.meta.pagination.pageSize,
+          total: allMovies.meta.pagination.total
+        }
+      }
     }
   } catch (err) {
     throw new Error(`Error message: ${err.message}`);
@@ -39,9 +46,12 @@ async function getOneMovie(id) {
 function simplifyMovieData(oneMovieData) {
   const convertedIntro = convertMD2HTML(oneMovieData.attributes.intro);
   oneMovieData.attributes.intro = convertedIntro;
+  
   return {
     id: oneMovieData.id,
-    ...oneMovieData.attributes,
+    title: oneMovieData.attributes.title,
+    poster: oneMovieData.attributes.image,
+    intro: oneMovieData.attributes.intro
   };
 }
 
@@ -49,6 +59,7 @@ function simplifyMovieData(oneMovieData) {
 const api = {
   getAllMovies,
   getOneMovie,
+  simplifyMovieData
 };
 
 export default api;

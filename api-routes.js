@@ -6,7 +6,7 @@ export default function apiRoutes(api) {
     router.get("/movies", async (req, res) => {
     const movies = await api.getAllMovies();
     if (!movies.status) {
-      res.render("movielist", { pageTitle: "Filmlistan", list: movies });
+      res.render("movielist", { pageTitle: "Filmlistan", list: movies.data });
     } else {
       res.status(movies.status).render("errorpage", {
         status: movies.status,
@@ -24,7 +24,7 @@ export default function apiRoutes(api) {
         pageTitle: oneMovie.title,
         movietitle: oneMovie.title,
         movieintro: oneMovie.intro,
-        movieimage: oneMovie.image.url,
+        movieimage: oneMovie.poster.url,
       });
     } else {
       res.status(oneMovie.status).render("errorpage", {
