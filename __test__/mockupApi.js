@@ -46,15 +46,11 @@ const mockupApiMovies = {
 const mockupApiMovie = {
   id: 2,
   title: "Encanto",
-  imdbId: "tt2953050",
-  intro:
-    "<p>A Colombian teenage girl has to face the frustration of being <strong>the only member of her family</strong> without magical powers.</p>\n",
-  image: {
+  poster: {
     url: "https://m.media-amazon.com/images/M/MV5BOTY1YmU1ZTItMzNjZC00ZGU0LTk0MTEtZDgzN2QwOWVlNjZhXkEyXkFqcGc@._V1_.jpg",
   },
-  createdAt: "2023-01-23T06:46:24.765Z",
-  updatedAt: "2025-01-15T10:41:46.386Z",
-  publishedAt: "2023-01-23T06:46:29.324Z",
+  intro:
+    "<p>A Colombian teenage girl has to face the frustration of being <strong>the only member of her family</strong> without magical powers.</p>\n"
 };
 
 export const mockupApiMovieConverted = {
