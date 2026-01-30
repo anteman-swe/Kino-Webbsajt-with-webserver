@@ -24,6 +24,38 @@
     <section id="user_review"> <!-- id is only to identify what section should contain -->
 
     </section>
+
+    <section id="user_review">
+        <h2>Skriv en recension</h2>
+
+        <form id="review-form">
+            <label>
+            Namn
+            <input type="text" name="author" required />
+            </label>
+
+            <label>
+            Betyg
+            <select name="rating" required>
+                <option value="">Välj betyg</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            </label>
+
+            <label>
+            Kommentar (valfri)
+            <textarea name="comment" rows="4"></textarea>
+            </label>
+
+            <button type="submit">Skicka</button>
+        </form>
+
+        <p id="review-message" aria-live="polite"></p>
+</section>
 </main>
 
 <%- include('partials/footer'); %>
