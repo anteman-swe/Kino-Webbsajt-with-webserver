@@ -20,7 +20,7 @@ anteman.swe@gmail.com
 
 **License:** [MIT](https://opensource.org/licenses/MIT)
 
-### Available authorizations 
+### Available authorizations
 #### bearerAuth (HTTP, bearer)
 Bearer format: JWT
 
@@ -163,6 +163,3 @@ Returns all screening times for one movie
 | name | string | Type of Error<br>*Example:* `"NotFoundError"` | No |
 | message | string | Error message<br>*Example:* `"Movie was not found"` | No |
 | status | number | HTTP Response status code<br>*Example:* `404` | No |
-
-
-
