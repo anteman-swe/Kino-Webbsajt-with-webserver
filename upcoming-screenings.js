@@ -1,8 +1,9 @@
 // upcoming-screening.js
-
+import express from "express";
 
 export default function apiRouter(api) {
-  const router = express.Router();
+    const router = express.Router();
+  
   router.get("/screenings", async (req, res) => {
     try {
       const cmsData = await api.getCMSData();
