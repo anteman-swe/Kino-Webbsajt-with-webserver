@@ -2,7 +2,6 @@ import convertMD2HTML from "./mdconversion.js";
 
 const cms = "https://plankton-app-xhkom.ondigitalocean.app/api"
 const movieCollection = "/movies";
-const getReviews = "/reviews?filters[movie]=";
 
 // Function to get a list of movies from API
 async function getAllMovies() {
@@ -44,9 +43,12 @@ async function getOneMovie(id) {
 }
 
 //Function to get reviews for one movie id
-async function getAllReviewsForMovie(id) { //TODO: need logics for pagination to 5 items per page
+async function getAllReviewsForMovie(id, page) { 
+  const getReviewsForMovie = "/reviews?filters[movie]=";
+  const pagination = '&pagination[pageSize]=5&pagination[page]=';
+  const fetchString = cms + getReviewsForMovie + id + pagination + page;
   try {
-    const response = await fetch(cms + getReviews + id);
+    const response = await fetch(fetchString);
     if (!response.ok || response.data == []) {
       const errorResponse = await response.json();
       return errorResponse.error;

@@ -111,6 +111,14 @@ paths:
       summary: Retrieve all reviews for one movie
       tags:
         - Reviews
+      parameters:
+        - name: page
+          in: query
+          description: I fyou want to retrieve second, third,... page if there are many reviews
+          required: false
+          schema:
+            type: integer
+            default: 1
       responses:
         '200':
           description: List of reviews
