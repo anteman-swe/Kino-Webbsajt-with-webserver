@@ -37,7 +37,7 @@ export default function apiRoutes(api) {
 
   router.get("/movies/:movieID/reviews", async (req, res) => {
     const movieID = req.params.movieID;
-    const page = parseInt(req.query.page) || 1; // check if request is for other then first page
+    const page = parseInt(req.query.page) || 1; // check if request is for other than first page
     const reviewsOneMovie = await api.getAllReviewsForMovie(movieID, page);
     res.status(200).send(reviewsOneMovie).end();
   });
