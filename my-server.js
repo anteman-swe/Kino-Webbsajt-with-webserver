@@ -10,6 +10,7 @@ export default function initServer(api) {
   const server = express();
     // API routes
  server.use("/api", screeningsRouter(api));
+ 
   
   const swaggerDocument = YAML.load("./swagger/openapi.yaml");
   const swaggerOptions = {

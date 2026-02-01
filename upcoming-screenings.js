@@ -1,21 +1,27 @@
-// upcoming-screening.js
 import express from "express";
+import { getUpcomingScreenings } from "./upcoming-screenings-logic.js";
 
 export default function apiRouter(api) {
-    const router = express.Router();
-  
-  router.get("/screenings", async (req, res) => {
+  const router = express.Router();
+
+  router.get("/movies/:id/screenings", async (req, res) => {
     try {
-      const cmsData = await api.getCMSData();
-      const allScreenings = await api.getAllScreenings(cmsData);
+      const movieId = Number(req.params.id);
+
+      const all = await api.getAllScreenings(); 
+
+      const forMovie = (all || []).filter(
+        (s) => s?.attributes?.movie?.data?.id === movieId
+      );
 
       if (req.query.type === "upcoming") {
-        return res.json(getUpcomingScreenings(allScreenings));
+        return res.json(getUpcomingScreenings(forMovie));
       }
 
-      return res.json(allScreenings);
+      return res.json(forMovie);
     } catch (err) {
-      return res.status(500).json({ message: "Failed to load screenings" });
+      console.error(err);
+      return res.status(500).json({ message: "Failed to load screenings", error: err.message });
     }
   });
 
