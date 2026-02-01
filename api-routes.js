@@ -35,6 +35,13 @@ export default function apiRoutes(api) {
     }
   });
 
+  router.get("/movies/:movieID/reviews", async (req, res) => {
+    const movieID = req.params.movieID;
+    const reviewsOneMovie = await api.getAllReviewsForMovie(movieID);
+    res.status(200).send(reviewsOneMovie).end();
+  });
+
+  // Testroute just for fun
   router.get("/coffeemaker", async (req, res) => {
     res.status(418).render("errorpage", {
       status: 418,
