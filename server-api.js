@@ -1,16 +1,19 @@
 import convertMD2HTML from "./mdconversion.js";
 
-const cms = "https://plankton-app-xhkom.ondigitalocean.app/api";
-const movieCollection = "/movies";
-
 const screeningsCollection =
   "https://plankton-app-xhkom.ondigitalocean.app/api/screenings?populate=movie";
 
 async function getAllScreenings() {
   const response = await fetch(screeningsCollection);
   const json = await response.json();
-  return json.data;
+  return json.data; 
 }
+
+
+const cms = "https://plankton-app-xhkom.ondigitalocean.app/api";
+const movieCollection = "/movies";
+
+
 
 // Function to get a list of movies from API
 async function getAllMovies() {
