@@ -20,8 +20,9 @@ export default function apiRoutes(api) {
     const movieID = req.params.movieID;
     const oneMovie = await api.getOneMovie(movieID);
     if (!oneMovie.status) {
-      res.status(200).render("onemovie", {
+      res.status(200).render("singlemoviepres", {
         pageTitle: oneMovie.title,
+        movieId: oneMovie.id,
         movietitle: oneMovie.title,
         movieintro: oneMovie.intro,
         movieimage: oneMovie.poster.url,
