@@ -25,6 +25,7 @@ export default function apiRoutes(api) {
         movietitle: oneMovie.title,
         movieintro: oneMovie.intro,
         movieimage: oneMovie.poster.url,
+        movieID: movieID,
       });
     } else {
       res.status(oneMovie.status).render("errorpage", {
@@ -34,6 +35,22 @@ export default function apiRoutes(api) {
       });
     }
   });
+  
+
+router.get("/movies/:movieID/screenings", async (req, res) => {
+  const movieID = req.params.movieID;
+  const screenings = await api.getUpcomingScreeningsForMovie(movieID);
+
+  if (!screenings.status) {
+    res.status(200).json({ data: screenings.data });
+  } else {
+    res.status(screenings.status).json({
+      status: screenings.status,
+      name: screenings.name,
+      message: screenings.message,
+    });
+  }
+});
 
   router.get("/coffeemaker", async (req, res) => {
     res.status(418).render("errorpage", {
