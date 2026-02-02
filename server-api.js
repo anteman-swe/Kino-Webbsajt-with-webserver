@@ -8,10 +8,40 @@ const reviewsCollection =
 const allMovieCollection =
   "https://plankton-app-xhkom.ondigitalocean.app/api/movies";  
 
+   function toScreeningDTO(s) {
+  const attrs = s?.attributes || {};
+  const movieData = attrs?.movie?.data;
+
+  return {
+    id: s?.id,
+    start_time: attrs?.start_time, 
+    room: attrs?.room,
+    movie: movieData
+      ? {
+          id: movieData.id,
+          title: movieData.attributes?.title,
+          imageUrl: movieData.attributes?.image?.url,
+        }
+      : null,
+  };
+}
+// Function to get a list of screenings from API
+
 async function getAllScreenings() {
-  const response = await fetch(screeningsCollection);
-  const json = await response.json();
-  return json.data; 
+  try {
+    const response = await fetch(screeningsCollection);
+
+    if (!response.ok) {
+      // försök läsa ett CMS-error, annars fallback
+      const errorResponse = await response.json().catch(() => ({}));
+      return errorResponse.error || { message: "Failed to fetch screenings" };
+    }
+
+    const json = await response.json();
+    return (json.data || []).map(toScreeningDTO);
+  } catch (err) {
+    throw new Error(`Error fetching screenings: ${err.message}`);
+  }
 }
 
   //Get reviews
