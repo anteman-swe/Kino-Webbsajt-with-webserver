@@ -1,5 +1,15 @@
 import convertMD2HTML from "./mdconversion.js";
 
+const screeningsCollection =
+  "https://plankton-app-xhkom.ondigitalocean.app/api/screenings?populate=movie";
+
+async function getAllScreenings() {
+  const response = await fetch(screeningsCollection);
+  const json = await response.json();
+  return json.data; 
+}
+
+
 const movieCollection =
   "https://plankton-app-xhkom.ondigitalocean.app/api/movies";
 
@@ -59,7 +69,8 @@ function simplifyMovieData(oneMovieData) {
 const api = {
   getAllMovies,
   getOneMovie,
-  simplifyMovieData
+  simplifyMovieData,
+  getAllScreenings
 };
 
 export default api;

@@ -1,4 +1,4 @@
-export async function getPopularMovies(api) {
+export async function fetchPopularMovies(api) {
   const movies = await api.getPopularMovies();
 
   //Filter out movies older then 30 days

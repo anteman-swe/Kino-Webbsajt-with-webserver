@@ -1,11 +1,11 @@
-import { describe, expect, test } from '@jest/globals';
-import { getPopularMovies } from "../popularMovies.js";
+import { describe, expect, it } from '@jest/globals';
+import { fetchPopularMovies } from "../popularMovies.js";
 import { mockMovieApi } from './mockPopularMovies.js';
 
 
-describe("getPopularMovies", () => {
+describe("fetchPopularMovies", () => {
   it("Filters out movies with ratings older than 30 days", async () => {
-    const result = await getPopularMovies(mockMovieApi);
+    const result = await fetchPopularMovies(mockMovieApi);
 
     expect(result).toHaveLength(1);
     expect(result[0].title).toBe("Nytt betyg");
@@ -20,7 +20,7 @@ describe("getPopularMovies", () => {
     ]
   };
 
-  const result = await getPopularMovies(api);
+  const result = await fetchPopularMovies(api);
 
   expect(result[0].rating).toBe(9); // highest 
   expect(result[1].rating).toBe(7);
@@ -38,7 +38,7 @@ describe("getPopularMovies", () => {
         { title: "6", rating: 5, reviewDate: new Date() }
       ]
     };
-    const result = await getPopularMovies(api);
+    const result = await fetchPopularMovies(api);
 
     expect(result).toHaveLength(5);
     expect(result[0].rating).toBe(10);
@@ -53,7 +53,7 @@ describe("getPopularMovies", () => {
         { title: "3", rating: 9, reviewDate: new Date(Date.now()-40 * 24 * 60 * 60 * 1000)},
       ]
     };
-    const result = await getPopularMovies(api);
+    const result = await fetchPopularMovies(api);
 
     expect(result).toHaveLength(0);
   });
