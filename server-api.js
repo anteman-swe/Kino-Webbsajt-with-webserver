@@ -3,7 +3,6 @@ import convertMD2HTML from "./mdconversion.js";
 const cms = "https://plankton-app-xhkom.ondigitalocean.app/api";
 const movieCollection = "/movies";
 
-const screeningsCollection = cms + "/screenings?populate=movie";
 const reviewsCollection = cms + "reviews?populate=movie";
 
 const allMovieCollection = cms + movieCollection;  
@@ -72,6 +71,9 @@ async function getMovies() {
 
 
 
+
+const screeningCollection =
+  "https://plankton-app-xhkom.ondigitalocean.app/api/screenings";
 
 // Function to get a list of movies from API
 async function getAllMovies() {
@@ -146,7 +148,7 @@ function simplifyMovieData(oneMovieData) {
     id: oneMovieData.id,
     title: oneMovieData.attributes.title,
     poster: oneMovieData.attributes.image,
-    intro: oneMovieData.attributes.intro,
+    intro: oneMovieData.attributes.intro
   };
 }
 
@@ -159,15 +161,63 @@ function simplifyReviewData(oneReviewData) {
     author: oneReviewData.attributes.author,
     verified: oneReviewData.attributes.verified,
     createdAt: oneReviewData.attributes.createdAt,
-    updatedAt: oneReviewData.attributes.updatedAt,
+    updatedAt: oneReviewData.attributes.updatedAt
   };
 }
+// Function to filter and sort upcoming screenings
+export function filterAndSortUpcomingScreenings(screeningsData, now = new Date()) {
+  return screeningsData
+    .filter((s) => {
+      const start = new Date(s.attributes.start_time);
+      return start > now;
+    })
+    .sort((a, b) => {
+      const da = new Date(a.attributes.start_time).getTime();
+      const db = new Date(b.attributes.start_time).getTime();
+      return da - db;
+    })
+    .map(simplifyScreeningData);
+}
+
+// Function to clean and simplify a json-object with data about a screening
+function simplifyScreeningData(oneScreening) {
+  return {
+    id: oneScreening.id,
+    start_time: oneScreening.attributes.start_time,
+    room: oneScreening.attributes.room ?? null
+  };
+}
+
+async function getUpcomingScreeningsForMovie(movieId) {
+  try {
+    const url = new URL(screeningCollection);
+    url.searchParams.set("populate", "movie");
+    url.searchParams.set("filters[movie]", movieId);
+
+    const response = await fetch(url.toString());
+
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      return errorResponse.error;
+    }
+
+    const payload = await response.json();
+
+    return {
+      data: filterAndSortUpcomingScreenings(payload.data),
+    };
+  } catch (err) {
+    throw new Error(`Error message: ${err.message}`);
+  }
+}
+
 
 // Export of functions as an object
 const api = {
   getAllMovies,
   getOneMovie,
   getAllReviewsForMovie,
+  getUpcomingScreeningsForMovie,
   simplifyMovieData,
   getAllScreenings,
   getAllReviews,
