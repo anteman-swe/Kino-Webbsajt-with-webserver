@@ -22,7 +22,7 @@ tags:
 paths:
   # Paths to endpoints
   /movies:
-    get:
+    get:    
       summary: Retrieve all movies
       description: Returns all movies
       tags:
@@ -188,14 +188,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+/movies/{id}/screenings:
+  get:
+    summary: Retrieve all screening times for one movie
+    description: Returns all screening times for one movie
+    tags:
+      - Screenings
 
-  /movies/{id}/screenings:
-    get:
-      summary: Retrieve all screening times for one movie
-      description: Returns all screening times for one movie
-      tags:
-        - Screenings
-      responses:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        description: Movie id
+
+      - in: query
+        name: type
+        required: false
+        schema:
+          type: string
+          enum: [upcoming]
+        description: >
+          Optional filter.
+          Use `type=upcoming` to return only upcoming screenings
+          (next 5 days, max 10).
+
+    responses:
         '200':
           description: List of screening times
           content:
