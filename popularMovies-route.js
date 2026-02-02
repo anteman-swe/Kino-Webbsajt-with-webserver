@@ -1,26 +1,26 @@
-//inuti popularMovie-routes.js
-import express from  'express';
-import { getPopularMovies } from "./popularMovies.js";
+//Route for popular movies
+
+import express from 'express';
+import { fetchPopularMovies } from "./popularMovies.js";
 
 //Popular movies route
-export default function popularMoviesRoute(api){
-  const router= express.Router();
+export default function apiRoute(api) {
+  const router = express.Router();
 
-  router.get("/popular-movies",async (reg, res)=> {
-    
+ router.get("/movies/popular", async (req, res) => {
   try {
-      const cmsData = await api.getCMSData();
-      const popularMovies = await api.getPopularMovies(cmsData);
+    const movies = await fetchPopularMovies(api);
 
-      if (req.query.type === "popular") {
-        return res.json(getPopularMovies(popularMovies));
-      }
+    res.json({
+      data: movies,
+      total: movies.length
+    });
 
-      return res.json(popularMovies);
-    } catch (err) {
-      return res.status(500).json({ message: "Failed to load screenings" });
-    }
-  });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to load popular movies!" });
+  }
+});
+
 
   return router;
 }
