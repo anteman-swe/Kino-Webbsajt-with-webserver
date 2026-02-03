@@ -9,6 +9,35 @@ async function getAllScreenings() {
   return json.data; 
 }
 
+const reviewsCollection =
+  "https://plankton-app-xhkom.ondigitalocean.app/api/reviews?populate=movie";
+
+  //Get reviews
+async function getReviews() {
+  const response = await fetch(reviewsCollection);
+  const json = await response.json();
+
+  return json.data.map(item => ({
+    id: item.id,
+    rating: item.attributes.rating,
+    reviewDate: item.attributes.createdAt,
+    movieId: item.attributes.movie.data.id
+  }));
+}
+
+//Get all movies
+async function getMovies() {
+  const response = await fetch(movieCollection);
+  const json = await response.json();
+
+  return json.data.map(item => ({
+    id: item.id,
+    title: item.attributes.title,
+    description: item.attributes.intro, // eller description om du har det
+    poster: item.attributes.image
+  }));
+}
+
 
 const cms = "https://plankton-app-xhkom.ondigitalocean.app/api";
 const movieCollection = "/movies";
@@ -117,6 +146,8 @@ const api = {
   getAllReviewsForMovie,
   simplifyMovieData,
   getAllScreenings,
+  getReviews,
+  getMovies
 };
 
 export default api;
