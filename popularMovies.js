@@ -1,7 +1,7 @@
-//Funktion for 
+//Function for real API integrations
 export async function fetchPopularMoviesIntegration(api) {
 
-  //Get reviews and movies
+  //Get reviews and movies from the API
   const reviews = await api.getReviews();
   const movies = await api.getMovies();
 
@@ -14,6 +14,7 @@ export async function fetchPopularMoviesIntegration(api) {
     return now - reviewTime <= THIRTY_DAYS;
   });
 
+  //Group reviews by movies ID
   const reviewsByMovie = {};
   for (const review of recentReviews) {
     if (!reviewsByMovie[review.movieId]) {
@@ -22,6 +23,7 @@ export async function fetchPopularMoviesIntegration(api) {
     reviewsByMovie[review.movieId].push(review);
   }
 
+  //Add average rating to each movie
   const moviesWithRatings = movies
     .map(movie => {
       const movieReviews = reviewsByMovie[movie.id];
