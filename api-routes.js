@@ -25,6 +25,7 @@ export default function apiRoutes(api) {
         movietitle: oneMovie.title,
         movieintro: oneMovie.intro,
         movieimage: oneMovie.poster.url,
+        movieID: movieID,
       });
     } else {
       res.status(oneMovie.status).render("errorpage", {
