@@ -72,6 +72,12 @@ Returns a list of the most popular movies with highest ratings within 30 days
 ### [GET] /movies/{id}/reviews
 **Retrieve all reviews for one movie**
 
+#### Parameters
+
+| Name | Located in | Description | Required | Schema |
+| ---- | ---------- | ----------- | -------- | ------ |
+| page | query | I fyou want to retrieve second, third,... page if there are many reviews | No | integer, <br>**Default:** 1 |
+
 #### Responses
 
 | Code | Description | Schema |

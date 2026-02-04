@@ -8,7 +8,8 @@
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
     "watch": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --watch",
     "dev-vite": "vite",
-    "build": "vite build",
+    "vite-build": "vite build",
+    "build": "sass src/sections/main.scss:css/main.css",
     "preview": "vite preview",
     "sass-watch": "sass --watch src/main.scss:css/main.css",
     "prepare": "husky",
@@ -30,6 +31,8 @@
   },
   "homepage": "https://github.com/anteman-swe/Kino-Webbsajt-with-webserver#readme",
   "devDependencies": {
+    "@types/express": "^5.0.6",
+    "eslint": "^9.39.2",
     "husky": "^9.1.7",
     "jest": "^30.2.0",
     "nodemon": "^3.1.11",
