@@ -39,17 +39,17 @@ export default function apiRoutes(api) {
 
 router.get("/movies/:movieID/screenings", async (req, res) => {
   const movieID = req.params.movieID;
-  const screenings = await api.getUpcomingScreeningsForMovie(movieID);
+  const result = await api.getUpcomingScreeningsForMovie(movieID);
 
-  if (!screenings.status) {
-    res.status(200).json({ data: screenings.data });
-  } else {
-    res.status(screenings.status).json({
-      status: screenings.status,
-      name: screenings.name,
-      message: screenings.message,
+  if (result.status) {
+    return res.status(result.status).json({
+      status: result.status,
+      name: result.name,
+      message: result.message,
     });
   }
+
+  return res.status(200).json({ data: result.data });
 });
 
   router.get("/coffeemaker", async (req, res) => {
