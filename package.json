@@ -9,7 +9,7 @@
     "watch": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --watch",
     "dev-vite": "vite",
     "vite-build": "vite build",
-    "build": "sass src/main.scss:css/main.css",
+    "build": "sass src/sections/main.scss:css/main.css",
     "preview": "vite preview",
     "sass-watch": "sass --watch src/main.scss:css/main.css",
     "prepare": "husky",

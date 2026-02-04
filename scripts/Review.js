@@ -43,6 +43,7 @@ export default class Review {
     }
 
     const revDate = document.createElement("p");
+    revDate.classList.add('review-card__date')
     const updated = this.data.updatedAt.split("T");
     const outDate = updated[0];
     revDate.textContent = "Review date: " + outDate;

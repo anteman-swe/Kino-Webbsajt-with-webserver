@@ -3,6 +3,7 @@ import Review from "/scripts/Review.js";
 const serverAdress = "http://localhost:5080/movies/";
 
 const oneMovieReviewsCont = document.querySelector(".reviews-one-movie");
+const numberOfReviewsView = document.querySelector(".number-of-reviews"); 
 const movie = oneMovieReviewsCont.dataset.movieId;
 const backButton = document.querySelector("#back-button");
 const forwardButton = document.querySelector("#forward-button");
@@ -14,6 +15,7 @@ let page = 1;
 document.addEventListener("DOMContentLoaded", async () => {
   if (oneMovieReviewsCont) {
     const oneMovieReviews = await getMovieReviews(movie, 1);
+    numberOfReviewsView.textContent = "Totalt antal recensioner: " + oneMovieReviews.meta.total;
     renderReviews(oneMovieReviewsCont, oneMovieReviews);
     setButtons(oneMovieReviews.meta, forwardButton, backButton);
   }

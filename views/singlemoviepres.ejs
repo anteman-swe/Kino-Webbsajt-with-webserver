@@ -12,8 +12,12 @@
     <section id="coming_screenings"> <!-- id is only to identify what section should contain -->
         
     </section>
-    <section id="movie_reviews"> <!-- id is only to identify what section should contain -->
-        <article>
+    <section id="movie_reviews"> <!-- id is only to identify what section contains -->
+        <h2 class="review-header">Recensioner för <%= movietitle %></h2>
+        <p class="number-of-reviews">
+            <!-- Code injected by browser script-->
+        </p>
+        <article class="reviews-container">
             <button type="button" id="back-button" class="reviews-button" disabled>&lt;</button>
             <ul class="reviews-one-movie" data-movie-id="<%= movieId %>">
                 <!-- Code injected by browser script-->
