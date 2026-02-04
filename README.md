@@ -36,7 +36,7 @@ Returns all movies
 
 | Code | Description | Schema |
 | ---- | ----------- | ------ |
-| 200 | List of movies | **application/json**: { **"data"**: [Movie](#movie), **"meta"**: { **"page"**: integer, **"pagination"**: integer, <br>**Default:** 5, **"total"**: number } }<br> |
+| 200 | List of movies | **application/json**: { **"data"**: [ [Movie](#movie) ], **"meta"**: { **"page"**: integer, **"pageSize"**: integer, <br>**Default:** 5, **"total"**: number } }<br> |
 | 400 | Bad request | **application/json**: [Error](#error)<br> |
 | 404 | Resource not found | **application/json**: [Error](#error)<br> |
 | 500 | Internal server error | **application/json**: [Error](#error)<br> |
@@ -64,7 +64,7 @@ Returns a list of the most popular movies with highest ratings within 30 days
 
 | Code | Description | Schema |
 | ---- | ----------- | ------ |
-| 200 | List of popular movies | **application/json**: { **"data"**: [Movie](#movie), **"total"**: number }<br> |
+| 200 | List of popular movies | **application/json**: { **"data"**: [ [Movie](#movie) ], **"total"**: number }<br> |
 
 ---
 ## default
@@ -72,11 +72,17 @@ Returns a list of the most popular movies with highest ratings within 30 days
 ### [GET] /movies/{id}/reviews
 **Retrieve all reviews for one movie**
 
+#### Parameters
+
+| Name | Located in | Description | Required | Schema |
+| ---- | ---------- | ----------- | -------- | ------ |
+| page | query | I fyou want to retrieve second, third,... page if there are many reviews | No | integer, <br>**Default:** 1 |
+
 #### Responses
 
 | Code | Description | Schema |
 | ---- | ----------- | ------ |
-| 200 | List of reviews | **application/json**: { **"data"**: [Review](#review), **"meta"**: { **"page"**: integer, **"pagination"**: integer, <br>**Default:** 5, **"total"**: number } }<br> |
+| 200 | List of reviews | **application/json**: { **"data"**: [ [Review](#review) ], **"meta"**: { **"page"**: integer, **"pageSize"**: integer, <br>**Default:** 5, **"total"**: number } }<br> |
 | 400 | Bad request | **application/json**: [Error](#error)<br> |
 | 404 | Resource not found | **application/json**: [Error](#error)<br> |
 | 500 | Internal server error | **application/json**: [Error](#error)<br> |
@@ -111,7 +117,7 @@ Returns all screening times for one movie
 
 | Code | Description | Schema |
 | ---- | ----------- | ------ |
-| 200 | List of screening times | **application/json**: { **"data"**: [Screening](#screening), **"total"**: number }<br> |
+| 200 | List of screening times | **application/json**: { **"data"**: [ [Screening](#screening) ], **"total"**: number }<br> |
 
 ---
 ### Schemas

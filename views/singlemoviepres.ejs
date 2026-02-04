@@ -3,21 +3,61 @@
 <%- include('partials/header'); %>
 
 <main class="container">
-    <section id="movieinformation"> <!-- id is only to identify what section should contain -->
+    <h1><%= movietitle %></h1>
+    <section id="movieinformation" data-movie-id="<%= movieId %>"> <!-- id is only to identify what section should contain -->
 
     </section>
     <section id="movie_rating"> <!-- id is only to identify what section should contain -->
 
     </section>
     <section id="coming_screenings"> <!-- id is only to identify what section should contain -->
-
+        
     </section>
-    <section id="movie_reviews"> <!-- id is only to identify what section should contain -->
-
+    <section id="movie_reviews"> <!-- id is only to identify what section contains -->
+        <h2 class="review-header">Recensioner för <%= movietitle %></h2>
+        <p class="number-of-reviews">
+            <!-- Code injected by browser script-->
+        </p>
+        <article class="reviews-container">
+            <button type="button" id="back-button" class="reviews-button" disabled>&lt;</button>
+            <ul class="reviews-one-movie" data-movie-id="<%= movieId %>">
+                <!-- Code injected by browser script-->
+            </ul>
+            <button type="button" id="forward-button" class="reviews-button" enabled>&gt;</button>
+        </article>
     </section>
-    <section id="user_review"> <!-- id is only to identify what section should contain -->
+   
+    <section id="user_review">
+        <h2>Skriv en recension</h2>
 
-    </section>
+        <form id="review-form">
+            <label>
+            Namn
+            <input type="text" name="author" required />
+            </label>
+
+            <label>
+            Betyg
+            <select name="rating" required>
+                <option value="">Välj betyg</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            </label>
+
+            <label>
+            Kommentar (valfri)
+            <textarea name="comment" rows="4"></textarea>
+            </label>
+
+            <button type="submit">Skicka</button>
+        </form>
+
+        <p id="review-message" aria-live="polite"></p>
+</section>
 </main>
 
 <%- include('partials/footer'); %>
