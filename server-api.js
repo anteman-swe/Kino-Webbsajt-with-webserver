@@ -1,5 +1,8 @@
 import convertMD2HTML from "./mdconversion.js";
 
+const cms = "https://plankton-app-xhkom.ondigitalocean.app/api"
+const movieCollection = "/movies";
+const getReviews = "/reviews?filters[movie]=";
 const screeningsCollection =
   "https://plankton-app-xhkom.ondigitalocean.app/api/screenings?populate=movie";
 
@@ -46,7 +49,7 @@ const movieCollection =
 // Function to get a list of movies from API
 async function getAllMovies() {
   try {
-    const response = await fetch(movieCollection);
+    const response = await fetch(cms + movieCollection);
     if (!response.ok) {
       const errorResponse = await response.json();
       return errorResponse.error;
@@ -69,13 +72,36 @@ async function getAllMovies() {
 // Function to get one specific movie from API
 async function getOneMovie(id) {
   try {
-    const response = await fetch(movieCollection + `/${id}`);
+    const response = await fetch(cms + movieCollection + `/${id}`);
     if (!response.ok) {
       const errorResponse = await response.json();
       return errorResponse.error;
     } else {
       const oneMovie = await response.json();
       return simplifyMovieData(oneMovie.data);
+    }
+  } catch (err) {
+    throw new Error(`Error message: ${err.message}`);
+  }
+}
+
+//Function to get reviews for one movie id
+async function getAllReviewsForMovie(id) { //TODO: need logics for pagination to 5 items per page
+  try {
+    const response = await fetch(cms + getReviews + id);
+    if (!response.ok || response.data == []) {
+      const errorResponse = await response.json();
+      return errorResponse.error;
+    } else {
+      const reviews = await response.json();
+      return {
+        data: reviews.data.map(simplifyReviewData),
+        meta: {
+          page: reviews.meta.pagination.page,
+          pageSize: reviews.meta.pagination.pageSize,
+          total: reviews.meta.pagination.total
+        }
+      }
     }
   } catch (err) {
     throw new Error(`Error message: ${err.message}`);
@@ -93,6 +119,18 @@ function simplifyMovieData(oneMovieData) {
     poster: oneMovieData.attributes.image,
     intro: oneMovieData.attributes.intro
   };
+}
+
+function simplifyReviewData(oneReviewData) {
+  return {
+    id: oneReviewData.id,
+    comment: oneReviewData.attributes.comment,
+    rating: oneReviewData.attributes.rating,
+    author: oneReviewData.attributes.author,
+    verified: oneReviewData.attributes.verified,
+    createdAt: oneReviewData.attributes.createdAt,
+    updatedAt: oneReviewData.attributes.updatedAt
+  }
 }
 
 // Export of functions as an object
