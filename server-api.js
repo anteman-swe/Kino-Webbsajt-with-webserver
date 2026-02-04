@@ -195,19 +195,26 @@ async function getUpcomingScreeningsForMovie(movieId) {
     url.searchParams.set("filters[movie]", movieId);
 
     const response = await fetch(url.toString());
+    const payload = await response.json(); 
 
     if (!response.ok) {
-      const errorResponse = await response.json();
-      return errorResponse.error;
+      const err = payload?.error ?? payload;
+      return {
+        status: err.status ?? response.status,
+        name: err.name ?? "Error",
+        message: err.message ?? "Unknown error",
+      };
     }
-
-    const payload = await response.json();
 
     return {
       data: filterAndSortUpcomingScreenings(payload.data),
     };
   } catch (err) {
-    throw new Error(`Error message: ${err.message}`);
+    return {
+      status: 500,
+      name: "ServerError",
+      message: err.message,
+    };
   }
 }
 
