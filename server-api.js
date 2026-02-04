@@ -5,12 +5,46 @@ const movieCollection = "/movies";
 const getReviews = "/reviews?filters[movie]=";
 const screeningsCollection =
   "https://plankton-app-xhkom.ondigitalocean.app/api/screenings?populate=movie";
+const reviewsCollection =
+  "https://plankton-app-xhkom.ondigitalocean.app/api/reviews?populate=movie";
+
+const allMovieCollection =
+  "https://plankton-app-xhkom.ondigitalocean.app/api/movies";  
 
 async function getAllScreenings() {
   const response = await fetch(screeningsCollection);
   const json = await response.json();
   return json.data; 
 }
+
+  //Get reviews
+async function getAllReviews() {
+  const response = await fetch(reviewsCollection);
+  const json = await response.json();
+
+  return json.data.map(item => ({
+    id: item.id,
+    rating: item.attributes.rating,
+    reviewDate: item.attributes.createdAt,
+    movieId: item.attributes.movie.data.id
+  }));
+}
+
+//Get all movies
+async function getMovies() {
+  const response = await fetch(allMovieCollection);
+  const json = await response.json();
+
+  return json.data.map(item => ({
+    id: item.id,
+    title: item.attributes.title,
+    description: item.attributes.intro, // eller description om du har det
+    poster: item.attributes.image
+  }));
+}
+
+
+
 
 // Function to get a list of movies from API
 async function getAllMovies() {
@@ -104,7 +138,9 @@ const api = {
   getAllMovies,
   getOneMovie,
   simplifyMovieData,
-  getAllScreenings
+  getAllScreenings,
+  getAllReviews,
+  getMovies
 };
 
 export default api;
