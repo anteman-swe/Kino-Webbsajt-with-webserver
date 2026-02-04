@@ -28,17 +28,32 @@ export default class Review {
     reviewRating.textContent = ratingStars;
 
     const reviewAuthor = document.createElement("p");
-    reviewAuthor.classList.add("review-card__author");
+    reviewAuthor.classList.add("review-card__revauthor");
+
+    const reviewedBy = document.createElement("span");
+    reviewedBy.classList.add("review-card__preauthor");
+    reviewedBy.textContent = "Review By: ";
+
+    const author = document.createElement("span");
+    author.classList.add("review-card__author");
     if (this.data.author) {
-      reviewAuthor.textContent = this.data.author;
+      author.textContent = this.data.author;
     } else {
-      reviewAuthor.textContent = "No user alias provided...";
+      author.textContent = "No user alias provided...";
     }
+
+    const revDate = document.createElement("p");
+    const updated = this.data.updatedAt.split("T");
+    const outDate = updated[0];
+    revDate.textContent = "Review date: " + outDate;
+
+    reviewAuthor.appendChild(reviewedBy);
+    reviewAuthor.appendChild(author);
 
     reviewCard.append(reviewText);
     reviewCard.append(reviewRating);
     reviewCard.append(reviewAuthor);
-
+    reviewCard.append(revDate);
     return reviewCard;
   }
 }

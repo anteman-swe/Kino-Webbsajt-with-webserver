@@ -1,5 +1,7 @@
 import Review from "/scripts/Review.js";
 
+const serverAdress = "http://localhost:5080/movies/";
+
 const oneMovieReviewsCont = document.querySelector(".reviews-one-movie");
 const movie = oneMovieReviewsCont.dataset.movieId;
 const backButton = document.querySelector("#back-button");
@@ -10,9 +12,11 @@ let zeroCheck = false;
 let page = 1;
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const oneMovieReviews = await getMovieReviews(movie, 1);
-  renderReviews(oneMovieReviewsCont, oneMovieReviews);
-  setButtons(oneMovieReviews.meta, forwardButton, backButton);
+  if (oneMovieReviewsCont) {
+    const oneMovieReviews = await getMovieReviews(movie, 1);
+    renderReviews(oneMovieReviewsCont, oneMovieReviews);
+    setButtons(oneMovieReviews.meta, forwardButton, backButton);
+  }
 });
 
 backButton.addEventListener("click", async () => {
@@ -33,14 +37,9 @@ forwardButton.addEventListener("click", async () => {
   setButtons(oneMovieReviews.meta, forwardButton, backButton);
 });
 
-if (oneMovieReviewsCont) {
-  const oneMovieReviews = await getMovieReviews(movie, 1);
-  renderReviews(oneMovieReviewsCont, oneMovieReviews);
-}
-
 async function getMovieReviews(movieID, page) {
   const getReviewsString =
-    "http://localhost:5080/movies/" + movieID + "/reviews?page=" + page;
+    serverAdress + movieID + "/reviews?page=" + page;
   try {
     const response = await fetch(getReviewsString);
     if (!response.ok) {
@@ -53,7 +52,7 @@ async function getMovieReviews(movieID, page) {
     throw new Error(`Error message: ${err.message}`);
   }
 
-  return await reviews.json();
+  // return await reviews.json();
 }
 
 function renderReviews(tagPointer, reviewsContent) {

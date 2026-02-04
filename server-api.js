@@ -1,6 +1,6 @@
 import convertMD2HTML from "./mdconversion.js";
 
-const cms = "https://plankton-app-xhkom.ondigitalocean.app/api"
+const cms = "https://plankton-app-xhkom.ondigitalocean.app/api";
 const movieCollection = "/movies";
 
 const screeningsCollection =
@@ -9,7 +9,7 @@ const screeningsCollection =
 async function getAllScreenings() {
   const response = await fetch(screeningsCollection);
   const json = await response.json();
-  return json.data; 
+  return json.data;
 }
 
 // Function to get a list of movies from API
@@ -26,9 +26,9 @@ async function getAllMovies() {
         meta: {
           page: allMovies.meta.pagination.page,
           pageSize: allMovies.meta.pagination.pageSize,
-          total: allMovies.meta.pagination.total
-        }
-      }
+          total: allMovies.meta.pagination.total,
+        },
+      };
     }
   } catch (err) {
     throw new Error(`Error message: ${err.message}`);
@@ -52,10 +52,10 @@ async function getOneMovie(id) {
 }
 
 //Function to get reviews for one movie id
-async function getAllReviewsForMovie(id, page) { 
+async function getAllReviewsForMovie(id, page) {
   const getReviewsForMovie = "/reviews?filters[movie]=";
-  const pagination = '&pagination[pageSize]=5&pagination[page]=';
-  const fetchString = cms + getReviewsForMovie + id + pagination + page;
+
+  const fetchString = cms + getReviewsForMovie + id;
   try {
     const response = await fetch(fetchString);
     if (!response.ok || response.data == []) {
@@ -63,33 +63,38 @@ async function getAllReviewsForMovie(id, page) {
       return errorResponse.error;
     } else {
       const reviews = await response.json();
+      const rev = reviews.data.map(simplifyReviewData).sort((a, b) => {
+        return new Date(b.updatedAt) - new Date(a.updatedAt);
+      }).splice(page * 5 - 5, 5);
+      
       return {
-        data: reviews.data.map(simplifyReviewData),
+        data: rev,
         meta: {
-          page: reviews.meta.pagination.page,
-          pageSize: reviews.meta.pagination.pageSize,
-          total: reviews.meta.pagination.total
-        }
-      }
+          page: page,
+          pageSize: 5,
+          total: reviews.meta.pagination.total,
+        },
+      };
     }
   } catch (err) {
     throw new Error(`Error message: ${err.message}`);
   }
 }
 
-// Function to clean and simplify a json-object with data about a movie
+// Function to clean and simplify an object with data about a movie
 function simplifyMovieData(oneMovieData) {
   const convertedIntro = convertMD2HTML(oneMovieData.attributes.intro);
   oneMovieData.attributes.intro = convertedIntro;
-  
+
   return {
     id: oneMovieData.id,
     title: oneMovieData.attributes.title,
     poster: oneMovieData.attributes.image,
-    intro: oneMovieData.attributes.intro
+    intro: oneMovieData.attributes.intro,
   };
 }
 
+// Function to clean and simplify an object with a movie review
 function simplifyReviewData(oneReviewData) {
   return {
     id: oneReviewData.id,
@@ -98,8 +103,8 @@ function simplifyReviewData(oneReviewData) {
     author: oneReviewData.attributes.author,
     verified: oneReviewData.attributes.verified,
     createdAt: oneReviewData.attributes.createdAt,
-    updatedAt: oneReviewData.attributes.updatedAt
-  }
+    updatedAt: oneReviewData.attributes.updatedAt,
+  };
 }
 
 // Export of functions as an object
@@ -108,7 +113,7 @@ const api = {
   getOneMovie,
   getAllReviewsForMovie,
   simplifyMovieData,
-  getAllScreenings
+  getAllScreenings,
 };
 
 export default api;

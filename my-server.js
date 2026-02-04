@@ -14,7 +14,7 @@ export default function initServer(api) {
   server.use("/api", screeningsRouter(api));
   server.use("/api", popularMoviesRouter(api));
 
-  const swaggerDocument = YAML.load("./swagger/openapi.yaml");
+  const swaggerDocument = YAML.load("swagger/openapi.yaml");
   const swaggerOptions = {
     customCss: ".swagger-ui .topbar { display: none }",
     customSiteTitle: "Kino API dokumentation",
