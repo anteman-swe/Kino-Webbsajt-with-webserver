@@ -168,18 +168,6 @@ function simplifyReviewData(oneReviewData) {
   };
 }
 
-function simplifyReviewData(oneReviewData) {
-  return {
-    id: oneReviewData.id,
-    comment: oneReviewData.attributes.comment,
-    rating: oneReviewData.attributes.rating,
-    author: oneReviewData.attributes.author,
-    verified: oneReviewData.attributes.verified,
-    createdAt: oneReviewData.attributes.createdAt,
-    updatedAt: oneReviewData.attributes.updatedAt
-  }
-}
-
 // Export of functions as an object
 const api = {
   getAllMovies,
