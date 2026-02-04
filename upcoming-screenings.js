@@ -14,6 +14,8 @@ export default function apiRouter(api) {
     try {
       const movieId = Number(req.params.id);
       const all = await api.getAllScreenings(); 
+
+      
      const forMovie = (all || []).filter((s) => s.movie?.id === movieId);
 
      if (req.query.type === "upcoming") {

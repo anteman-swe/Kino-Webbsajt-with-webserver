@@ -4,7 +4,7 @@ import { mockScreeningsApi } from './mockUpcomingScreenings.js';
 
 
 describe("getUpcomingScreenings", () => {
-  it("Filters out screenings with start_time new than 5 days", async () => {
+  it("Filters out screenings with start_time newer than 5 days", async () => {
     const screenings = await mockScreeningsApi.getUpcomingScreenings(); 
     const result = getUpcomingScreenings(screenings, new Date());
 
@@ -13,7 +13,6 @@ describe("getUpcomingScreenings", () => {
   });
 
  });
-
 
 it("Returns max 10 screenings within 5 days when more exist", () => {
   const DAY = 24 * 60 * 60 * 1000;
@@ -28,7 +27,6 @@ it("Returns max 10 screenings within 5 days when more exist", () => {
 
   expect(result).toHaveLength(10);
 });
-
 
 it("Excludes screenings in the past", () => {
   const DAY = 24 * 60 * 60 * 1000;
