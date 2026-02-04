@@ -1,12 +1,12 @@
 import convertMD2HTML from "./mdconversion.js";
 
-const screeningsCollection =
-  "https://plankton-app-xhkom.ondigitalocean.app/api/screenings?populate=movie";
-const reviewsCollection =
-  "https://plankton-app-xhkom.ondigitalocean.app/api/reviews?populate=movie";
+const cms = "https://plankton-app-xhkom.ondigitalocean.app/api";
+const movieCollection = "/movies";
 
-const allMovieCollection =
-  "https://plankton-app-xhkom.ondigitalocean.app/api/movies";  
+const screeningsCollection = cms + "/screenings?populate=movie";
+const reviewsCollection = cms + "reviews?populate=movie";
+
+const allMovieCollection = cms + movieCollection;  
 
    function toScreeningDTO(s) {
   const attrs = s?.attributes || {};
