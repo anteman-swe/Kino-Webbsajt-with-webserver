@@ -1045,6 +1045,10 @@ body.light .header__logo-light, body.light .header__nav-logolight, body.light .h
   font-size: 1rem;
   background-color: #350000;
   color: #FFFFFF;
+  cursor: pointer;
+}
+.reviews-container .reviews-button:active {
+  transform: translate(1px, 1px);
 }
 .reviews-container .reviews-button:disabled {
   border-color: #1A0000;

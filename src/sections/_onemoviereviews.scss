@@ -32,7 +32,10 @@
     font-size: 1rem;
     background-color: $dark-button;
     color: $dark-text;
-    
+    cursor: pointer;
+    &:active{
+        transform: translate(1px, 1px);
+    }
     &:disabled {
       border-color: $dark-bg;
       color: $toggle-off;

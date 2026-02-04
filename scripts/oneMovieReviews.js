@@ -3,8 +3,12 @@ import Review from "/scripts/Review.js";
 const serverAdress = "http://localhost:5080/movies/";
 
 const oneMovieReviewsCont = document.querySelector(".reviews-one-movie");
-const numberOfReviewsView = document.querySelector(".number-of-reviews"); 
-const movie = oneMovieReviewsCont.dataset.movieId;
+const numberOfReviewsView = document.querySelector(".number-of-reviews");
+let movie;
+if (oneMovieReviewsCont) {
+  movie = oneMovieReviewsCont.dataset.movieId;
+}
+
 const backButton = document.querySelector("#back-button");
 const forwardButton = document.querySelector("#forward-button");
 
@@ -15,33 +19,35 @@ let page = 1;
 document.addEventListener("DOMContentLoaded", async () => {
   if (oneMovieReviewsCont) {
     const oneMovieReviews = await getMovieReviews(movie, 1);
-    numberOfReviewsView.textContent = "Totalt antal recensioner: " + oneMovieReviews.meta.total;
+    numberOfReviewsView.textContent =
+      "Totalt antal recensioner: " + oneMovieReviews.meta.total;
     renderReviews(oneMovieReviewsCont, oneMovieReviews);
     setButtons(oneMovieReviews.meta, forwardButton, backButton);
   }
 });
 
-backButton.addEventListener("click", async () => {
-  if (zeroCheck) {
-    page--;
-  }
-  const oneMovieReviews = await getMovieReviews(movie, page);
-  renderReviews(oneMovieReviewsCont, oneMovieReviews);
-  setButtons(oneMovieReviews.meta, forwardButton, backButton);
-});
+if (backButton && forwardButton) {
+  backButton.addEventListener("click", async () => {
+    if (zeroCheck) {
+      page--;
+    }
+    const oneMovieReviews = await getMovieReviews(movie, page);
+    renderReviews(oneMovieReviewsCont, oneMovieReviews);
+    setButtons(oneMovieReviews.meta, forwardButton, backButton);
+  });
 
-forwardButton.addEventListener("click", async () => {
-  if (noEndCheck) {
-    page++;
-  }
-  const oneMovieReviews = await getMovieReviews(movie, page);
-  renderReviews(oneMovieReviewsCont, oneMovieReviews);
-  setButtons(oneMovieReviews.meta, forwardButton, backButton);
-});
+  forwardButton.addEventListener("click", async () => {
+    if (noEndCheck) {
+      page++;
+    }
+    const oneMovieReviews = await getMovieReviews(movie, page);
+    renderReviews(oneMovieReviewsCont, oneMovieReviews);
+    setButtons(oneMovieReviews.meta, forwardButton, backButton);
+  });
+}
 
 async function getMovieReviews(movieID, page) {
-  const getReviewsString =
-    serverAdress + movieID + "/reviews?page=" + page;
+  const getReviewsString = serverAdress + movieID + "/reviews?page=" + page;
   try {
     const response = await fetch(getReviewsString);
     if (!response.ok) {
