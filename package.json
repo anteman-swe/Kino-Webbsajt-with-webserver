@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/anteman-swe/Kino-Webbsajt-with-webserver#readme",
   "devDependencies": {
+    "cross-env": "^10.1.0",
     "@types/express": "^5.0.6",
     "eslint": "^9.39.2",
     "husky": "^9.1.7",
@@ -44,7 +45,6 @@
   "dependencies": {
     "braces": "^3.0.3",
     "chokidar": "^4.0.3",
-    "cross-env": "^10.1.0",
     "detect-libc": "^1.0.3",
     "dotenv": "^17.2.3",
     "ejs": "^4.0.1",
