@@ -2,7 +2,7 @@
 export async function fetchPopularMoviesIntegration(api) {
 
   //Get reviews and movies from the API
-  const reviews = await api.getReviews();
+  const reviews = await api.getAllReviews();
   const movies = await api.getMovies();
 
   //FIlter out reviews older than 30 days

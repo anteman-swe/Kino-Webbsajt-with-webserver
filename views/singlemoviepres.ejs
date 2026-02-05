@@ -3,19 +3,30 @@
 <%- include('partials/header'); %>
 
 <main class="container">
-    <section id="movieinformation"> <!-- id is only to identify what section should contain -->
+    <h1><%= movietitle %></h1>
+    <section id="movieinformation" data-movie-id="<%= movieId %>"> <!-- id is only to identify what section should contain -->
 
     </section>
     <section id="movie_rating"> <!-- id is only to identify what section should contain -->
 
     </section>
     <section id="coming_screenings"> <!-- id is only to identify what section should contain -->
-
+        
     </section>
-    <section id="movie_reviews"> <!-- id is only to identify what section should contain -->
-
+    <section id="movie_reviews"> <!-- id is only to identify what section contains -->
+        <h2 class="review-header">Recensioner för <%= movietitle %></h2>
+        <p class="number-of-reviews">
+            <!-- Code injected by browser script-->
+        </p>
+        <article class="reviews-container">
+            <button type="button" id="back-button" class="reviews-button" disabled>&lt;</button>
+            <ul class="reviews-one-movie" data-movie-id="<%= movieId %>">
+                <!-- Code injected by browser script-->
+            </ul>
+            <button type="button" id="forward-button" class="reviews-button" enabled>&gt;</button>
+        </article>
     </section>
-
+   
     <section id="user_review">
         <h2>Skriv en recension</h2>
 

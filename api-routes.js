@@ -20,8 +20,9 @@ export default function apiRoutes(api) {
     const movieID = req.params.movieID;
     const oneMovie = await api.getOneMovie(movieID);
     if (!oneMovie.status) {
-      res.status(200).render("onemovie", {
+      res.status(200).render("singlemoviepres", {
         pageTitle: oneMovie.title,
+        movieId: oneMovie.id,
         movietitle: oneMovie.title,
         movieintro: oneMovie.intro,
         movieimage: oneMovie.poster.url,
@@ -35,6 +36,14 @@ export default function apiRoutes(api) {
     }
   });
 
+  router.get("/movies/:movieID/reviews", async (req, res) => {
+    const movieID = req.params.movieID;
+    const page = parseInt(req.query.page) || 1; // check if request is for other than first page
+    const reviewsOneMovie = await api.getAllReviewsForMovie(movieID, page);
+    res.status(200).send(reviewsOneMovie).end();
+  });
+
+  // Testroute just for fun
   router.get("/coffeemaker", async (req, res) => {
     res.status(418).render("errorpage", {
       status: 418,
