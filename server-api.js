@@ -3,46 +3,64 @@ import convertMD2HTML from "./mdconversion.js";
 const cms = "https://plankton-app-xhkom.ondigitalocean.app/api";
 const movieCollection = "/movies";
 
-const screeningsCollection = cms + "/screenings?populate=movie";
-const reviewsCollection = cms + "reviews?populate=movie";
+//Moment 1
 
-const allMovieCollection = cms + movieCollection;  
+//Simplify function
+ import { getUpcomingScreenings } from "./upcoming-screenings-logic.js";
+async function getUpcomingScreeningsSimplified(movieId) {
+  const url = new URL(screeningsCollection);
+  url.searchParams.set("populate", "movie");
+  url.searchParams.set("filters[movie]", movieId);
 
-   function toScreeningDTO(s) {
-  const attrs = s?.attributes || {};
-  const movieData = attrs?.movie?.data;
+  const response = await fetch(url.toString());
+  const payload = await response.json();
 
-  return {
-    id: s?.id,
-    start_time: attrs?.start_time, 
-    room: attrs?.room,
-    movie: movieData
-      ? {
-          id: movieData.id,
-          title: movieData.attributes?.title,
-          imageUrl: movieData.attributes?.image?.url,
-        }
-      : null,
-  };
+  const simplified = (payload.data || []).map((s) => ({
+    id: s.id,
+    start_time: s.attributes?.start_time,
+    room: s.attributes?.room ?? null,
+  }));
+
+  return { data: getUpcomingScreenings(simplified) };
 }
-// Function to get a list of screenings from API
 
+//Moment 1
+  // Get all movies (screenings) from CMS
 async function getAllScreenings() {
-  try {
-    const response = await fetch(screeningsCollection);
+ try {
+    const url = new URL(screeningsCollection);
+    url.searchParams.set("populate", "movie"); //
+    const response = await fetch(url.toString());
 
     if (!response.ok) {
-      // försök läsa ett CMS-error, annars fallback
       const errorResponse = await response.json().catch(() => ({}));
       return errorResponse.error || { message: "Failed to fetch screenings" };
     }
 
     const json = await response.json();
-    return (json.data || []).map(toScreeningDTO);
+
+    return (json.data || []).map((s) => {
+      const attrs = s.attributes || {};
+      const movieData = attrs.movie?.data;
+
+      return {
+        id: s.id,
+        start_time: attrs.start_time,
+        room: attrs.room,
+        movie: movieData
+          ? {
+              id: movieData.id,
+              title: movieData.attributes?.title,
+              imageUrl: movieData.attributes?.image?.url,
+            }
+          : null,
+      };
+    });
   } catch (err) {
     throw new Error(`Error fetching screenings: ${err.message}`);
   }
 }
+
 
   //Get reviews
 async function getAllReviews() {
@@ -234,7 +252,8 @@ const api = {
   simplifyMovieData,
   getAllScreenings,
   getAllReviews,
-  getMovies
+  getMovies,
+  getUpcomingScreeningsSimplified,
 };
 
 export default api;
