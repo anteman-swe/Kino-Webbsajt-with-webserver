@@ -20,7 +20,7 @@ it("Returns max 10 screenings within 5 days when more exist", () => {
 
   const screenings = Array.from({ length: 12 }, (_, i) => ({
     title: `view ${i + 1}`,
-    start_time: new Date(now.getTime() + ((i % 5) + 1) * DAY).toISOString(), // 1..5 dagar framåt
+    start_time: new Date(now.getTime() + ((i % 5) + 1) * DAY),
   }));
 
   const result = getUpcomingScreenings(screenings, now);
@@ -33,8 +33,8 @@ it("Excludes screenings in the past", () => {
   const now = new Date();
 
   const screenings = [
-    { title: "past", start_time: new Date(now.getTime() - 1 * DAY).toISOString() },
-    { title: "future", start_time: new Date(now.getTime() + 1 * DAY).toISOString() },
+    { title: "past", start_time: new Date(now.getTime() - 1 * DAY)},
+    { title: "future", start_time: new Date(now.getTime() + 1 * DAY) },
   ];
 
   const result = getUpcomingScreenings(screenings, now);

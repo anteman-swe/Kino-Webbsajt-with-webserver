@@ -12,40 +12,33 @@ const reviewsCollection =
 const allMovieCollection =
   "https://plankton-app-xhkom.ondigitalocean.app/api/movies";  
 
-  //Min som inte fungerar==> får inte framtida visningar
+  //Moment 1
 
-import { filterAndSortUpcomingScreenings } from "./upcoming-screenings-logic.js";
-async function getUpcomingScreeningsForMovie(movieId) {
-  try {
-    const url = new URL(screeningsCollection);
-    url.searchParams.set("populate", "movie");
-    url.searchParams.set("filters[movie]", movieId);
+//Simplify function
+ import { getUpcomingScreenings } from "./upcoming-screenings-logic.js";
+async function getUpcomingScreeningsSimplified(movieId) {
+  const url = new URL(screeningsCollection);
+  url.searchParams.set("populate", "movie");
+  url.searchParams.set("filters[movie]", movieId);
 
-    const response = await fetch(url.toString());
+  const response = await fetch(url.toString());
+  const payload = await response.json();
 
-    if (!response.ok) {
-      const errorResponse = await response.json().catch(() => ({}));
-      return errorResponse.error || { message: "Failed to fetch screenings" };
-    }
+  const simplified = (payload.data || []).map((s) => ({
+    id: s.id,
+    start_time: s.attributes?.start_time,
+    room: s.attributes?.room ?? null,
+  }));
 
-    const payload = await response.json();
-
-    return {
-      data: filterAndSortUpcomingScreenings(payload.data),
-    };
-  } catch (err) {
-    throw new Error(`Error message: ${err.message}`);
-  }
+  return { data: getUpcomingScreenings(simplified) };
 }
 
-
-  // Hämtar alla filmvisningar (screenings) från CMS
+//Moment 1
+  // Get all movies (screenings) from CMS
 async function getAllScreenings() {
-  try {
+ try {
     const url = new URL(screeningsCollection);
     url.searchParams.set("populate", "movie"); //
-    
-
     const response = await fetch(url.toString());
 
     if (!response.ok) {
@@ -77,8 +70,6 @@ async function getAllScreenings() {
   }
 }
 
-
-
   //Get reviews
 async function getAllReviews() {
   const response = await fetch(reviewsCollection);
@@ -104,8 +95,6 @@ async function getMovies() {
     poster: item.attributes.image
   }));
 }
-
-
 
 
 // Function to get a list of movies from API
@@ -200,10 +189,10 @@ const api = {
   getAllMovies,
   getOneMovie,
   simplifyMovieData,
-  getAllScreenings,
   getAllReviews,
   getMovies,
-  getUpcomingScreeningsForMovie,
+  getAllScreenings,
+  getUpcomingScreeningsSimplified,
 };
 
 export default api;

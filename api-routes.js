@@ -36,11 +36,11 @@ export default function apiRoutes(api) {
     }
   });
 
-  //moment 1 
+  //moment 1 Route
     router.get("/movies/:id/screenings", async (req, res) => {
   try {
     const movieId = Number(req.params.id);
-    const screenings = await api.getUpcomingScreeningsForMovie(movieId);
+    const screenings = await api.getUpcomingScreeningsSimplified(movieId);
     return res.status(200).json({ data: screenings.data });
   } catch (err) {
     return res.status(500).json({ message: "Failed to load screenings", error: err.message });
