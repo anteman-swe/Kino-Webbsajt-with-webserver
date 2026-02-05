@@ -41,7 +41,12 @@ export default function apiRoutes(api) {
   try {
     const movieId = Number(req.params.id);
     const screenings = await api.getUpcomingScreeningsSimplified(movieId);
-    return res.status(200).json({ data: screenings.data });
+    return res.status(200).json({
+       data: screenings.data,
+      message: screenings.data.length === 0
+    ? "No upcoming screenings within the next 5 days"
+    : undefined
+  });
   } catch (err) {
     return res.status(500).json({ message: "Failed to load screenings", error: err.message });
   }
