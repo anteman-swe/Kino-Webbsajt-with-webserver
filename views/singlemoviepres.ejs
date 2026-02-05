@@ -58,6 +58,14 @@
 
         <p id="review-message" aria-live="polite"></p>
 </section>
+
+<section class="screenings">
+    <h2>Kommande visningar</h2>
+    <p id="screenings-status">Laddar visningar…</p>
+    <ul id="screenings" data-movie-id="<%= movieID %>"></ul>
+</section>
 </main>
+
+<script src="/scripts/screenings.js" defer></script>
 
 <%- include('partials/footer'); %>
