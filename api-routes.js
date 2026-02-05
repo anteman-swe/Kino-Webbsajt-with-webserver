@@ -37,20 +37,20 @@ export default function apiRoutes(api) {
     }
   });
   
-
-router.get("/movies/:movieID/screenings", async (req, res) => {
-  const movieID = req.params.movieID;
-  const result = await api.getUpcomingScreeningsForMovie(movieID);
-
-  if (result.status) {
-    return res.status(result.status).json({
-      status: result.status,
-      name: result.name,
-      message: result.message,
-    });
+  //moment_1 Route
+    router.get("/movies/:id/screenings", async (req, res) => {
+  try {
+    const movieId = Number(req.params.id);
+    const screenings = await api.getUpcomingScreeningsSimplified(movieId);
+    return res.status(200).json({
+       data: screenings.data,
+      message: screenings.data.length === 0
+    ? "No upcoming screenings within the next 5 days"
+    : undefined
+  });
+  } catch (err) {
+    return res.status(500).json({ message: "Failed to load screenings", error: err.message });
   }
-
-  return res.status(200).json({ data: result.data });
 });
 
   router.get("/movies/:movieID/reviews", async (req, res) => {
