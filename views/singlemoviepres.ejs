@@ -10,7 +10,21 @@
     <img src="<%= movieimage %>" alt="Movieposter <%= movietitle %>">
     </section>
     <section id="movie_rating"> <!-- id is only to identify what section should contain -->
-
+       <% if (locals.movieRating && movieRating !== "N/A") { %>
+            <h3>Rating: <%= movieRating %> ⭐</h3>
+            
+            <p>
+                <small>
+                    <% if (ratingSource === 'local') { %>
+                        <strong>Community Score</strong> (Based on <%= reviewCount %> reviews)
+                    <% } else { %>
+                        <strong>IMDb Score</strong> (Ratings fetched from IMDB website)
+                    <% } %>
+                </small>
+            </p>
+        <% } else { %>
+            <h3>Rating: Not available yet</h3>
+        <% } %>
     </section>
     <section id="coming_screenings"> <!-- id is only to identify what section should contain -->
         

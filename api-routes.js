@@ -17,39 +17,27 @@ export default function apiRoutes(api) {
   });
 
   router.get("/movies/:movieID", async (req, res) => {
-    const movieID = req.params.movieID;
-    const oneMovie = await api.getOneMovie(movieID);
-    if (!oneMovie.status) {
-      res.status(200).render("singlemoviepres", {
-        pageTitle: oneMovie.title,
-        movieId: oneMovie.id,
-        movietitle: oneMovie.title,
-        movieintro: oneMovie.intro,
-        movieimage: oneMovie.poster.url,
-        movieID: movieID,
-      });
-    } else {
-      res.status(oneMovie.status).render("errorpage", {
-        status: oneMovie.status,
-        name: oneMovie.name,
-        message: oneMovie.message,
-      });
-    }
-  });
-  
-  //moment_1 Route
-    router.get("/movies/:id/screenings", async (req, res) => {
-  try {
-    const movieId = Number(req.params.id);
-    const screenings = await api.getUpcomingScreeningsSimplified(movieId);
-    return res.status(200).json({
-       data: screenings.data,
-      message: screenings.data.length === 0
-    ? "No upcoming screenings within the next 5 days"
-    : undefined
-  });
-  } catch (err) {
-    return res.status(500).json({ message: "Failed to load screenings", error: err.message });
+  const movieID = req.params.movieID;
+  const oneMovie = await api.getOneMovie(movieID);
+
+  if (oneMovie && !oneMovie.status) {
+    res.status(200).render("singlemoviepres", {
+      pageTitle: oneMovie.title,
+      movieId: oneMovie.id,
+      movietitle: oneMovie.title,
+      movieintro: oneMovie.intro,
+      movieimage: oneMovie.poster?.url,
+      
+      movieRating: oneMovie.rating.rating,
+      ratingSource: oneMovie.rating.source,
+      reviewCount: oneMovie.rating.count
+    });
+  } else {
+    res.status(404).render("errorpage", { 
+      message: "Filmen du försöker nå finns inte i filmlistan",
+      pageTitle: "Serverfel!",
+      status: "404" 
+    });
   }
 });
 

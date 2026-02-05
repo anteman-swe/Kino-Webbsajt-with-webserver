@@ -46,23 +46,30 @@ const mockupApiMovies = {
 const mockupApiMovie = {
   id: 2,
   title: "Encanto",
+  imdbId: "tt2953050", // Added
   poster: {
     url: "https://m.media-amazon.com/images/M/MV5BOTY1YmU1ZTItMzNjZC00ZGU0LTk0MTEtZDgzN2QwOWVlNjZhXkEyXkFqcGc@._V1_.jpg",
   },
   intro:
-    "<p>A Colombian teenage girl has to face the frustration of being <strong>the only member of her family</strong> without magical powers.</p>\n"
+    "<p>A Colombian teenage girl has to face the frustration of being <strong>the only member of her family</strong> without magical powers.</p>\n",
+  rating: { // Added to match new business logic
+    rating: "4.5",
+    source: "local",
+    count: 10
+  }
 };
 
 export const mockupApiMovieConverted = {
   id: 2,
   title: "Encanto",
-  
+  imdbId: "tt2953050", // Added to match simplifyMovieData output
   poster: {
     url: "https://m.media-amazon.com/images/M/MV5BOTY1YmU1ZTItMzNjZC00ZGU0LTk0MTEtZDgzN2QwOWVlNjZhXkEyXkFqcGc@._V1_.jpg",
   },
   intro:
-    "<p>A Colombian teenage girl has to face the frustration of being <strong>the only member of her family</strong> without magical powers.</p>\n"
+    "<p>A Colombian teenage girl has to face the frustration of being <strong>the only member of her family</strong> without magical powers.</p>\n",
 };
+
 export const mockupCMSAnswer = {
   "data": {
     "id": 2,

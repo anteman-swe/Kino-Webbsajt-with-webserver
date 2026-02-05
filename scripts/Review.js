@@ -1,3 +1,5 @@
+const sumOfRatings = [];
+
 export default class Review {
   constructor(data) {
     this.data = data;
@@ -61,3 +63,6 @@ export default class Review {
     return reviewCard;
   }
 }
+
+
+export { sumOfRatings };
