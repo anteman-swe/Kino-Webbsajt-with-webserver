@@ -1,3 +1,5 @@
+const sumOfRatings = [];
+
 export default class Review {
   constructor(data) {
     this.data = data;
@@ -19,6 +21,7 @@ export default class Review {
     reviewRating.classList.add("review-card__rating");
     let ratingStars = "";
     if (this.data.rating) {
+      sumOfRatings.push(this.data.rating);
       for (let i = 1; i <= this.data.rating; i++) {
         ratingStars = ratingStars + "⭐";
       }
@@ -58,3 +61,6 @@ export default class Review {
     return reviewCard;
   }
 }
+
+
+export { sumOfRatings };
