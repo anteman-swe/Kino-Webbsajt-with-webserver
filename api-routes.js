@@ -36,6 +36,17 @@ export default function apiRoutes(api) {
     }
   });
 
+  //moment 1 
+    router.get("/movies/:id/screenings", async (req, res) => {
+  try {
+    const movieId = Number(req.params.id);
+    const screenings = await api.getUpcomingScreeningsForMovie(movieId);
+    return res.status(200).json({ data: screenings.data });
+  } catch (err) {
+    return res.status(500).json({ message: "Failed to load screenings", error: err.message });
+  }
+});
+
   router.get("/movies/:movieID/reviews", async (req, res) => {
     const movieID = req.params.movieID;
     const page = parseInt(req.query.page) || 1; // check if request is for other than first page
