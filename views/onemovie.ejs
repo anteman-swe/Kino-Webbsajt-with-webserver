@@ -5,38 +5,5 @@
         <%- movieintro %>
         <img src=<%= movieimage %> alt="">
     </section>
-
-    <section id="user_review">
-      <h2>Skriv en recension</h2>
-
-      <form id="review-form" data-movie-id="<%= movieID %>">
-          <label>
-          Namn
-          <input type="text" name="author" required />
-          </label>
-
-          <label>
-          Betyg
-          <select name="rating" required>
-              <option value="">Välj betyg</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-          </select>
-          </label>
-
-          <label>
-          Kommentar (valfri)
-          <textarea name="comment" rows="4"></textarea>
-          </label>
-
-          <button type="submit">Skicka</button>
-      </form>
-
-      <p id="review-message" aria-live="polite"></p>
-    </section>
 </main>
-<script src="/scripts/review-form.js" defer></script>
 <%- include('partials/footer') %>

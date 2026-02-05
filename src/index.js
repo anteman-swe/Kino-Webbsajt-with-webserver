@@ -21,6 +21,7 @@ import { openTrailer } from "/scripts/trailermodal.js";
 import { movieCarousel } from "/scripts/carousel.js";
 
 import "/scripts/oneMovieReviews.js";
+import "/scripts/review-form.js";
 
 
 
