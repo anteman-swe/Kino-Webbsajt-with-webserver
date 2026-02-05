@@ -3,26 +3,29 @@ import ejs from "ejs";
 import swaggerUi from "swagger-ui-express";
 import YAML from "yamljs";
 import apiRoutes from "./api-routes.js";
+import screeningsRouter from "./upcoming-screenings.js";
+import popularMoviesRouter from "./popularMovies-route.js";
+
+
 
 export default function initServer(api) {
   const server = express();
-  const swaggerDocument = YAML.load("./swagger/openapi.yaml");
+  // API routes
+  server.use("/api", screeningsRouter(api));
+  server.use("/api", popularMoviesRouter(api));
+
+  const swaggerDocument = YAML.load("swagger/openapi.yaml");
   const swaggerOptions = {
-    customCss: '.swagger-ui .topbar { display: none }',
+    customCss: ".swagger-ui .topbar { display: none }",
     customSiteTitle: "Kino API dokumentation",
     swaggerOptions: {
-      persistAuthorization: true, // Behåll auth-token mellan sidladdningar
-    }
+      persistAuthorization: true, // Keep auth-token between page loadings
+    },
   };
 
   server.engine("ejs", ejs.renderFile);
   server.set("view engine", "ejs");
   server.set("views", "./views");
-
-  // Serving swagger docs
-  server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument, swaggerOptions));
-  // Serving API
-  server.use(apiRoutes(api));
 
   // Serving site dynamically
   server.get(["/", "/index", "/index.html"], (req, res) => {
@@ -51,6 +54,15 @@ export default function initServer(api) {
   server.use("/css", express.static("./css"));
   // Serving asset static
   server.use("/assets", express.static("./assets"));
+
+  // Serving swagger docs
+  server.use(
+    "/api-docs",
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerDocument, swaggerOptions),
+  );
+  // Serving API
+  server.use(apiRoutes(api));
 
   return server;
 }
