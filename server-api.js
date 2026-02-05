@@ -2,28 +2,28 @@ import convertMD2HTML from "./mdconversion.js";
 
 const cms = "https://plankton-app-xhkom.ondigitalocean.app/api";
 const movieCollection = "/movies";
-const screeningsCollection =
-  "https://plankton-app-xhkom.ondigitalocean.app/api/screenings";
 
-//Moment 1
+const screeningsCollection = cms + "/screenings?populate=movie";
+const reviewsCollection = cms + "/reviews?populate=movie";
 
-//Simplify function
- import { getUpcomingScreenings } from "./upcoming-screenings-logic.js";
-async function getUpcomingScreeningsSimplified(movieId) {
-  const url = new URL(screeningsCollection);
-  url.searchParams.set("populate", "movie");
-  url.searchParams.set("filters[movie]", movieId);
+const allMovieCollection = cms + movieCollection;  
 
-  const response = await fetch(url.toString());
-  const payload = await response.json();
+   function toScreeningDTO(s) {
+  const attrs = s?.attributes || {};
+  const movieData = attrs?.movie?.data;
 
-  const simplified = (payload.data || []).map((s) => ({
-    id: s.id,
-    start_time: s.attributes?.start_time,
-    room: s.attributes?.room ?? null,
-  }));
-
-  return { data: getUpcomingScreenings(simplified) };
+  return {
+    id: s?.id,
+    start_time: attrs?.start_time, 
+    room: attrs?.room,
+    movie: movieData
+      ? {
+          id: movieData.id,
+          title: movieData.attributes?.title,
+          imageUrl: movieData.attributes?.image?.url,
+        }
+      : null,
+  };
 }
 
 //Moment 1
@@ -85,7 +85,7 @@ async function getMovies() {
   return json.data.map(item => ({
     id: item.id,
     title: item.attributes.title,
-    description: item.attributes.intro, // eller description om du har det
+    description: item.attributes.intro,
     poster: item.attributes.image
   }));
 }
