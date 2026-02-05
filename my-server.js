@@ -3,7 +3,7 @@ import ejs from "ejs";
 import swaggerUi from "swagger-ui-express";
 import YAML from "yamljs";
 import apiRoutes from "./api-routes.js";
-import screeningsRouter from "./upcoming-screenings.js";
+import screeningsRouter from "./api-routes.js";
 import popularMoviesRouter from "./popularMovies-route.js";
 
 

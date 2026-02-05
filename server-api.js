@@ -2,6 +2,8 @@ import convertMD2HTML from "./mdconversion.js";
 
 const cms = "https://plankton-app-xhkom.ondigitalocean.app/api";
 const movieCollection = "/movies";
+const screeningsCollection =
+  "https://plankton-app-xhkom.ondigitalocean.app/api/screenings";
 
 //Moment 1
 
