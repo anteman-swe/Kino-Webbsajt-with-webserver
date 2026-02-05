@@ -4,7 +4,7 @@ const cms = "https://plankton-app-xhkom.ondigitalocean.app/api";
 const movieCollection = "/movies";
 
 const screeningsCollection = cms + "/screenings?populate=movie";
-const reviewsCollection = cms + "reviews?populate=movie";
+const reviewsCollection = cms + "/reviews?populate=movie";
 
 const allMovieCollection = cms + movieCollection;  
 
@@ -65,7 +65,7 @@ async function getMovies() {
   return json.data.map(item => ({
     id: item.id,
     title: item.attributes.title,
-    description: item.attributes.intro, // eller description om du har det
+    description: item.attributes.intro,
     poster: item.attributes.image
   }));
 }
