@@ -201,7 +201,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
                 
-   /movies/{id}/screenings:
+    /movies/{id}/screenings:
     get:
       summary: Retrieve all screening times for one movie
       description: Returns all screening times for one movie
