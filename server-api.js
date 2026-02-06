@@ -233,7 +233,7 @@ const api = {
   getAllReviews,
   getMovies,
   getMovieScore
-  getUpcomingScreeningsSimplified,
+  // getUpcomingScreeningsSimplified,
 };
 
 export default api;
