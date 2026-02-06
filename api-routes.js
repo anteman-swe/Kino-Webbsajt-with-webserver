@@ -28,9 +28,9 @@ export default function apiRoutes(api) {
       movieintro: oneMovie.intro,
       movieimage: oneMovie.poster?.url,
       
-      movieRating: oneMovie.rating.rating,
-      ratingSource: oneMovie.rating.source,
-      reviewCount: oneMovie.rating.count
+      movieRating: oneMovie.rating?.rating || "N/A",
+      ratingSource: oneMovie.rating?.source || "none",
+      reviewCount: oneMovie.rating?.count || 0
     });
   } else {
     res.status(404).render("errorpage", { 
