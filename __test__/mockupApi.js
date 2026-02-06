@@ -67,9 +67,8 @@ export const mockupApiMovieConverted = {
     url: "https://m.media-amazon.com/images/M/MV5BOTY1YmU1ZTItMzNjZC00ZGU0LTk0MTEtZDgzN2QwOWVlNjZhXkEyXkFqcGc@._V1_.jpg",
   },
   intro:
-    "<p>A Colombian teenage girl has to face the frustration of being <strong>the only member of her family</strong> without magical powers.</p>\n",
+    "<p>A Colombian teenage girl has to face the frustration of being <strong>the only member of her family</strong> without magical powers.</p>\n"
 };
-
 export const mockupCMSAnswer = {
   "data": {
     "id": 2,
@@ -155,14 +154,11 @@ export const mockupApi = {
     return mockupApiMovies;
   },
   getOneMovie: async (id) => {
-    if (id == 99) {
-      return error404;
+    if (id == 99){
+        return error404;
     } else {
-      mockupApiMovie.id = id;
-      return mockupApiMovie;
+        mockupApiMovie.id = id;
+        return mockupApiMovie;
     }
   },
-  getAllReviewsForMovie: async (id, page) => {
-    return mockupReviews;
-  }
 };
