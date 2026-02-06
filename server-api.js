@@ -219,7 +219,7 @@ export async function getMovieScore(targetImdbId) {
     return { source: 'none', rating: "N/A", count: 0 }; 
   }
 }
-
+  
 
 
 

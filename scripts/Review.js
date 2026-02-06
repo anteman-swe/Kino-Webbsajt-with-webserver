@@ -23,7 +23,10 @@ export default class Review {
 
     let ratingStars = "";
     if (this.data.rating) {
-      ratingStars = "⭐".repeat(this.data.rating);
+      sumOfRatings.push(this.data.rating);
+      for (let i = 1; i <= this.data.rating; i++) {
+        ratingStars = ratingStars + "⭐";
+      }
     } else {
       ratingStars = "🍅";
     }
