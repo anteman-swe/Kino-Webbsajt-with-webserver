@@ -14,7 +14,7 @@ export function renderPopularMovies(movies) {
     card.classList.add("popular-movies__card");
 
     card.innerHTML = `
-      <img 
+      <a href="/movies/${movie.id}" class="popular-movies__link"><img 
         class="popular-movies__poster" 
         src="${movie.poster.url}" 
         alt="${movie.title}"
