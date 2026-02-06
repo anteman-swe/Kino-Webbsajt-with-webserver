@@ -39,6 +39,9 @@ export default function apiRoutes(api) {
       status: "404" 
     });
   }
+    } catch (error) {
+        res.status(500).send("Internal Server Error");
+    }
 });
 
   router.get("/movies/:movieID/reviews", async (req, res) => {
