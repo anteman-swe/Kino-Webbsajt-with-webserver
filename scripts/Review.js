@@ -11,6 +11,7 @@ export default class Review {
 
     const reviewText = document.createElement("p");
     reviewText.classList.add("review-card__text");
+    
     if (this.data.comment) {
       reviewText.textContent = this.data.comment;
     } else {
@@ -19,6 +20,7 @@ export default class Review {
 
     const reviewRating = document.createElement("span");
     reviewRating.classList.add("review-card__rating");
+
     let ratingStars = "";
     if (this.data.rating) {
       sumOfRatings.push(this.data.rating);
@@ -26,7 +28,7 @@ export default class Review {
         ratingStars = ratingStars + "⭐";
       }
     } else {
-      ratingStars = "🍅  No rating added by user";
+      ratingStars = "🍅";
     }
     reviewRating.textContent = ratingStars;
 
@@ -35,15 +37,20 @@ export default class Review {
 
     const reviewedBy = document.createElement("span");
     reviewedBy.classList.add("review-card__preauthor");
-    reviewedBy.textContent = "Review By: ";
-
+    
     const author = document.createElement("span");
     author.classList.add("review-card__author");
+
     if (this.data.author) {
+      reviewedBy.textContent = "Review By: ";
       author.textContent = this.data.author;
     } else {
+      reviewedBy.textContent = "";
       author.textContent = "No user alias provided...";
     }
+
+    reviewAuthor.appendChild(reviewedBy);
+    reviewAuthor.appendChild(author);
 
     const revDate = document.createElement("p");
     revDate.classList.add('review-card__date')
@@ -51,13 +58,11 @@ export default class Review {
     const outDate = updated[0];
     revDate.textContent = "Review date: " + outDate;
 
-    reviewAuthor.appendChild(reviewedBy);
-    reviewAuthor.appendChild(author);
-
     reviewCard.append(reviewText);
     reviewCard.append(reviewRating);
     reviewCard.append(reviewAuthor);
     reviewCard.append(revDate);
+
     return reviewCard;
   }
 }

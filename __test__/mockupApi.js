@@ -88,6 +88,61 @@ export const mockupCMSAnswer = {
   "meta": {}
 };
 
+export const mockupReviews = {
+  "data": [
+    {
+      "id": 1,
+      "comment": "Review 1",
+      "rating": 4,
+      "author": "test",
+      "verified": null,
+      "createdAt": "2025-05-29T11:15:52.807Z",
+      "updatedAt": "2025-05-29T11:15:52.807Z"
+    },
+    {
+      "id": 2,
+      "comment": "Review 2",
+      "rating": 5,
+      "author": null,
+      "verified": null,
+      "createdAt": "2025-07-14T09:51:32.689Z",
+      "updatedAt": "2025-07-14T09:51:32.689Z"
+    },
+    {
+      "id": 3,
+      "comment": "Review 3",
+      "rating": 5,
+      "author": null,
+      "verified": null,
+      "createdAt": "2025-07-14T09:56:49.564Z",
+      "updatedAt": "2025-07-14T09:56:49.564Z"
+    },
+    {
+      "id": 4,
+      "comment": "Review 4",
+      "rating": 0,
+      "author": null,
+      "verified": null,
+      "createdAt": "2025-07-15T05:46:39.002Z",
+      "updatedAt": "2025-07-15T05:46:39.002Z"
+    },
+    {
+      "id": 5,
+      "comment": "Review 5",
+      "rating": 4,
+      "author": "Joel",
+      "verified": null,
+      "createdAt": "2025-07-15T05:50:18.849Z",
+      "updatedAt": "2025-07-15T05:50:18.849Z"
+    },
+  ],
+  "meta": {
+    "page": 1,
+    "pageSize": 5,
+    "total": 27
+  }
+}
+
 const error404 = {
     status: 404,
     name: "NotFoundError",
@@ -106,5 +161,5 @@ export const mockupApi = {
         mockupApiMovie.id = id;
         return mockupApiMovie;
     }
-  }
+  },
 };

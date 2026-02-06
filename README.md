@@ -113,6 +113,13 @@ Returns a list of the most popular movies with highest ratings within 30 days
 
 Returns all screening times for one movie
 
+#### Parameters
+
+| Name | Located in | Description | Required | Schema |
+| ---- | ---------- | ----------- | -------- | ------ |
+| id | path | Movie id | Yes | integer |
+| type | query | Optional filter. Use `type=upcoming` to return only upcoming screenings (next 5 days, max 10).  | No | string, <br>**Available values:** "upcoming" |
+
 #### Responses
 
 | Code | Description | Schema |
