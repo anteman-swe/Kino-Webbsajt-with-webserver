@@ -16,33 +16,47 @@ export default function apiRoutes(api) {
     }
   });
 
- router.get("/movies/:movieID", async (req, res) => {
-  try { 
-        const movieID = req.params.movieID;
-        const oneMovie = await api.getOneMovie(movieID);
+  router.get("/movies/:movieID", async (req, res) => {
+    const movieID = req.params.movieID;
+    const oneMovie = await api.getOneMovie(movieID);
+    if (!oneMovie.status) {
+      res.status(200).render("singlemoviepres", {
+        pageTitle: oneMovie.title,
+        movieId: oneMovie.id,
+        movietitle: oneMovie.title,
+        movieintro: oneMovie.intro,
+        movieimage: oneMovie.poster?.url || '', // Safety check
+      movieID: movieID,
+
+      // Safety checks for the rating object
+      movieRating: oneMovie.rating?.rating || "N/A",
+      ratingSource: oneMovie.rating?.source || "none",
+      reviewCount: oneMovie.rating?.count || 0
+      });
+
+    } else {
+      res.status(404).render("errorpage", { 
+        message: "Filmen du försöker nå finns inte i filmlistan",
+        pageTitle: "Serverfel!",
+        status: "404" 
+      });
+    }
+  });
     
-        if (oneMovie && !oneMovie.status) {
-          res.status(200).render("singlemoviepres", {
-            pageTitle: oneMovie.title,
-            movieId: oneMovie.id,
-            movietitle: oneMovie.title,
-            movieintro: oneMovie.intro,
-            movieimage: oneMovie.poster?.url,
-            
-            movieRating: oneMovie.rating?.rating || "N/A",
-            ratingSource: oneMovie.rating?.source || "none",
-            reviewCount: oneMovie.rating?.count || 0
-          });
-        } else {
-          res.status(404).render("errorpage", { 
-            message: "Filmen du försöker nå finns inte i filmlistan",
-            pageTitle: "Serverfel!",
-            status: "404" 
-          });
-        }
-  } catch (error) { // <--- This now has a matching 'try'
-    console.error("Route Error:", error);
-    res.status(500).send("Internal Server Error");
+  
+  //moment_1 Route
+    router.get("/movies/:id/screenings", async (req, res) => {
+  try {
+    const movieId = Number(req.params.id);
+    const screenings = await api.getUpcomingScreeningsSimplified(movieId);
+    return res.status(200).json({
+       data: screenings.data,
+      message: screenings.data.length === 0
+    ? "No upcoming screenings within the next 5 days"
+    : undefined
+  });
+  } catch (err) {
+    return res.status(500).json({ message: "Failed to load screenings", error: err.message });
   }
 });
 
