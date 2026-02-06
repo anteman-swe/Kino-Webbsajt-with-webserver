@@ -85,7 +85,7 @@ async function getMovies() {
   return json.data.map(item => ({
     id: item.id,
     title: item.attributes.title,
-    description: item.attributes.intro, // eller description om du har det
+    description: item.attributes.intro,
     poster: item.attributes.image
   }));
 }
