@@ -113,10 +113,8 @@ async function getOneMovie(id) {
 }
 
 //Function to get reviews for one movie id
-async function getAllReviewsForMovie(id, page) {
-  const getReviewsForMovie = "/reviews?filters[movie]=";
-
-  const fetchString = cms + getReviewsForMovie + id;
+async function getAllReviewsForMovie(id, page, reqPageSize = 5) {
+  const fetchString = cms + "/reviews?filters[movie]=" + id + "&pagination[page]=" + page + "&pagination[pageSize]=" + reqPageSize;
   try {
     const response = await fetch(fetchString);
     if (!response.ok || response.data == []) {
@@ -124,19 +122,16 @@ async function getAllReviewsForMovie(id, page) {
       return errorResponse.error;
     } else {
       const reviews = await response.json();
-      const rev = reviews.data.map(simplifyReviewData).sort((a, b) => {
-        return new Date(b.updatedAt) - new Date(a.updatedAt);
-      }).splice(page * 5 - 5, 5);
-      
+      const rev = reviews.data.map(simplifyReviewData);
       return {
         data: rev,
         meta: {
           page: page,
-          pageSize: 5,
+          pageSize: reqPageSize,
           total: reviews.meta.pagination.total,
         },
       };
-    }
+    } 
   } catch (err) {
     throw new Error(`Error message: ${err.message}`);
   }
