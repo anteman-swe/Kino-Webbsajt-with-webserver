@@ -3,7 +3,6 @@ import ejs from "ejs";
 import swaggerUi from "swagger-ui-express";
 import YAML from "yamljs";
 import apiRoutes from "./api-routes.js";
-import screeningsRouter from "./upcoming-screenings.js";
 import popularMoviesRouter from "./popularMovies-route.js";
 
 
@@ -11,7 +10,6 @@ import popularMoviesRouter from "./popularMovies-route.js";
 export default function initServer(api) {
   const server = express();
   // API routes
-  server.use("/api", screeningsRouter(api));
   server.use("/api", popularMoviesRouter(api));
 
   const swaggerDocument = YAML.load("swagger/openapi.yaml");

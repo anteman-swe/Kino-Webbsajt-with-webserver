@@ -15,13 +15,12 @@ closeNotice();
 import { toggleTheme } from '/scripts/tema.js';
 toggleTheme();
 
-import { fetchMovies } from "/scripts/api.js";
-import { renderMovieList } from "/scripts/createcard.js";
-import { openTrailer } from "/scripts/trailermodal.js"; 
-import { movieCarousel } from "/scripts/carousel.js";
-
-import "/scripts/oneMovieReviews.js";
-
+import { fetchMovies } from "../scripts/api.js";
+import { renderMovieList } from "../scripts/createcard.js";
+import { openTrailer } from "../scripts/trailermodal.js"; 
+import { movieCarousel } from "../scripts/carousel.js"; 
+import { fetchPopularMovies, renderPopularMovies } from "../scripts/popularMovies.js"; 
+import "/scripts/oneMovieReviews.js"; 
 
 
 function parseDate(dateStr) {
@@ -42,6 +41,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const currentTrack = document.getElementById("currentMoviesTrack");
   const comingSoonTrack = document.getElementById("comingSoonTrack");
   const eventsTrack = document.getElementById("eventsTrack");
+  const movies = await fetchPopularMovies();
+
+ renderPopularMovies(movies);
 
   // loading text
   if (currentTrack) currentTrack.innerHTML = "<p>Laddar…</p>";
