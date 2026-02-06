@@ -155,11 +155,14 @@ export const mockupApi = {
     return mockupApiMovies;
   },
   getOneMovie: async (id) => {
-    if (id == 99){
-        return error404;
+    if (id == 99) {
+      return error404;
     } else {
-        mockupApiMovie.id = id;
-        return mockupApiMovie;
+      mockupApiMovie.id = id;
+      return mockupApiMovie;
     }
   },
+  getAllReviewsForMovie: async (id, page) => {
+    return mockupReviews;
+  }
 };
