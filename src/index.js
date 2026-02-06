@@ -22,7 +22,7 @@ import { movieCarousel } from "../scripts/carousel.js";
 import { fetchPopularMovies, renderPopularMovies } from "../scripts/popularMovies.js"; 
 
 import "/scripts/oneMovieReviews.js";
-
+import { fetchPopularMovies, renderPopularMovies } from "../scripts/popularMovies.js"; 
 
 
 function parseDate(dateStr) {

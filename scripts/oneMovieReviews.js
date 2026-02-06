@@ -46,7 +46,7 @@ if (backButton && forwardButton) {
   });
 }
 
-async function getMovieReviews(movieID, page) {
+export async function getMovieReviews(movieID, page) {
   const getReviewsString = serverAdress + movieID + "/reviews?page=" + page;
   try {
     const response = await fetch(getReviewsString);
@@ -59,8 +59,6 @@ async function getMovieReviews(movieID, page) {
   } catch (err) {
     throw new Error(`Error message: ${err.message}`);
   }
-
-  // return await reviews.json();
 }
 
 function renderReviews(tagPointer, reviewsContent) {
