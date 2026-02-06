@@ -8,7 +8,21 @@
 
     </section>
     <section id="movie_rating"> <!-- id is only to identify what section should contain -->
-
+       <% if (locals.movieRating && movieRating !== "N/A") { %>
+            <h3>Rating: <%= movieRating %> ⭐</h3>
+            
+            <p>
+                <small>
+                    <% if (ratingSource === 'local') { %>
+                        <strong>Community Score</strong> (Based on <%= reviewCount %> reviews)
+                    <% } else { %>
+                        <strong>IMDb Score</strong> (Ratings fetched from IMDB website)
+                    <% } %>
+                </small>
+            </p>
+        <% } else { %>
+            <h3>Rating: Not available yet</h3>
+        <% } %>
     </section>
     <section id="coming_screenings"> <!-- id is only to identify what section should contain -->
         
@@ -57,13 +71,13 @@
         </form>
 
         <p id="review-message" aria-live="polite"></p>
-</section>
+    </section>
 
-<section class="screenings">
-    <h2>Kommande visningar</h2>
-    <p id="screenings-status">Laddar visningar…</p>
-    <ul id="screenings" data-movie-id="<%= movieID %>"></ul>
-</section>
+    <section class="screenings">
+        <h2>Kommande visningar</h2>
+        <p id="screenings-status">Laddar visningar…</p>
+        <ul id="screenings" data-movie-id="<%= movieId %>"></ul>
+    </section>
 </main>
 
 <script src="/scripts/screenings.js" defer></script>

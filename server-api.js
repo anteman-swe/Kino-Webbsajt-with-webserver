@@ -1,5 +1,6 @@
 import convertMD2HTML from "./mdconversion.js";
 
+
 const cms = "https://plankton-app-xhkom.ondigitalocean.app/api";
 
 const movieCollection = cms + "/movies";
@@ -121,7 +122,13 @@ async function getOneMovie(id) {
       return errorResponse.error;
     } else {
       const oneMovie = await response.json();
-      return simplifyMovieData(oneMovie.data);
+      const movieData = simplifyMovieData(oneMovie.data);
+      const ratingInfo = await getMovieScore(movieData.imdbId);
+
+      movieData.rating = ratingInfo;
+      
+      return movieData;
+      
     }
   } catch (err) {
     throw new Error(`Error message: ${err.message}`);
@@ -162,7 +169,8 @@ function simplifyMovieData(oneMovieData) {
     id: oneMovieData.id,
     title: oneMovieData.attributes.title,
     poster: oneMovieData.attributes.image,
-    intro: oneMovieData.attributes.intro
+    intro: oneMovieData.attributes.intro,
+    imdbId: oneMovieData.attributes.imdbId,
   };
 }
 
@@ -178,60 +186,40 @@ function simplifyReviewData(oneReviewData) {
     updatedAt: oneReviewData.attributes.updatedAt
   };
 }
-// Function to filter and sort upcoming screenings
-export function filterAndSortUpcomingScreenings(screeningsData, now = new Date()) {
-  return screeningsData
-    .filter((s) => {
-      const start = new Date(s.attributes.start_time);
-      return start > now;
-    })
-    .sort((a, b) => {
-      const da = new Date(a.attributes.start_time).getTime();
-      const db = new Date(b.attributes.start_time).getTime();
-      return da - db;
-    })
-    .map(simplifyScreeningData);
-}
 
-// Function to clean and simplify a json-object with data about a screening
-function simplifyScreeningData(oneScreening) {
-  return {
-    id: oneScreening.id,
-    start_time: oneScreening.attributes.start_time,
-    room: oneScreening.attributes.room ?? null
-  };
-}
+export async function getMovieScore(targetImdbId) {
+  // Simple filter for the movie only. No verified filter.
+  const reviewsUrl = `${cms}/reviews?filters[movie][imdbId]=${targetImdbId}&pagination[limit]=100`;
+  const externalApiUrl = `https://api.imdbapi.dev/titles/${targetImdbId}`;
 
-async function getUpcomingScreeningsForMovie(movieId) {
   try {
-    const url = new URL(screeningCollection);
-    url.searchParams.set("populate", "movie");
-    url.searchParams.set("filters[movie]", movieId);
+    const response = await fetch(reviewsUrl);
+    const json = await response.json();
+    const movieReviews = json.data || [];
 
-    const response = await fetch(url.toString());
-    const payload = await response.json(); 
-
-    if (!response.ok) {
-      const err = payload?.error ?? payload;
-      return {
-        status: err.status ?? response.status,
-        name: err.name ?? "Error",
-        message: err.message ?? "Unknown error",
+    if (movieReviews.length >= 5) {
+      const totalScore = movieReviews.reduce((sum, r) => sum + Number(r.attributes.rating), 0);
+      const average = (totalScore / movieReviews.length).toFixed(1);
+      
+      return { 
+        source: 'local', 
+        rating: average, 
+        count: movieReviews.length 
+      };
+    } else {
+      const externalRes = await fetch(externalApiUrl);
+      const externalData = await externalRes.json();
+      return { 
+        source: 'imdb', 
+        rating: externalData.rating?.aggregateRating || "N/A",
+        count: movieReviews.length 
       };
     }
-
-    return {
-      data: filterAndSortUpcomingScreenings(payload.data),
-    };
-  } catch (err) {
-    return {
-      status: 500,
-      name: "ServerError",
-      message: err.message,
-    };
+  } catch (error) {
+    return { source: 'none', rating: "N/A", count: 0 }; 
   }
 }
-
+  
 
 
 
@@ -239,13 +227,13 @@ async function getUpcomingScreeningsForMovie(movieId) {
 const api = {
   getAllMovies,
   getOneMovie,
-  getUpcomingScreeningsForMovie,
   getAllReviewsForMovie,
   simplifyMovieData,
   getAllScreenings,
   getAllReviews,
   getMovies,
-  getUpcomingScreeningsSimplified,
+  getMovieScore
+  // getUpcomingScreeningsSimplified,
 };
 
 export default api;
