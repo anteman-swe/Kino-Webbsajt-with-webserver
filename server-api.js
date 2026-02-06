@@ -284,6 +284,7 @@ const api = {
   getAllReviews,
   getMovies,
   getMovieScore,
+  getUpcomingScreeningsForMovie,
   getUpcomingScreeningsSimplified,
 };
 
