@@ -11,7 +11,7 @@
     "vite-build": "vite build",
     "build": "sass src/sections/main.scss:css/main.css",
     "preview": "vite preview",
-    "sass-watch": "sass --watch src/main.scss:css/main.css",
+    "sass-watch": "sass --watch src/sections/main.scss:css/main.css",
     "prepare": "husky",
     "start": "node start-server.js",
     "dev-serv": "nodemon start-server.js"
