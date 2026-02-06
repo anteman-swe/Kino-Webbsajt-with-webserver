@@ -1,10 +1,9 @@
 import convertMD2HTML from "./mdconversion.js";
 
 const cms = "https://plankton-app-xhkom.ondigitalocean.app/api";
-const movieCollection = "/movies";
-const screeningsCollection =
-  "https://plankton-app-xhkom.ondigitalocean.app/api/screenings";
 
+const movieCollection = cms + "/movies";
+const screeningsCollection = cms + "/screenings";
 const reviewsCollection = cms + "/reviews?populate=movie";
 //Moment 1
 
@@ -79,7 +78,7 @@ async function getAllReviews() {
 
 //Get all movies
 async function getMovies() {
-  const response = await fetch(allMovieCollection);
+  const response = await fetch(movieCollection);
   const json = await response.json();
 
   return json.data.map(item => ({
@@ -93,7 +92,7 @@ async function getMovies() {
 // Function to get a list of movies from API
 async function getAllMovies() {
   try {
-    const response = await fetch(cms + movieCollection);
+    const response = await fetch(movieCollection);
     if (!response.ok) {
       const errorResponse = await response.json();
       return errorResponse.error;
@@ -116,7 +115,7 @@ async function getAllMovies() {
 // Function to get one specific movie from API
 async function getOneMovie(id) {
   try {
-    const response = await fetch(cms + movieCollection + `/${id}`);
+    const response = await fetch(movieCollection + `/${id}`);
     if (!response.ok) {
       const errorResponse = await response.json();
       return errorResponse.error;
@@ -202,29 +201,6 @@ function simplifyScreeningData(oneScreening) {
     room: oneScreening.attributes.room ?? null
   };
 }
-// Function to filter and sort upcoming screenings
-export function filterAndSortUpcomingScreenings(screeningsData, now = new Date()) {
-  return screeningsData
-    .filter((s) => {
-      const start = new Date(s.attributes.start_time);
-      return start > now;
-    })
-    .sort((a, b) => {
-      const da = new Date(a.attributes.start_time).getTime();
-      const db = new Date(b.attributes.start_time).getTime();
-      return da - db;
-    })
-    .map(simplifyScreeningData);
-}
-
-// Function to clean and simplify a json-object with data about a screening
-function simplifyScreeningData(oneScreening) {
-  return {
-    id: oneScreening.id,
-    start_time: oneScreening.attributes.start_time,
-    room: oneScreening.attributes.room ?? null
-  };
-}
 
 async function getUpcomingScreeningsForMovie(movieId) {
   try {
@@ -257,35 +233,6 @@ async function getUpcomingScreeningsForMovie(movieId) {
 }
 
 
-async function getUpcomingScreeningsForMovie(movieId) {
-  try {
-    const url = new URL(screeningCollection);
-    url.searchParams.set("populate", "movie");
-    url.searchParams.set("filters[movie]", movieId);
-
-    const response = await fetch(url.toString());
-    const payload = await response.json(); 
-
-    if (!response.ok) {
-      const err = payload?.error ?? payload;
-      return {
-        status: err.status ?? response.status,
-        name: err.name ?? "Error",
-        message: err.message ?? "Unknown error",
-      };
-    }
-
-    return {
-      data: filterAndSortUpcomingScreenings(payload.data),
-    };
-  } catch (err) {
-    return {
-      status: 500,
-      name: "ServerError",
-      message: err.message,
-    };
-  }
-}
 
 
 // Export of functions as an object
@@ -294,7 +241,6 @@ const api = {
   getOneMovie,
   getUpcomingScreeningsForMovie,
   getAllReviewsForMovie,
-  getUpcomingScreeningsForMovie,
   simplifyMovieData,
   getAllScreenings,
   getAllReviews,
