@@ -20,9 +20,7 @@ import { renderMovieList } from "../scripts/createcard.js";
 import { openTrailer } from "../scripts/trailermodal.js"; 
 import { movieCarousel } from "../scripts/carousel.js"; 
 import { fetchPopularMovies, renderPopularMovies } from "../scripts/popularMovies.js"; 
-
-import "/scripts/oneMovieReviews.js";
-import { fetchPopularMovies, renderPopularMovies } from "../scripts/popularMovies.js"; 
+import "/scripts/oneMovieReviews.js"; 
 
 
 function parseDate(dateStr) {
