@@ -5,6 +5,7 @@ import YAML from "yamljs";
 import apiRoutes from "./api-routes.js";
 import popularMoviesRouter from "./popularMovies-route.js";
 import cors from "cors";
+import screeningsRouter from "./upcomingScreenings-route.js";
 
 export default function initServer(api) {
   const server = express();
@@ -17,6 +18,7 @@ export default function initServer(api) {
 
   // API routes
   server.use("/api", popularMoviesRouter(api));
+   server.use("/api", popularMoviesRouter(api));
 
   const swaggerDocument = YAML.load("swagger/openapi.yaml");
   const swaggerOptions = {

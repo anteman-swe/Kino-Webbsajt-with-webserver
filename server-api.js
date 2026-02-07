@@ -9,32 +9,43 @@ const reviewsCollection = cms + "/reviews?populate=movie";
 //Moment 1
 
 //Simplify function
- import { getUpcomingScreenings } from "./upcoming-screenings-logic.js";
-async function getUpcomingScreeningsSimplified(movieId) {
+
+async function getScreeningsForMovie(movieId) {
   const url = new URL(screeningsCollection);
   url.searchParams.set("populate", "movie");
-  url.searchParams.set("filters[movie]", movieId);
+  url.searchParams.set("filters[movie]", String(movieId));
 
   const response = await fetch(url.toString());
-  const payload = await response.json();
+  const json = await response.json();
 
-  const simplified = (payload.data || []).map((s) => ({
-    id: s.id,
-    start_time: s.attributes?.start_time,
-    room: s.attributes?.room ?? null,
-  }));
+  return (json.data || []).map((s) => {
+    const attrs = s.attributes || {};
+    const movieData = attrs.movie?.data;
 
-  return { data: getUpcomingScreenings(simplified) };
+    return {
+      id: s.id,
+      start_time: attrs.start_time,
+      room: attrs.room,
+      movie: movieData
+        ? {
+            id: movieData.id,
+            title: movieData.attributes?.title,
+            imageUrl: movieData.attributes?.image?.url,
+          }
+        : null,
+    };
+  });
 }
 
-//Moment 1
-  // Get all movies (screenings) from CMS
-async function getAllScreenings() {
- try {
-    const url = new URL(screeningsCollection);
-    url.searchParams.set("populate", "movie"); //
-    const response = await fetch(url.toString());
 
+async function getAllScreenings() {
+  try {
+    const url = new URL(screeningsCollection);
+    url.searchParams.set("populate", "movie");
+    url.searchParams.set("sort", "start_time:asc");            
+    url.searchParams.set("pagination[pageSize]", "200");       
+
+    const response = await fetch(url.toString());
     if (!response.ok) {
       const errorResponse = await response.json().catch(() => ({}));
       return errorResponse.error || { message: "Failed to fetch screenings" };
@@ -63,6 +74,7 @@ async function getAllScreenings() {
     throw new Error(`Error fetching screenings: ${err.message}`);
   }
 }
+
 
   //Get reviews
 async function getAllReviews() {
@@ -322,8 +334,9 @@ const api = {
   getMovies,
   getMovieScore,
   getUpcomingScreeningsForMovie,
-  getUpcomingScreeningsSimplified,
   addReview,
+  getScreeningsForMovie,
+  
 };
 
 export default api;
