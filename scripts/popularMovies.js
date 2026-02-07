@@ -1,5 +1,8 @@
+import config from './config.js';
+const apiAdress = config.apiUrl;
+
 export async function fetchPopularMovies() {
-  const response = await fetch("/api/movies/popular");
+  const response = await fetch(apiAdress + "/api/movies/popular");
   const json = await response.json();
   return json.data;
 }
