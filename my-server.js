@@ -18,7 +18,7 @@ export default function initServer(api) {
 
   // API routes
   server.use("/api", popularMoviesRouter(api));
-   server.use("/api", popularMoviesRouter(api));
+   server.use("/api", screeningsRouter(api));
 
   const swaggerDocument = YAML.load("swagger/openapi.yaml");
   const swaggerOptions = {
