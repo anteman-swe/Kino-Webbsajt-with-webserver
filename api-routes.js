@@ -65,7 +65,12 @@ export default function apiRoutes(api) {
       });
     }
 
-    const result = await api.addReview(movieID, author, Number(rating), comment || "");
+    const result = await api.addReview(
+      movieID,
+      author,
+      Number(rating),
+      comment || "",
+    );
 
     if (result.success) {
       res.status(201).json(result.data);
@@ -74,6 +79,8 @@ export default function apiRoutes(api) {
         error: result.message,
       });
     }
+  });
+
   router.get("/movies/:movieID/screenings", async (req, res) => {
     const movieID = req.params.movieID;
     const result = await api.getUpcomingScreeningsForMovie(movieID);
