@@ -1124,6 +1124,53 @@ body.light .header__logo-light, body.light .header__nav-logolight, body.light .h
 .reviews-container .review-card__date {
   font-size: 0.6rem;
 }
+.upcoming-screenings__track {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem; 
+  margin-top: 1rem;
+}
+
+.upcoming-screenings__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem; 
+  text-align: center;
+}
+
+.upcoming-screenings__img {
+  width: 70%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.upcoming-screenings__title {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.2;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: calc(1.2em * 2);
+}
+
+.upcoming-screenings__time {
+  font-size: 0.8rem;
+}
+
+.upcoming-screenings__room {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+
+
+
 
 .header__top img, .header__nav img {
   height: 45px;
