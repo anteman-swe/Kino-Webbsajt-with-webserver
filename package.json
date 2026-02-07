@@ -55,6 +55,7 @@
   "dependencies": {
     "braces": "^3.0.3",
     "chokidar": "^4.0.3",
+    "cors": "^2.8.6",
     "cross-env": "^10.1.0",
     "detect-libc": "^1.0.3",
     "dotenv": "^17.2.3",
