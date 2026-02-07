@@ -54,6 +54,33 @@ export default function apiRoutes(api) {
     res.status(200).send(reviewsOneMovie).end();
   });
 
+  router.post("/movies/:movieID/reviews", async (req, res) => {
+    const movieID = req.params.movieID;
+    const { author, rating, comment } = req.body;
+
+    // Basic validation
+    if (!author || !rating) {
+      return res.status(400).json({
+        error: "Author and rating are required",
+      });
+    }
+
+    const result = await api.addReview(
+      movieID,
+      author,
+      Number(rating),
+      comment || "",
+    );
+
+    if (result.success) {
+      res.status(201).json(result.data);
+    } else {
+      res.status(result.status || 500).json({
+        error: result.message,
+      });
+    }
+  });
+
   router.get("/movies/:movieID/screenings", async (req, res) => {
     const movieID = req.params.movieID;
     const result = await api.getUpcomingScreeningsForMovie(movieID);

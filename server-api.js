@@ -187,6 +187,43 @@ function simplifyReviewData(oneReviewData) {
   };
 }
 
+// Function to add a new review for a movie
+async function addReview(movieID, author, rating, comment) {
+  try {
+    const response = await fetch(`${cms}/reviews`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        data: {
+          author,
+          rating,
+          comment,
+          movie: movieID,
+        },
+      }),
+    });
+
+    if (!response.ok) {
+      return {
+        status: response.status,
+        message: `Failed to add review: ${response.statusText}`,
+      };
+    }
+
+    const result = await response.json();
+    return {
+      success: true,
+      data: simplifyReviewData(result.data),
+    };
+  } catch (error) {
+    return {
+      status: 500,
+      message: `Error adding review: ${error.message}`,
+    };
+  }
+}
 export async function getMovieScore(targetImdbId) {
   // Simple filter for the movie only. No verified filter.
   const reviewsUrl = `${cms}/reviews?filters[movie][imdbId]=${targetImdbId}&pagination[limit]=100`;
@@ -286,6 +323,7 @@ const api = {
   getMovieScore,
   getUpcomingScreeningsForMovie,
   getUpcomingScreeningsSimplified,
+  addReview,
 };
 
 export default api;
