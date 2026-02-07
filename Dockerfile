@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y libatomic1 && rm -rf /var/lib/apt/lists
 WORKDIR /usr/src/app
 
 COPY package*.json ./
-RUN npm install --only=production
+RUN npm install --only=production --ignore-scripts
 
 COPY . .
 
