@@ -45,7 +45,7 @@
     <section id="user_review">
         <h2>Skriv en recension</h2>
 
-        <form id="review-form">
+        <form id="review-form" data-movie-id="<%= movieId %>">
             <label>
             Namn
             <input type="text" name="author" required />
@@ -81,6 +81,6 @@
     </section>
 </main>
 
-<script src="/scripts/screenings.js" defer></script>
+<script src="/scripts/screenings.js" type="module" defer></script>
 
 <%- include('partials/footer'); %>

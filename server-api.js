@@ -187,6 +187,43 @@ function simplifyReviewData(oneReviewData) {
   };
 }
 
+// Function to add a new review for a movie
+async function addReview(movieID, author, rating, comment) {
+  try {
+    const response = await fetch(`${cms}/reviews`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        data: {
+          author,
+          rating,
+          comment,
+          movie: movieID,
+        },
+      }),
+    });
+
+    if (!response.ok) {
+      return {
+        status: response.status,
+        message: `Failed to add review: ${response.statusText}`,
+      };
+    }
+
+    const result = await response.json();
+    return {
+      success: true,
+      data: simplifyReviewData(result.data),
+    };
+  } catch (error) {
+    return {
+      status: 500,
+      message: `Error adding review: ${error.message}`,
+    };
+  }
+}
 export async function getMovieScore(targetImdbId) {
   // Simple filter for the movie only. No verified filter.
   const reviewsUrl = `${cms}/reviews?filters[movie][imdbId]=${targetImdbId}&pagination[limit]=100`;
@@ -219,9 +256,60 @@ export async function getMovieScore(targetImdbId) {
     return { source: 'none', rating: "N/A", count: 0 }; 
   }
 }
-  
 
+// Function to filter and sort upcoming screenings
+export function filterAndSortUpcomingScreenings(screeningsData, now = new Date()) {
+  return screeningsData
+    .filter((s) => {
+      const start = new Date(s.attributes.start_time);
+      return start > now;
+    })
+    .sort((a, b) => {
+      const da = new Date(a.attributes.start_time).getTime();
+      const db = new Date(b.attributes.start_time).getTime();
+      return da - db;
+    })
+    .map(simplifyScreeningData);
+}
 
+// Function to clean and simplify a json-object with data about a screening
+function simplifyScreeningData(oneScreening) {
+  return {
+    id: oneScreening.id,
+    start_time: oneScreening.attributes.start_time,
+    room: oneScreening.attributes.room ?? null
+  };
+}
+
+async function getUpcomingScreeningsForMovie(movieId) {
+  try {
+    const url = new URL(screeningsCollection);
+    url.searchParams.set("populate", "movie");
+    url.searchParams.set("filters[movie]", movieId);
+
+    const response = await fetch(url.toString());
+    const payload = await response.json(); 
+
+    if (!response.ok) {
+      const err = payload?.error ?? payload;
+      return {
+        status: err.status ?? response.status,
+        name: err.name ?? "Error",
+        message: err.message ?? "Unknown error",
+      };
+    }
+
+    return {
+      data: filterAndSortUpcomingScreenings(payload.data),
+    };
+  } catch (err) {
+    return {
+      status: 500,
+      name: "ServerError",
+      message: err.message,
+    };
+  }
+}
 
 // Export of functions as an object
 const api = {
@@ -233,7 +321,9 @@ const api = {
   getAllReviews,
   getMovies,
   getMovieScore,
+  getUpcomingScreeningsForMovie,
   getUpcomingScreeningsSimplified,
+  addReview,
 };
 
 export default api;

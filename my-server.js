@@ -9,6 +9,10 @@ import popularMoviesRouter from "./popularMovies-route.js";
 
 export default function initServer(api) {
   const server = express();
+  
+  // Middleware for parsing JSON
+  server.use(express.json());
+  
   // API routes
   server.use("/api", popularMoviesRouter(api));
 
