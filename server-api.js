@@ -269,12 +269,9 @@ const api = {
   getAllScreenings,
   getAllReviews,
   getMovies,
-<<<<<<< HEAD
-  addReview,
-=======
   getMovieScore,
   getUpcomingScreeningsSimplified,
->>>>>>> origin/dev
+  addReview,
 };
 
 export default api;
