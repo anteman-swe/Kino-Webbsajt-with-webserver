@@ -168,6 +168,44 @@ function simplifyReviewData(oneReviewData) {
   };
 }
 
+// Function to add a new review for a movie
+async function addReview(movieID, author, rating, comment) {
+  try {
+    const response = await fetch(`${cms}/reviews`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        data: {
+          author,
+          rating,
+          comment,
+          movie: movieID,
+        },
+      }),
+    });
+
+    if (!response.ok) {
+      return {
+        status: response.status,
+        message: `Failed to add review: ${response.statusText}`,
+      };
+    }
+
+    const result = await response.json();
+    return {
+      success: true,
+      data: simplifyReviewData(result.data),
+    };
+  } catch (error) {
+    return {
+      status: 500,
+      message: `Error adding review: ${error.message}`,
+    };
+  }
+}
+
 // Export of functions as an object
 const api = {
   getAllMovies,
@@ -176,7 +214,8 @@ const api = {
   simplifyMovieData,
   getAllScreenings,
   getAllReviews,
-  getMovies
+  getMovies,
+  addReview,
 };
 
 export default api;
