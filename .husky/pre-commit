@@ -1,6 +1,8 @@
 #!/bin/bash
 # .husky/pre-commit
 
+npx lint-staged
+
 echo "Kör pre-commit kontroll..."
 
 # Namnet på detta skript så vi kan exkludera det

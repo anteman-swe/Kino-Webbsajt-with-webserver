@@ -1,6 +1,8 @@
 import Review from "/scripts/Review.js";
+import config from './config.js';
+const apiAdress = config.apiUrl;
 
-const serverAdress = "http://localhost:5080/movies/";
+const serverAdress = apiAdress + "/movies/";
 
 const oneMovieReviewsCont = document.querySelector(".reviews-one-movie");
 const numberOfReviewsView = document.querySelector(".number-of-reviews");

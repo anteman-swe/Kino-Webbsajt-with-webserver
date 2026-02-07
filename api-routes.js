@@ -1,9 +1,9 @@
-import express from  'express';
+import express from "express";
 
 export default function apiRoutes(api) {
-    const router = express.Router();
+  const router = express.Router();
 
-    router.get("/movies", async (req, res) => {
+  router.get("/movies", async (req, res) => {
     const movies = await api.getAllMovies();
     if (!movies.status) {
       res.render("movielist", { pageTitle: "Filmlistan", list: movies.data });
@@ -16,35 +16,36 @@ export default function apiRoutes(api) {
     }
   });
 
- router.get("/movies/:movieID", async (req, res) => {
-  try { 
-        const movieID = req.params.movieID;
-        const oneMovie = await api.getOneMovie(movieID);
-    
-        if (oneMovie && !oneMovie.status) {
-          res.status(200).render("singlemoviepres", {
-            pageTitle: oneMovie.title,
-            movieId: oneMovie.id,
-            movietitle: oneMovie.title,
-            movieintro: oneMovie.intro,
-            movieimage: oneMovie.poster?.url,
-            
-            movieRating: oneMovie.rating?.rating || "N/A",
-            ratingSource: oneMovie.rating?.source || "none",
-            reviewCount: oneMovie.rating?.count || 0
-          });
-        } else {
-          res.status(404).render("errorpage", { 
-            message: "Filmen du försöker nå finns inte i filmlistan",
-            pageTitle: "Serverfel!",
-            status: "404" 
-          });
-        }
-  } catch (error) { // <--- This now has a matching 'try'
-    console.error("Route Error:", error);
-    res.status(500).send("Internal Server Error");
-  }
-});
+  router.get("/movies/:movieID", async (req, res) => {
+    try {
+      const movieID = req.params.movieID;
+      const oneMovie = await api.getOneMovie(movieID);
+
+      if (oneMovie && !oneMovie.status) {
+        res.status(200).render("singlemoviepres", {
+          pageTitle: oneMovie.title,
+          movieId: oneMovie.id,
+          movietitle: oneMovie.title,
+          movieintro: oneMovie.intro,
+          movieimage: oneMovie.poster?.url,
+
+          movieRating: oneMovie.rating?.rating || "N/A",
+          ratingSource: oneMovie.rating?.source || "none",
+          reviewCount: oneMovie.rating?.count || 0,
+        });
+      } else {
+        res.status(404).render("errorpage", {
+          message: "Filmen du försöker nå finns inte i filmlistan",
+          pageTitle: "Serverfel!",
+          status: "404",
+        });
+      }
+    } catch (error) {
+      // <--- This now has a matching 'try'
+      console.error("Route Error:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
 
   router.get("/movies/:movieID/reviews", async (req, res) => {
     const movieID = req.params.movieID;
@@ -73,6 +74,19 @@ export default function apiRoutes(api) {
         error: result.message,
       });
     }
+  router.get("/movies/:movieID/screenings", async (req, res) => {
+    const movieID = req.params.movieID;
+    const result = await api.getUpcomingScreeningsForMovie(movieID);
+
+    if (result.status) {
+      return res.status(result.status).json({
+        status: result.status,
+        name: result.name,
+        message: result.message,
+      });
+    }
+
+    return res.status(200).json({ data: result.data });
   });
 
   // Testroute just for fun
