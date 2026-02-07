@@ -46,23 +46,30 @@ const mockupApiMovies = {
 const mockupApiMovie = {
   id: 2,
   title: "Encanto",
+  imdbId: "tt2953050", // Added
   poster: {
     url: "https://m.media-amazon.com/images/M/MV5BOTY1YmU1ZTItMzNjZC00ZGU0LTk0MTEtZDgzN2QwOWVlNjZhXkEyXkFqcGc@._V1_.jpg",
   },
   intro:
-    "<p>A Colombian teenage girl has to face the frustration of being <strong>the only member of her family</strong> without magical powers.</p>\n"
+    "<p>A Colombian teenage girl has to face the frustration of being <strong>the only member of her family</strong> without magical powers.</p>\n",
+  rating: { // Added to match new business logic
+    rating: "4.5",
+    source: "local",
+    count: 10
+  }
 };
 
 export const mockupApiMovieConverted = {
   id: 2,
   title: "Encanto",
-  
+  imdbId: "tt2953050", // Added to match simplifyMovieData output
   poster: {
     url: "https://m.media-amazon.com/images/M/MV5BOTY1YmU1ZTItMzNjZC00ZGU0LTk0MTEtZDgzN2QwOWVlNjZhXkEyXkFqcGc@._V1_.jpg",
   },
   intro:
-    "<p>A Colombian teenage girl has to face the frustration of being <strong>the only member of her family</strong> without magical powers.</p>\n"
+    "<p>A Colombian teenage girl has to face the frustration of being <strong>the only member of her family</strong> without magical powers.</p>\n",
 };
+
 export const mockupCMSAnswer = {
   "data": {
     "id": 2,
@@ -81,6 +88,61 @@ export const mockupCMSAnswer = {
   "meta": {}
 };
 
+export const mockupReviews = {
+  "data": [
+    {
+      "id": 1,
+      "comment": "Review 1",
+      "rating": 4,
+      "author": "test",
+      "verified": null,
+      "createdAt": "2025-05-29T11:15:52.807Z",
+      "updatedAt": "2025-05-29T11:15:52.807Z"
+    },
+    {
+      "id": 2,
+      "comment": "Review 2",
+      "rating": 5,
+      "author": null,
+      "verified": null,
+      "createdAt": "2025-07-14T09:51:32.689Z",
+      "updatedAt": "2025-07-14T09:51:32.689Z"
+    },
+    {
+      "id": 3,
+      "comment": "Review 3",
+      "rating": 5,
+      "author": null,
+      "verified": null,
+      "createdAt": "2025-07-14T09:56:49.564Z",
+      "updatedAt": "2025-07-14T09:56:49.564Z"
+    },
+    {
+      "id": 4,
+      "comment": "Review 4",
+      "rating": 0,
+      "author": null,
+      "verified": null,
+      "createdAt": "2025-07-15T05:46:39.002Z",
+      "updatedAt": "2025-07-15T05:46:39.002Z"
+    },
+    {
+      "id": 5,
+      "comment": "Review 5",
+      "rating": 4,
+      "author": "Joel",
+      "verified": null,
+      "createdAt": "2025-07-15T05:50:18.849Z",
+      "updatedAt": "2025-07-15T05:50:18.849Z"
+    },
+  ],
+  "meta": {
+    "page": 1,
+    "pageSize": 5,
+    "total": 27
+  }
+}
+
 const error404 = {
     status: 404,
     name: "NotFoundError",
@@ -93,11 +155,14 @@ export const mockupApi = {
     return mockupApiMovies;
   },
   getOneMovie: async (id) => {
-    if (id == 99){
-        return error404;
+    if (id == 99) {
+      return error404;
     } else {
-        mockupApiMovie.id = id;
-        return mockupApiMovie;
+      mockupApiMovie.id = id;
+      return mockupApiMovie;
     }
+  },
+  getAllReviewsForMovie: async (id, page) => {
+    return mockupReviews;
   }
 };

@@ -16,25 +16,35 @@ export default function apiRoutes(api) {
     }
   });
 
-  router.get("/movies/:movieID", async (req, res) => {
-    const movieID = req.params.movieID;
-    const oneMovie = await api.getOneMovie(movieID);
-    if (!oneMovie.status) {
-      res.status(200).render("singlemoviepres", {
-        pageTitle: oneMovie.title,
-        movietitle: oneMovie.title,
-        movieintro: oneMovie.intro,
-        movieimage: oneMovie.poster.url,
-        movieId: movieID,
-      });
-    } else {
-      res.status(oneMovie.status).render("errorpage", {
-        status: oneMovie.status,
-        name: oneMovie.name,
-        message: oneMovie.message,
-      });
-    }
-  });
+ router.get("/movies/:movieID", async (req, res) => {
+  try { 
+        const movieID = req.params.movieID;
+        const oneMovie = await api.getOneMovie(movieID);
+    
+        if (oneMovie && !oneMovie.status) {
+          res.status(200).render("singlemoviepres", {
+            pageTitle: oneMovie.title,
+            movieId: oneMovie.id,
+            movietitle: oneMovie.title,
+            movieintro: oneMovie.intro,
+            movieimage: oneMovie.poster?.url,
+            
+            movieRating: oneMovie.rating?.rating || "N/A",
+            ratingSource: oneMovie.rating?.source || "none",
+            reviewCount: oneMovie.rating?.count || 0
+          });
+        } else {
+          res.status(404).render("errorpage", { 
+            message: "Filmen du försöker nå finns inte i filmlistan",
+            pageTitle: "Serverfel!",
+            status: "404" 
+          });
+        }
+  } catch (error) { // <--- This now has a matching 'try'
+    console.error("Route Error:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
   router.get("/movies/:movieID/reviews", async (req, res) => {
     const movieID = req.params.movieID;
