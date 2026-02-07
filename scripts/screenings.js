@@ -1,6 +1,3 @@
-import config from './config.js';
-const apiAdress = config.apiUrl;
-
 document.addEventListener("DOMContentLoaded", async () => {
   const listEl = document.querySelector("#screenings");
   const statusEl = document.querySelector("#screenings-status");
@@ -9,7 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const movieId = listEl.dataset.movieId;
 
   try {
-    const res = await fetch(`${apiAdress}/movies/${movieId}/screenings`);
+    const res = await fetch(`/movies/${movieId}/screenings`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const payload = await res.json();

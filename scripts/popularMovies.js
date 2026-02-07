@@ -1,8 +1,6 @@
-import config from './config.js';
-const apiAdress = config.apiUrl;
-
+// PopularMovies - Frontend
 export async function fetchPopularMovies() {
-  const response = await fetch(apiAdress + "/api/movies/popular");
+  const response = await fetch("/api/movies/popular");
   const json = await response.json();
   return json.data;
 }
@@ -12,7 +10,7 @@ export function renderPopularMovies(movies) {
 
   container.innerHTML = "";
 
-  movies.forEach(movie => {
+  movies.forEach((movie) => {
     const card = document.createElement("div");
     card.classList.add("popular-movies__card");
 
@@ -32,7 +30,7 @@ export function renderPopularMovies(movies) {
 
 function createStars(rating) {
   const fullStar = "⭐";
-  const emptyStar = "☆";
+  // const emptyStar = "☆";
 
   const stars = fullStar.repeat(rating);
   return `${stars} (${rating})`;

@@ -1,8 +1,4 @@
 import Review from "/scripts/Review.js";
-import config from './config.js';
-const apiAdress = config.apiUrl;
-
-const serverAdress = apiAdress + "/movies/";
 
 const oneMovieReviewsCont = document.querySelector(".reviews-one-movie");
 const numberOfReviewsView = document.querySelector(".number-of-reviews");
@@ -49,7 +45,7 @@ if (backButton && forwardButton) {
 }
 
 export async function getMovieReviews(movieID, page) {
-  const getReviewsString = serverAdress + movieID + "/reviews?page=" + page;
+  const getReviewsString = "/movies/" + movieID + "/reviews?page=" + page;
   try {
     const response = await fetch(getReviewsString);
     if (!response.ok) {
