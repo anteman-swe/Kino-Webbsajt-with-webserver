@@ -1,26 +1,29 @@
-import { initMemberPage, initMemberButtons } from '/scripts/member-page.js';
-if (document.querySelector('.members__offers')) {
+import { initMemberPage, initMemberButtons } from "/scripts/member-page.js";
+if (document.querySelector(".members__offers")) {
   initMemberPage();
 }
 initMemberButtons();
 
-import { toggleLogin } from '/scripts/login.js';
+import { toggleLogin } from "/scripts/login.js";
 toggleLogin();
-import { toggleRegister } from '/scripts/register.js';
+import { toggleRegister } from "/scripts/register.js";
 toggleRegister();
-import { toggleMenu } from '/scripts/menu.js'; 
-toggleMenu(); 
-import { closeNotice } from '/scripts/notice.js';
+import { toggleMenu } from "/scripts/menu.js";
+toggleMenu();
+import { closeNotice } from "/scripts/notice.js";
 closeNotice();
-import { toggleTheme } from '/scripts/tema.js';
+import { toggleTheme } from "/scripts/tema.js";
 toggleTheme();
 
-import { fetchMovies } from "../scripts/api.js";
-import { renderMovieList } from "../scripts/createcard.js";
-import { openTrailer } from "../scripts/trailermodal.js"; 
-import { movieCarousel } from "../scripts/carousel.js"; 
-import { fetchPopularMovies, renderPopularMovies } from "../scripts/popularMovies.js"; 
-import "/scripts/oneMovieReviews.js"; 
+import { fetchMovies } from "/scripts/api.js";
+import { renderMovieList } from "/scripts/createcard.js";
+import { openTrailer } from "/scripts/trailermodal.js";
+import { movieCarousel } from "/scripts/carousel.js";
+import {
+  fetchPopularMovies,
+  renderPopularMovies,
+} from "/scripts/popularMovies.js";
+import "/scripts/oneMovieReviews.js";
 import "/scripts/review-form.js";
 
 function parseDate(dateStr) {
@@ -43,7 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const eventsTrack = document.getElementById("eventsTrack");
   const movies = await fetchPopularMovies();
 
- renderPopularMovies(movies);
+  renderPopularMovies(movies);
 
   // loading text
   if (currentTrack) currentTrack.innerHTML = "<p>Laddar…</p>";
@@ -71,7 +74,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (btn.textContent === "Trailer") {
         const movieId = Number(btn.dataset.id);
 
-        const movie = movies.find(m => m.id === movieId);
+        const movie = movies.find((m) => m.id === movieId);
 
         if (!movie?.Trailer_Id) {
           alert("Trailer saknas");
@@ -81,7 +84,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         openTrailer(movie.Trailer_Id);
       }
     });
-
   } catch (err) {
     console.error(err);
     const msg = `<p class="empty_state">Kunde inte hämta filmer: ${err.message}</p>`;

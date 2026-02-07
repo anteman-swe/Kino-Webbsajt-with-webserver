@@ -4,15 +4,17 @@ import swaggerUi from "swagger-ui-express";
 import YAML from "yamljs";
 import apiRoutes from "./api-routes.js";
 import popularMoviesRouter from "./popularMovies-route.js";
-
-
+import cors from "cors";
 
 export default function initServer(api) {
   const server = express();
-  
+
+  //Middleware för att tillåta anrop från alla domäner
+  server.use(cors());
+
   // Middleware for parsing JSON
   server.use(express.json());
-  
+
   // API routes
   server.use("/api", popularMoviesRouter(api));
 
