@@ -1,3 +1,14 @@
+import { fetchUpcomingScreenings, renderUpcomingScreenings } 
+  from "../scripts/upcomingScreenings.js";
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const res = await fetch("/api/screenings");
+  const json = await res.json();
+  renderUpcomingScreenings(json.screenings);
+});
+
+
+
 import { initMemberPage, initMemberButtons } from "/scripts/member-page.js";
 if (document.querySelector(".members__offers")) {
   initMemberPage();

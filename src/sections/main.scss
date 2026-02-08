@@ -1,3 +1,4 @@
+
 @use './base.scss';
 @use './cafe-bistro.scss';
 @use './components.scss';
@@ -11,6 +12,8 @@
 @use './link-list.scss';
 @use './popular-movies.scss';
 @use './onemoviereviews.scss';
+@use './upcoming-screenings.scss';
+
 
 .header__top img, .header__nav img {
   height: 45px;
