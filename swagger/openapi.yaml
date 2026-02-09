@@ -22,13 +22,13 @@ tags:
 paths:
   # Paths to endpoints
   /movies:
-    get:    
+    get:
       summary: Retrieve all movies
       description: Returns all movies
       tags:
         - Movies
       responses:
-        '200':
+        "200":
           description: List of movies
           content:
             application/json:
@@ -37,8 +37,8 @@ paths:
                 properties:
                   data:
                     type: array
-                    items: 
-                      $ref: '#/components/schemas/Movie'
+                    items:
+                      $ref: "#/components/schemas/Movie"
                   meta:
                     type: object
                     properties:
@@ -55,24 +55,24 @@ paths:
                         type: number
                         description: Count of total number of items in data
                         example: 1
-        '400':
+        "400":
           description: Bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '404':
+                $ref: "#/components/schemas/Error"
+        "404":
           description: Resource not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
+                $ref: "#/components/schemas/Error"
+        "500":
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   /movies/{id}:
     get:
@@ -81,30 +81,30 @@ paths:
       tags:
         - Movies
       responses:
-        '200':
+        "200":
           description: One movie
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Movie'
-        '400':
+                $ref: "#/components/schemas/Movie"
+        "400":
           description: Bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '404':
+                $ref: "#/components/schemas/Error"
+        "404":
           description: Resource not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
+                $ref: "#/components/schemas/Error"
+        "500":
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   /movies/{id}/reviews:
     get:
@@ -120,7 +120,7 @@ paths:
             type: integer
             default: 1
       responses:
-        '200':
+        "200":
           description: List of reviews
           content:
             application/json:
@@ -130,7 +130,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/Review'
+                      $ref: "#/components/schemas/Review"
                   meta:
                     type: object
                     properties:
@@ -147,24 +147,24 @@ paths:
                         type: number
                         description: Count of total number of items in data
                         example: 1
-        '400':
+        "400":
           description: Bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '404':
+                $ref: "#/components/schemas/Error"
+        "404":
           description: Resource not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
+                $ref: "#/components/schemas/Error"
+        "500":
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     post:
       summary: Post a new review of current movie
       tags:
@@ -174,41 +174,41 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReviewPost'
+              $ref: "#/components/schemas/ReviewPost"
       responses:
-        '200':
+        "200":
           description: Review added successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Review'
-        '400':
+                $ref: "#/components/schemas/Review"
+        "400":
           description: Bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '404':
+                $ref: "#/components/schemas/Error"
+        "404":
           description: Resource not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
+                $ref: "#/components/schemas/Error"
+        "500":
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-                
-    /movies/{id}/screenings:
+                $ref: "#/components/schemas/Error"
+
+  /movies/{id}/screenings:
     get:
       summary: Retrieve all screening times for one movie
       description: Returns all screening times for one movie
       tags:
         - Screenings
       responses:
-        '200':
+        "200":
           description: List of screening times
           content:
             application/json:
@@ -216,11 +216,12 @@ paths:
                 type: object
                 properties:
                   data:
-                    $ref: '#/components/schemas/Screening'
+                    $ref: "#/components/schemas/Screening"
                   total:
                     type: number
                     description: Count of total number of items in data
                     example: 1
+
   /movies/popular:
     get:
       summary: Retrieve a list of the most popular movies
@@ -228,7 +229,7 @@ paths:
       tags:
         - Movies
       responses:
-        '200':
+        "200":
           description: List of popular movies
           content:
             application/json:
@@ -238,7 +239,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/Movie'
+                      $ref: "#/components/schemas/Movie"
                   total:
                     type: number
                     description: Count of total number of items in data
@@ -264,12 +265,15 @@ components:
             url:
               type: string
               description: A string containing an url to a movie poster image
-              example: "https://m.media-amazon.com/images/M/MV5BOTY1YmU1ZTItMzNjZC00ZGU0LTk0MTEtZDgzN2QwOWVlNjZhXkEyXkFqcGc@._V1_.jpg"
+              example: >
+                "https://m.media-amazon.com/images/M/MV5BOTY1YmU1ZTItMzNjZC00ZGU0LTk0MTEtZDgzN2QwOWVlNjZhXkEyXkFqcGc@._V1_.jpg"
         intro:
           type: string
           description: An short introduction to the movie plot
-          example: "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring."
-    
+          example: >
+            "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from
+            Frodo and Sam as they approach Mount Doom with the One Ring."
+
     Review:
       type: object
       properties:
@@ -369,7 +373,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
           example:
             name: "NotFoundError"
             message: "The resource could not be found"
@@ -380,7 +384,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
           example:
             name: "BadRequest"
             message: "Request contains invalid data"
@@ -391,12 +395,12 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
           example:
             name: "InternalServerError"
             message: "An unexpected error occured"
             status: 500
-  
+
   securitySchemes:
     bearerAuth:
       type: http
