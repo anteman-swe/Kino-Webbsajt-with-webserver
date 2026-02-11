@@ -1,6 +1,5 @@
 import convertMD2HTML from "./mdconversion.js";
 
-
 const cms = "https://plankton-app-xhkom.ondigitalocean.app/api";
 
 const movieCollection = cms + "/movies";
@@ -37,13 +36,12 @@ async function getScreeningsForMovie(movieId) {
   });
 }
 
-
 async function getAllScreenings() {
   try {
     const url = new URL(screeningsCollection);
     url.searchParams.set("populate", "movie");
-    url.searchParams.set("sort", "start_time:asc");            
-    url.searchParams.set("pagination[pageSize]", "200");       
+    url.searchParams.set("sort", "start_time:asc");
+    url.searchParams.set("pagination[pageSize]", "200");
 
     const response = await fetch(url.toString());
     if (!response.ok) {
@@ -75,17 +73,16 @@ async function getAllScreenings() {
   }
 }
 
-
-  //Get reviews
+//Get reviews
 async function getAllReviews() {
   const response = await fetch(reviewsCollection);
   const json = await response.json();
 
-  return json.data.map(item => ({
+  return json.data.map((item) => ({
     id: item.id,
     rating: item.attributes.rating,
     reviewDate: item.attributes.createdAt,
-    movieId: item.attributes.movie.data.id
+    movieId: item.attributes.movie.data.id,
   }));
 }
 
@@ -94,11 +91,11 @@ async function getMovies() {
   const response = await fetch(movieCollection);
   const json = await response.json();
 
-  return json.data.map(item => ({
+  return json.data.map((item) => ({
     id: item.id,
     title: item.attributes.title,
     description: item.attributes.intro,
-    poster: item.attributes.image
+    poster: item.attributes.image,
   }));
 }
 
@@ -138,9 +135,8 @@ async function getOneMovie(id) {
       const ratingInfo = await getMovieScore(movieData.imdbId);
 
       movieData.rating = ratingInfo;
-      
+
       return movieData;
-      
     }
   } catch (err) {
     throw new Error(`Error message: ${err.message}`);
@@ -149,7 +145,14 @@ async function getOneMovie(id) {
 
 //Function to get reviews for one movie id
 async function getAllReviewsForMovie(id, page, reqPageSize = 5) {
-  const fetchString = cms + "/reviews?filters[movie]=" + id + "&pagination[page]=" + page + "&pagination[pageSize]=" + reqPageSize;
+  const fetchString =
+    cms +
+    "/reviews?filters[movie]=" +
+    id +
+    "&pagination[page]=" +
+    page +
+    "&pagination[pageSize]=" +
+    reqPageSize;
   try {
     const response = await fetch(fetchString);
     if (!response.ok || response.data == []) {
@@ -166,7 +169,7 @@ async function getAllReviewsForMovie(id, page, reqPageSize = 5) {
           total: reviews.meta.pagination.total,
         },
       };
-    } 
+    }
   } catch (err) {
     throw new Error(`Error message: ${err.message}`);
   }
@@ -195,7 +198,7 @@ function simplifyReviewData(oneReviewData) {
     author: oneReviewData.attributes.author,
     verified: oneReviewData.attributes.verified,
     createdAt: oneReviewData.attributes.createdAt,
-    updatedAt: oneReviewData.attributes.updatedAt
+    updatedAt: oneReviewData.attributes.updatedAt,
   };
 }
 
@@ -247,30 +250,37 @@ export async function getMovieScore(targetImdbId) {
     const movieReviews = json.data || [];
 
     if (movieReviews.length >= 5) {
-      const totalScore = movieReviews.reduce((sum, r) => sum + Number(r.attributes.rating), 0);
+      const totalScore = movieReviews.reduce(
+        (sum, r) => sum + Number(r.attributes.rating),
+        0,
+      );
       const average = (totalScore / movieReviews.length).toFixed(1);
-      
-      return { 
-        source: 'local', 
-        rating: average, 
-        count: movieReviews.length 
+
+      return {
+        source: "local",
+        rating: average,
+        count: movieReviews.length,
       };
     } else {
       const externalRes = await fetch(externalApiUrl);
       const externalData = await externalRes.json();
-      return { 
-        source: 'imdb', 
+      return {
+        source: "imdb",
         rating: externalData.rating?.aggregateRating || "N/A",
-        count: movieReviews.length 
+        count: movieReviews.length,
       };
     }
   } catch (error) {
-    return { source: 'none', rating: "N/A", count: 0 }; 
+    console.error(error);
+    return { source: "none", rating: "N/A", count: 0 };
   }
 }
 
 // Function to filter and sort upcoming screenings
-export function filterAndSortUpcomingScreenings(screeningsData, now = new Date()) {
+export function filterAndSortUpcomingScreenings(
+  screeningsData,
+  now = new Date(),
+) {
   return screeningsData
     .filter((s) => {
       const start = new Date(s.attributes.start_time);
@@ -289,7 +299,7 @@ function simplifyScreeningData(oneScreening) {
   return {
     id: oneScreening.id,
     start_time: oneScreening.attributes.start_time,
-    room: oneScreening.attributes.room ?? null
+    room: oneScreening.attributes.room ?? null,
   };
 }
 
@@ -300,7 +310,7 @@ async function getUpcomingScreeningsForMovie(movieId) {
     url.searchParams.set("filters[movie]", movieId);
 
     const response = await fetch(url.toString());
-    const payload = await response.json(); 
+    const payload = await response.json();
 
     if (!response.ok) {
       const err = payload?.error ?? payload;
@@ -334,8 +344,8 @@ const api = {
   getMovies,
   getMovieScore,
   getUpcomingScreeningsForMovie,
-   getScreeningsForMovie,
-  
+  getScreeningsForMovie,
+  addReview,
 };
 
 export default api;
