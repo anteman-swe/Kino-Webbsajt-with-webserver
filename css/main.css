@@ -37,6 +37,15 @@ body .header__theme-btn--light {
   font-size: 1.5rem;
   font-weight: bold;
 }
+
+.login_modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.6);
+}
+
 .auth-buttons .btn_join {
   margin-left: 10px;
   font-size: 1.3rem;
