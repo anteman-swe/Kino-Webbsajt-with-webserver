@@ -6,7 +6,7 @@ export function toggleLogin() {
 
   if (!modal || !openBtn || !closeBtn || !form) return;
 
-  
+  modal.style.display = "none";
 
   openBtn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -25,6 +25,7 @@ export function toggleLogin() {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
+    modal.style.display = "none";
     window.location.href = "/member-page";
   });
 }
@@ -35,6 +36,7 @@ window.addEventListener("pageshow", () => {
     modal.style.display = "none";
   }
 });
+
 
 
 
