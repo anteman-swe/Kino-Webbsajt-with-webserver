@@ -25,8 +25,27 @@ export function toggleLogin() {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    modal.style.display = "none";
-    window.location.href = "/member-page";
+
+    const email = document
+      .querySelector("#login-email")
+      .value.trim()
+      .toLowerCase();
+    const password = document.querySelector("#login-password").value.trim();
+
+    const users = JSON.parse(localStorage.getItem("kinoUsers")) || [];
+
+    const matchedUser = users.find((user) => {
+      return user.email === email && user.password === password;
+    });
+
+    if (matchedUser) {
+      localStorage.setItem("kinoLoggedInUser", JSON.stringify(matchedUser));
+      alert("Inloggning lyckades!");
+      modal.style.display = "none";
+      window.location.href = "/member-page";
+    } else {
+      alert("Fel e-post eller lösenord.");
+    }
   });
 }
 
@@ -36,9 +55,6 @@ window.addEventListener("pageshow", () => {
     modal.style.display = "none";
   }
 });
-
-
-
 
 /*export function toggleLogin() {
     const modal = document.querySelector('.login__modal');
@@ -55,7 +71,7 @@ window.addEventListener("pageshow", () => {
     e.preventDefault();
     window.location.href = "member-page.html";
   });*/
-   /*const closeBtn = document.querySelector('.login__close');
+/*const closeBtn = document.querySelector('.login__close');
     const submit = document.querySelector('.login__submit');
 
   
