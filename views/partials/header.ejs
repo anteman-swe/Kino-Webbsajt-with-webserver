@@ -128,45 +128,37 @@
       <div class="register__modal">
         <div class="register__content">
           <button class="register__close" aria-label="Stäng">✕</button>
-          <h2 class="register__title">Registrera dig</h2>
-
-          <form class="register__form" id="signupForm">
-            <input
-              class="register__input"
-              type="text"
-              name="username"
-              placeholder="Användarnamn"
-              required
-            >
-
-            <input
-              class="register__input"
-              type="email"
-              name="email"
-              placeholder="E-post"
-              required
-            >
-
-            <input
-              class="register__input"
-              type="password"
-              name="password"
-              id="passwordInput"
-              placeholder="Lösenord"
-              required
-            >
-
-            <div class="password-strength">
-              <div class="password-strength__bar" id="passwordStrength"></div>
+          <h2 class="register__title text-center mb-5">Registrera dig</h2>
+          
+          <form id="signupForm" class="register__form">
+            <div class="mb-3">
+              <label class="form-label login-form__label">Användarnamn</label>
+              <input type="text" class="form-control form-control-lg" name="username" required>
             </div>
-            <p id="strengthText" class="password-strength__text"></p>
 
-            <button class="register__submit" type="submit">
-              Skapa konto
-            </button>
+            <div class="mb-3">
+              <label class="form-label login-form__label">Fullständigt namn</label>
+              <input type="text" class="form-control form-control-lg" name="fullName" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label login-form__label">E-post</label>
+              <input type="email" class="form-control form-control-lg" name="email" required>
+ 
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label login-form__label">Lösenord</label>
+              <input type="password" id="passwordInput" class="form-control form-control-lg" name="password" required>
+              <div class="password-meter mt-2">
+                <div id="passwordStrength" class="password-meter__bar"></div>
+              </div>
+              <small id="strengthText" class="form-text"></small>
+            </div>
+
+            <button type="submit" class="btn login-form__btn--primary">Skapa konto</button>
           </form>
         </div>
-      </div>
     </div>
 
     <nav class="header__nav">

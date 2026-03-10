@@ -535,6 +535,9 @@ body .header__theme-btn--light {
   cursor: pointer;
 }
 
+.register__title {
+  font-weight: 800;
+}
 .register {
   position: relative;
 }
@@ -554,10 +557,8 @@ body .header__theme-btn--light {
   display: flex;
 }
 .register__content {
-  background: white;
-  padding: 4rem;
   border-radius: 8px;
-  width: 300px;
+  width: 500px;
   position: relative;
 }
 .register__title {
@@ -566,11 +567,11 @@ body .header__theme-btn--light {
 .register__form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 }
 .register__input {
   padding: 0.5rem;
   border: 1px solid #ccc;
+  padding: 2rem 2rem;
 }
 .register__submit {
   background: #350000;
@@ -588,6 +589,10 @@ body .header__theme-btn--light {
   color: #000000;
   cursor: pointer;
   background-color: transparent;
+}
+
+.form-text {
+  color: #fff;
 }
 
 .login {

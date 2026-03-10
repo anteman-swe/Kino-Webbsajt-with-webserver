@@ -17,8 +17,8 @@ initMemberButtons();
 
 import { toggleLogin } from "/scripts/login.js";
 toggleLogin();
-/*import { toggleRegister } from "/scripts/register.js";
-toggleRegister();*/
+import { toggleRegister , initSignup} from "/scripts/register.js";
+toggleRegister();
 import { toggleMenu } from "/scripts/menu.js";
 toggleMenu();
 import { closeNotice } from "/scripts/notice.js";
@@ -52,6 +52,7 @@ function isUpcoming(movie) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+  initSignup(); 
   const currentTrack = document.getElementById("currentMoviesTrack");
   const comingSoonTrack = document.getElementById("comingSoonTrack");
   const eventsTrack = document.getElementById("eventsTrack");
