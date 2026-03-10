@@ -1,0 +1,14 @@
+<%- include('partials/header', {pageTitle: 'Serverfel!'}); %>
+<main>
+    <section class="onemovie">
+        <article>
+            <h1>
+                Fel vid hämtning av filminformation
+            </h1>
+            <p>Filmen du försöker nå finns inte i filmlistan</p>
+            <p>Servern returnerade statuskod: <%= status %></p>
+            <p>Och meddelandet: <%= message %></p>
+        </article>
+    </section>
+</main>
+<%- include('partials/footer'); %>

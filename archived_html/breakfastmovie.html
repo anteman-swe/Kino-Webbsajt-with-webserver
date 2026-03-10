@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <title>KINO _ Movie Theater</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font_awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet"type="text/css" href="css/main.css">
+
+    </head>
+<!-- Info / notice bar -->
+
+<body>
+    <div class="notice" role="status" aria-live="polite">
+        <p class="notice__text">Biljetter kan enbart köpas på biografen! <br> Välkommen till oss på Storgatan 12.</p>
+        <span class="notice__hours">Öppettider: 08:00 – 22:00</span>
+        <button class="notice__close" type="button" aria-label="Stäng notis">&times;</button>
+    </div>
+    <div class="container">
+        <header class="header">
+
+            <img class="header__logo" src="/assets/logo1.png" alt="Logga - Kino bio">
+
+            <div class="header__top">
+                <button class="header__menu-button" aria-label="Menu">☰ MENY</button>
+
+
+                <div class="header__auth">
+                    <button class="header__login-btn" aria-label="Logga in">JOIN / LOGIN</button>
+                    <button class="open-register">Registrera dig</button>
+                </div>
+
+                
+                <!-- Login användare -->
+                <div class="login">
+                    <div class="login__modal">
+                        <div class="login__content">
+                            <button class="login__close" aria-label="Stäng">✕</button>
+                            <h2 class="login__title">Logga in</h2>
+                            <form class="login__form">
+                                <input class="login__input" type="email" placeholder="E-post" name="email" required>
+                                <input class="login__input" type="password" placeholder="Lösenord" name="password" required>
+                                <!-- Glömt lösenord under lösenordet -->
+                                <a href="#" class="login__forgot">Glömt lösenord?</a>
+                                <button class="login__submit" type="submit">Logga in</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!--Registrera användare-->
+                <div class="register">
+                    <div class="register__modal">
+                        <div class="register__content">
+                            <button class="register__close" aria-label="Stäng">✕</button>
+                            <h2 class="register__title">Registrera dig</h2>
+                            <form class="register__form">
+                                <input class="register__input" type="text" placeholder="Namn" name="username" required>
+                                <input class="register__input" type="email" placeholder="E-post" name="email" required>
+                                <input class="register__input" type="password" placeholder="Lösenord" name="password"
+                                    required>
+                                <button class="register__submit" type="submit">Skapa konto</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <nav class="header__nav">
+                    <button class="header__nav-close" aria-label="Stäng menyn">
+                        ✕ <span class="close-menu">MENY</span></button>
+                    <img class="header__nav-logo" src="/assets/logo1.png">
+
+                    <ul class="header__nav-list">
+                        <li class="header__nav-item"><a href="index.html">På bio just nu</a></li>
+                        <li class="header__nav-item"><a href="all-movies.html">Kommande filmer</a></li>
+                        <li class="header__nav-item"><a href="#">Barnbio</a></li>
+                        <li class="header__nav-item"><a href="#">Presentkort</a></li>
+                        <li class="header__nav-item"><a href="#">Café & Bistro</a></li>
+                        <li class="header__nav-item"><a href="#">Event</a></li>
+                        <li class="header__nav-item"><a href="#">Kundservice</a></li>
+                        <li class="header__nav-item"><a href="#">Mina sidor</a></li>
+                        <li class="header__nav-item"><a href="#">Företag</a></li>
+                    </ul>
+                </nav>
+        </header>
+    </div>
+    <main>
+        <div class="breakfast-movie">
+            <!-- This section needs to be automated with JS, for now is placeholder DOM elements-->
+            <img class="breakfast-movie__img" src="assets/bistro-ac00.png" alt="Kino Lycksele Café & Bistro">
+            <div class="breakfast-movie__text">
+                <h1 class="breakfast-movie__text--headline">Presenterar Frukostbio</h1>
+                <img class="breakfast-movie-choices-image" src="assets/breakfast-movie-ac01.png" alt="Presentation av frukost-film paketerbjudande">
+                <div class="breakfast-movie__text-info">
+                    Kom och se en biofilm och njut av vår frukostmeny!
+                    Välj en av våra frukost-filmer och vilket frukostpaket du vill ha, 
+                    klicka sedan på knappen för att fylla i din information och boka din plats <em>(just nu kan detta endast bokas på plats)</em>
+                </div>
+            </div>
+            
+            <form class="breakfast-movie-choices" action="" target="_blank" method="post">
+                <h2 class="breakfast-movie-choices-header">Frukostfilmer</h2>
+                <span class="breakfast-movie-choices-selector">
+                    <img class="breakfast-movie-choices-pic" src="assets/breakfast-movie-bd01.png" alt="Filmaffisch Superman"></br>
+                    <input type="radio" id="movie-choice1" name="bf-movie" value="movie-choice1"><br>
+                    <label for="movie-choice1">Superman</label>
+                </span>
+                
+                <span class="breakfast-movie-choices-selector">
+                    <img class="breakfast-movie-choices-pic" src="assets/breakfast-movie-bd02.png" alt="Filmaffisch The Godfather"></br>
+                    <input type="radio" id="movie-choice2" name="bf-movie" value="movie-choice2"><br>
+                    <label for="movie-choice2">Gudfadern</label>
+                </span>
+                
+                
+                <span class="breakfast-movie-choices-selector">
+                    <img class="breakfast-movie-choices-pic" src="assets/breakfast-movie-bd03.png" alt="Filmaffisch Star Wars Episode X"></br>
+                    <input type="radio" id="movie-choice3" name="bf-movie" value="movie-choice3"><br>
+                    <label for="movie-choice3">Star Wars Episode X: Echoes The Force</label>
+                </span>
+               
+                <span class="breakfast-movie-choices-selector">
+                    <img class="breakfast-movie-choices-pic" src="assets/breakfast-movie-bd04.png" alt="Filmaffisch Thunderbolts"></br>
+                    <input type="radio" id="movie-choice4" name="bf-movie" value="movie-choice4"><br>
+                    <label for="movie-choice4">Thunderbolts</label>
+                </span>
+               
+                <!-- -- -->
+                <h2 class="breakfast-movie-choices-header">Frukostval</h2>
+                <span class="breakfast-movie-choices-selector">
+                    <img class="breakfast-movie-choices-pic" src="assets/breakfast-product-ac1_coffee.jpg" alt="En kopp cappucino"></br>
+                    <input type="radio" id="food-choice1" name="breakfast-choice" value="food-choice1">
+                    <label for="food-choice1">Valfritt kaffe med tillbehör</label>
+                </span>                
+                
+                <span class="breakfast-movie-choices-selector">
+                    <img class="breakfast-movie-choices-pic" src="assets/breakfast-product-ac2_scrambled-eggs.png" alt="En tallrik äggröra med tomat och spenat"></br>
+                    <input type="radio" id="food-choice2" name="breakfast-choice" value="food-choice2">
+                    <label for="food-choice2">Äggröra med grönsaker och valfri dryck</label>
+                </span>
+                
+                <span class="breakfast-movie-choices-selector">
+                    <img class="breakfast-movie-choices-pic" src="assets/breakfast-product-ac3_scrambled-eggs-with-avocado-and-bacon.png" alt="En tallrik äggröra med avocado och bacon"></br>
+                    <input type="radio" id="food-choice3" name="breakfast-choice" value="food-choice3">
+                    <label for="food-choice3">Äggröra med avocado, bacon och valfri dryck</label>
+                </span>
+                
+                <span class="breakfast-movie-choices-selector">
+                    <img class="breakfast-movie-choices-pic" src="assets/breakfast-product-ac4_bagel.png" alt="En smörgås med skinka, ost, sallad och tomat"></br>
+                    <input type="radio" id="food-choice4" name="breakfast-choice" value="food-choice4">
+                    <label for="food-choice4">Bagel med skinka, ost, sallad, tomat och valfri dryck</label>
+                </span>
+                
+                <input class="breakfast-movie-choices-submit" type="submit" value="Boka film med frukost" disabled>
+            </form>
+        </div>
+        
+    </main>
+    <footer>
+        <section class="footer__container">
+            <section class="footer__content">
+                <div class="footer__section footer__section--about">
+                    <div class="footer__about"></div>
+                    <h3>Om oss</h3>
+                    <ul class="footer__links">
+                        <li><a href="#">Jobba hos oss</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Om Kino</a></li>
+                        <li><a href="#">Filmfestivalen</a></li>
+                        <li><a href="#">Hitta hit</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__section footer__section--other">
+                    <div class="footer__other"></div>
+                    <h3>Övrigt</h3>
+                    <ul class="footer__terms">
+                        <li><a href="#">Köpvilkor</a></li>
+                        <li><a href="#">Integritetspolicy</a></li>
+                        <li><a href="#">Åldersgränser</a></li>
+                        <li><a href="#">Tillgänglighet</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="footer__section footer__section--contact">
+                    <div class="footer__contact"></div>
+                    <h3>Hjälp & Kontakt</h3>
+                    <ul class="footer__info">
+                        <li><i class="fas fa_map_marker_alt"></i> <a
+                                href="https://maps.google.com/?q=Storgatan 12, 123 45 Lycksele">Storgatan 12, 123 45
+                                Lycksele</a></li>
+                        <li><i class="fas fa_phone"></i> <a href="tel:+46950xxxxxxxx">+46 950-xxxxxxxx</a></li>
+                        <li><i class="fas fa_envelope"></i> <a href="mailto:info@kino.com">info@kino.com</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__section footer__section--social">
+                    <div class="footer__social"></div>
+                    <h3>Sociala medier</h3>
+                    <div class="footer__icons">
+                        <div class="social">
+                            <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+                            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="footer__section footer__section--extra">
+                    <div class="footer__extra">
+                        <div class="footer__row">
+                            <div class="newsletter">
+                                <h3 class="newsletter__title">Nyhetsbrev</h3>
+                                <input class="newsletter__input" type="email" placeholder="you@example.com">
+                                <button class="newsletter__submit" type="submit">Anmäl dig</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+
+            </section>
+        </section>
+    </footer>
+
+    <script type="module" src="/src/index.js"></script>
+</body>
+
+</html>

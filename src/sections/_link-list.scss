@@ -1,0 +1,25 @@
+.movielistlink {
+    padding: 2rem  0 3rem 0;
+    h2{
+        a {
+            color: white;
+        }
+    }
+}
+.movielist {
+    width: 20rem;
+    margin: 12dvh auto;
+    li{
+        a {
+            color: white;
+        }
+    }
+}
+.onemovie {
+    width: 30rem;
+    margin: 3rem auto;
+    img {
+        width:20rem;
+        padding: 1rem 5rem;
+    }
+}

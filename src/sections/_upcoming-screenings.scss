@@ -1,0 +1,47 @@
+@use "../lib/variables_mixins" as *;
+
+.upcoming-screenings {
+  &__track {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: $gap-md;
+    margin-top: 1rem;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $gap-sm;
+    text-align: center;
+  }
+
+  &__img {
+    width: 70%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.2;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+     line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: calc(1.2em * 2);
+  }
+
+  &__time {
+    font-size: 0.8rem;
+  }
+
+  &__room {
+    font-size: 0.75rem;
+    opacity: 0.8;
+  }
+}

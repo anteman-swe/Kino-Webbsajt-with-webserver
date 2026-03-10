@@ -1,0 +1,32 @@
+# .yamllint
+extends: default
+
+rules:
+  # Hur många tecken en rad får ha innan lintern klagar. 
+  # 80 är ofta för lite för t.ex. GitHub Actions, så vi ökar den.
+  line-length:
+    max: 120
+    allow-non-breakable-words: true
+
+  # YAML-filer kan börja med --- men det är inte alltid man vill ha det.
+  # Vi stänger av kravet här.
+  document-start: disable
+
+  # Sant/Falskt kan skrivas på många sätt (true, True, yes, ON).
+  # Denna regel ser till att du håller dig till små bokstäver.
+  truthy:
+    allowed-values: ['true', 'false']
+
+  # Ser till att du har rätt antal mellanslag i listor och mappar.
+  indentation:
+    spaces: 2
+    indent-sequences: true
+
+  # Kommentarer bör ha ett mellanslag efter # för att vara läsbara.
+  comments:
+    level: warning
+    require-starting-space: true
+
+  # Inga tomma rader i slutet av filen, men en (1) är standard i Linux/Unix.
+  new-lines:
+    type: unix

@@ -1,0 +1,76 @@
+@use "../lib/variables_mixins" as *;
+
+.review-header {
+    text-align: center;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+.number-of-reviews {
+    width: fit-content;
+    text-align: center;
+    font-size: 0.6rem;
+    margin: 0 auto 1rem;
+    transform: translateX(100%);
+}
+.reviews-container {
+  width: 80%;
+  margin: 0 auto;
+  height: 18rem;
+  max-height: 18rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 auto 5rem;
+  .reviews-button {
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 1px solid $dark-text;
+    font-size: 1rem;
+    background-color: $dark-button;
+    color: $dark-text;
+    cursor: pointer;
+    &:active{
+        transform: translate(1px, 1px);
+    }
+    &:disabled {
+      border-color: $dark-bg;
+      color: $toggle-off;
+    }
+  }
+  .reviews-one-movie {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+  }
+  .review-card {
+    height: fit-content;
+    width: fit-content;
+    &__text{
+        font-size: 0.8rem;
+        color: $dark-text;
+    }
+    &__rating {
+        font-size: 0.6rem;
+    }
+    &__revauthor{
+        width: fit-content;
+    }
+    &__preauthor {
+        font-size: 0.7rem;
+        font-style: italic;
+    }
+    &__author {
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+    &__date {
+        font-size: 0.6rem;
+    }
+  }
+}

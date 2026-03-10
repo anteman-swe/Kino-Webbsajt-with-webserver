@@ -1,0 +1,33 @@
+#!/bin/bash
+# .husky/pre-commit
+
+npx lint-staged
+
+echo "Kör pre-commit kontroll..."
+
+# Namnet på detta skript så vi kan exkludera det
+SELF=".husky/pre-commit"
+
+echo "Söker efter debug-kod (ignorerar $SELF)..."
+
+# 1. git diff --cached : kolla det som är i staging
+# 2. -- . ":!$SELF"   : ignorera mig själv...
+# 3. grep "^+"         : kolla bara tillagda rader
+# 4. grep -v "^+++"    : ignorera filhuvudet i diffen
+# 5. grep -E ...       : leta efter förbjudna ord
+DEBUG_FOUND=$(git diff --cached --unified=0 -- . ":!$SELF" | grep "^+" | grep -v "^+++" | grep -E "console\.log|debugger|TODO: REMOVE" || true)
+
+if [ ! -z "$DEBUG_FOUND" ]; then
+    echo ""
+    echo "⚠️  STOPP!"
+    echo "Följande debug-kod hittades i ändringarna som du vill committa:"
+    echo "------------------------------------------------------------"
+    echo "$DEBUG_FOUND"
+    echo "------------------------------------------------------------"
+    echo "Ta bort detta eller använd 'git commit --no-verify' om du verkligen vill committa din ändringar."
+    exit 1
+fi
+
+echo "✅ Inga problem hittade!"
+echo "📝 Fortsätter med commit..."
+exit 0
