@@ -148,6 +148,10 @@
   cursor: pointer;
 }
 .register {
+
+  &__title {
+    font-weight: 800;
+  }
   position: relative;
   &__modal {
     display: none;
@@ -165,23 +169,25 @@
     }
   }
   &__content {
-    background: white;
-    padding: 4rem;
+    // background: white;
     border-radius: 8px;
-    width: 300px;
+    width: 500px;
     position: relative;
   }
   &__title {
     margin-bottom: 1rem;
   }
+  
   &__form {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    
+    
   }
   &__input {
     padding: 0.5rem;
     border: 1px solid #ccc;
+    padding: 2rem 2rem;
   }
   &__submit {
     background: $dark-button;
@@ -200,7 +206,13 @@
     cursor: pointer;
     background-color: transparent;
   }
+
+
 }
+.form-text{
+    color: #fff;
+}
+
 .login {
   position: relative;
   &__modal {
