@@ -1,26 +1,35 @@
-<!-- header.ejs -->
 <!DOCTYPE html>
-<html>
+<html lang="sv">
 <head>
-  <meta charset='utf-8'>
-  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <% if (locals.pageTitle) { %>
     <title><%= pageTitle %></title>
- <% } else { %>
-  <title>Kino Bio</title>
- <% } %>
- <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <% } else { %>
+    <title>Kino Bio</title>
+  <% } %>
+
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <link rel="stylesheet" href="/css/main.css">
 </head>
+
 <body>
-  <!-- Info / notice bar -->
-  <div class="notice" role="status" aria-live="polite">
-    <p class="notice__text">Biljetter kan enbart köpas på biografen! <br> Välkommen till oss på Storgatan 12.</p>
+  <!-- <div class="notice" role="status" aria-live="polite">
+    <p class="notice__text">
+      Biljetter kan enbart köpas på biografen! <br>
+      Välkommen till oss på Storgatan 12.
+    </p>
     <span class="notice__hours">Öppettider: 08:00 – 22:00</span>
     <button class="notice__close" type="button" aria-label="Stäng notis">&times;</button>
-  </div>
+  </div> -->
+
   <header class="header">
     <div class="header__theme">
       <button class="header__theme-btn header__theme-btn--light" aria-label="toggle light">
@@ -31,52 +40,135 @@
         <img class="header__theme-icon" src="/assets/toggle1-dark.png" alt="Dark mode icon">
       </button>
     </div>
+
     <div class="header__top">
       <button class="header__menu-button" aria-label="Menu">☰ MENY</button>
+
       <img class="header__logo-dark" src="/assets/logo1-dark.png" alt="Logga - Kino bio">
       <img class="header__logo-light" src="/assets/logo2-light.png" alt="Logga - Kino bio">
 
       <div class="auth-buttons">
-        <button class="header__member-btn" aria-label="Logga in">Member</button>
-        <button class="header__login-btn" aria-label="Logga in">JOIN / LOGIN</button>
-        <button class="open-register">Registrera dig</button>
+        <button class="header__login-btn btn btn-link p-0" type="button" aria-label="Logga in">
+          Logga in
+        </button>
       </div>
     </div>
-    <div class="login">
-      <div class="login__modal">
-        <div class="login__content">
-          <button class="login__close" aria-label="Stäng">✕</button>
-          <h2 class="login__title">Logga in</h2>
-          <form class="login__form">
-            <input class="login__input" type="email" placeholder="E-post" name="email" required>
-            <input class="login__input" type="password" placeholder="Lösenord" name="password" required>
 
-            <a href="#" class="login__forgot">Glömt lösenord?</a>
-            <button class="login__submit" type="submit">Logga in</button>
-          </form>
+    <!-- LOGIN MODAL -->
+    <div class="login-modal" aria-hidden="true">
+      <div class="login-modal__dialog">
+        <div class="login-modal__content">
+          <button class="login-modal__close btn-close btn-close-white" type="button" aria-label="Stäng"></button>
+
+          <div class="row justify-content-center w-100 m-0">
+            <div class="col-12 col-md-9 col-lg-7">
+
+              <div class="text-center mb-5">
+                <img src="/assets/logo1.png" alt="Kino logga" class="login-modal__logo img-fluid">
+              </div>
+
+              <h1 class="login-modal__title text-center mb-5">
+                Logga in eller bli medlem
+              </h1>
+
+              <div class="login-modal__feedback" aria-live="polite"></div>
+
+              <form class="login-form" novalidate>
+                <div class="mb-4">
+                  <label for="login-email" class="form-label login-form__label">E-postadress</label>
+                  <input
+                    type="email"
+                    class="form-control login-form__input"
+                    id="login-email"
+                    name="email"
+                    placeholder="E-post"
+                    required
+                  >
+                </div>
+
+                <div class="mb-2">
+                  <label for="login-password" class="form-label login-form__label">Lösenord</label>
+                  <input
+                    type="password"
+                    class="form-control login-form__input"
+                    id="login-password"
+                    name="password"
+                    placeholder="Lösenord"
+                    required
+                  >
+                </div>
+
+                <div class="text-end mb-5">
+                  <a href="#" class="login-form__forgot">Har du glömt ditt lösenord?</a>
+                </div>
+
+                <div class="d-grid gap-4">
+                  <button type="submit" class="btn login-form__btn login-form__btn--primary">
+                    Logga in
+                  </button>
+
+                  <button type="button" class="btn login-form__btn login-form__btn--secondary open-register">
+                    Bli medlem
+                  </button>
+
+                  <button type="button" class="btn login-form__cancel">
+                    Avbryt
+                  </button>
+                </div>
+              </form>
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- REGISTER MODAL -->
     <div class="register">
       <div class="register__modal">
         <div class="register__content">
           <button class="register__close" aria-label="Stäng">✕</button>
-          <h2 class="register__title">Registrera dig</h2>
-          <form class="register__form">
-            <input class="register__input" type="text" placeholder="Namn" name="username" required>
-            <input class="register__input" type="email" placeholder="E-post" name="email" required>
-            <input class="register__input" type="password" placeholder="Lösenord" name="password" required>
-            <button class="register__submit" type="submit">Skapa konto</button>
+          <h2 class="register__title text-center mb-5">Registrera dig</h2>
+          
+          <form id="signupForm" class="register__form">
+            <div class="mb-3">
+              <label class="form-label login-form__label">Användarnamn</label>
+              <input type="text" class="form-control form-control-lg" name="username" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label login-form__label">Fullständigt namn</label>
+              <input type="text" class="form-control form-control-lg" name="fullName" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label login-form__label">E-post</label>
+              <input type="email" class="form-control form-control-lg" name="email" required>
+ 
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label login-form__label">Lösenord</label>
+              <input type="password" id="passwordInput" class="form-control form-control-lg" name="password" required>
+              <div class="password-meter mt-2">
+                <div id="passwordStrength" class="password-meter__bar"></div>
+              </div>
+              <small id="strengthText" class="form-text"></small>
+            </div>
+
+            <button type="submit" class="btn login-form__btn--primary">Skapa konto</button>
           </form>
         </div>
-      </div>
     </div>
+
     <nav class="header__nav">
-      <button class="header__nav-close" aria-label="Stäng menyn">✕
-        <span class="close-menu">MENY</span>
+      <button class="header__nav-close" aria-label="Stäng menyn">
+        ✕ <span class="close-menu">MENY</span>
       </button>
+
       <img class="header__nav-logodark" src="/assets/logo1-dark.png" alt="Logga - Kino bio">
       <img class="header__nav-logolight" src="/assets/logo2-light.png" alt="Logga - Kino bio">
+
       <ul class="header__nav-list">
         <li class="header__nav-item"><a href="/index.html">På bio just nu</a></li>
         <li class="header__nav-item"><a href="/all-movies.html">Kommande filmer</a></li>
