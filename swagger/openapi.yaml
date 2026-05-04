@@ -114,7 +114,7 @@ paths:
       parameters:
         - name: page
           in: query
-          description: I fyou want to retrieve second, third,... page if there are many reviews
+          description: If you want to retrieve second, third,... page if there are many reviews
           required: false
           schema:
             type: integer
